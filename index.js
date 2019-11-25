@@ -1,37 +1,24 @@
-//For an extra security layer, the whole program runs within an async anonymous function
-(async () => {
-    //Everything that runs on this platform is stored inside a mongo db by default.
-    //This is done so that users can modify the code from a remote terminal.
-    const mongo = require('./modules/mongoose/Mongoose');
-    const fs = require('fs');
-    let logger = null;
+//You can learn everything you need about this project by following the code from this file onward.
+//These files will only ensure we have enough to run a http server and then will import a database that was pre-populated by myself.
+//The database will contain the base of this project and will be thoroughly explained in the website it contains.
 
-    var mainModule = async (AppsterData) => {
-        //Our database is ready, we can start loading and running our main module.
-        try {
-            console.log(['Finished Initiating Appster Model.', "Starting to instantiate the \"" + AppsterData.name + "\" module..."]);
-            await (async ()=>{
-                await eval(AppsterData.eval);
-            })();
-        } catch (error) {
-            throw new Error(["Error on module: \"" + AppsterData.name + '" ', error]);
-        }
-    };
+//remote modules
 
-    //We start the mongo module with a promise just in case we need to extend this in the future.
-    //This way we're sure we won't be bothered by the asynchronicity of the require function.
-    await mongo.start.then(async AppsterData => {
-        await mainModule(AppsterData);
-    }).catch(e => {
-        var msg = ['Error while executing program loop: ', e];
-        if (logger)
-        logger.types.init.log(msg);
-        else console.log(msg)
-    }).finally(() => {
-        var msg = ['Finished Initiating Program'];
-        //Make sure to check that this log is last to ensure your code is structured correctly
-        if (logger)
-        logger.types.init.log(msg);
-        else console.log(msg)
-    });
-})()
+//private vars
+
+(async ()=>{
+    'use strict'
+
+    const main = await require('./modules/appster/main.js').promise;
+
+    console.log("APPSTER____________________________________________________________________________________________________EXECUTION STARTED. THANK YOU!");
+
+    //make sure dependencies are loaded (I have made a selection of dependencies that do not require any other third party software installs. Running npm on this file will take care of absolutely everything you need)
+    await main.load_dependencies();
+
+    //start services
+    await main.start_database();
+    await main.start_server();
+
+    console.log("APPSTER____________________________________________________________________________________________________EXECUTION ENDED. The server is ready!");
+})();
