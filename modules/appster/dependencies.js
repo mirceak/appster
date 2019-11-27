@@ -51,7 +51,7 @@ let load_sequelize = async ()=>{
 }
 
 var load_package = async (pack, cannot_require = false)=>{
-    if (!await utils.file_exists('../../package.json')){
+    if (!await utils.file_exists('./package.json')){
         await shell.run_command("npm init -y \n exit \n");
     }
 
