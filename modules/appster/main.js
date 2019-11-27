@@ -16,9 +16,7 @@ class Main{
 
     async load_dependencies(){
         //our database - used for remembering information
-        await dependencies.load_database();
-        //our http server - this is where start accepting requests from clients. clients are the users trying to access your server or we can call it website directly because this is in a way what we are building.
-        await dependencies.load_server();
+        await dependencies.load();
     }
 
     async start_database(){

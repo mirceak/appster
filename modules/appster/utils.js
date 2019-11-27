@@ -21,6 +21,25 @@ class Utils{
         })
     }
 
+    async get_file_content(path){
+        return new Promise(async resolve => {
+            fs.readFile('package.json', function read(err, data) {
+                if (err) {
+                    throw err;
+                }
+                resolve(data);
+            });
+        })
+    }
+
+    async write_to_file(path, content){
+        return new Promise(async resolve => {
+            fs.writeFile(path, content,  ()=> {
+                resolve();
+            });
+        })
+    }
+
     async package_loaded_in_package_json(pack){
         return new Promise(async resolve => {
             fs.readFile('package.json', function read(err, data) {
@@ -42,11 +61,11 @@ class Utils{
         }
     }
 
-    package_exists(_pack, timeout = 0, interval = 0, return_pack = true){
+    package_exists(_pack, sync = false, return_pack = true){
         return new Promise(async resolve => {
             var pack = _pack;
-            timeout = timeout === 0 ? 10000 : timeout;
-            interval = interval === 0 ? 50 : interval;
+            var timeout = sync ? 0 : 10000;
+            var interval = sync ? 0 : 50;
             if (!this.can_resolve(pack)) {
                 let interv = setInterval(async () => {
                     if (this.can_resolve(pack)) {
