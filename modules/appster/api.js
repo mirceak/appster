@@ -3,7 +3,7 @@
 //appster modules
 
 //remote modules
-const Sequelize = require('sequelize');
+// const Sequelize = require('sequelize');
 
 //private vars
 

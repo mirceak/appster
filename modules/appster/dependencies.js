@@ -5,14 +5,13 @@ let utils;
 let shell;
 
 //remote modules
-const Sequelize = require('sequelize');
 
 //private vars
 
 //we only want our index.js (the parent module or javascript file in this case) to access the load_database() and load_server() methods so we define the rest in the outside of the class
 
 let install_vue = async ()=>{
-    if (!await utils.folder_exists('./app')){
+    if (!await utils.file_exists('./app')){
         try{
             await shell.run_command("vue create app -d -f \n");
             console.log("APPSTER____________________________________________________________________________________________________Initiated VUE.js app.")
@@ -27,7 +26,7 @@ let install_vue = async ()=>{
 
 let load_vue = async ()=>{
     //this package helps us build our actual website faster offering us a structured way of using blocks of code over and over again so that we don't have to copy paste all the time.
-    await load_package("@vue/cli")
+    await load_package("vue", true)
 
     //after loading the package we must create an app with our newly available vue framework so we will call this installing vue
     await install_vue();
@@ -51,13 +50,19 @@ let load_sequelize = async ()=>{
     await load_package("sequelize")
 }
 
-var load_package = async (pack)=>{
-    if (!await utils.package_exists(pack)){
+var load_package = async (pack, cannot_require = false)=>{
+    if (!(await utils.package_loaded_in_package_json(pack)) || (!cannot_require && !utils.can_resolve(pack))){
         await shell.run_command("npm install " + pack + " --save \n" + "exit \n");
-        console.log("APPSTER____________________________________________________________________________________________________" + pack + " module installed.");
+        //wait for the module to actually be available
+        if (await utils.package_exists(pack, 10000, 50, false)){
+            console.log("APPSTER____________________________________________________________________________________________________" + pack + " module installed.");
+        }else{
+            throw new Error("Cannot load package");
+        }
     }else{
         console.log("APPSTER____________________________________________________________________________________________________" + pack + " module already installed.");
     }
+
 };
 
 class Dependencies{

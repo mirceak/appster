@@ -1,15 +1,17 @@
 'use strict'
 
 //appster modules
+let utils;
 let api;
 
 //remote modules
-const express = require('express')
+let express;
 
 //private vars
 
 let listen = async ()=>{
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
+        if (!express) express = await utils.require('express');
         const app = express()
         const port = 8080
 
@@ -33,6 +35,8 @@ class Server{
 }
 
 exports.promise = new Promise(async resolve => {
+    utils = await require('./utils.js').promise;
+
     api = await require('./api.js').promise;
 
     resolve(new Server());
