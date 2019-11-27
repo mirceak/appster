@@ -51,6 +51,10 @@ let load_sequelize = async ()=>{
 }
 
 var load_package = async (pack, cannot_require = false)=>{
+    if (!await utils.file_exists('../../package.json')){
+        await shell.run_command("npm init -y \n exit \n");
+    }
+
     if (!(await utils.package_loaded_in_package_json(pack)) || (!cannot_require && !utils.can_resolve(pack))){
         await shell.run_command("npm install " + pack + " --save \n" + "exit \n");
         //wait for the module to actually be available

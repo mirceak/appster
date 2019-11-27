@@ -27,7 +27,8 @@ class Utils{
                 if (err) {
                     throw err;
                 }
-                resolve(JSON.parse(data).dependencies[pack] != null);
+                let json = JSON.parse(data);
+                resolve(json.dependencies && json.dependencies[pack] != null);
             });
         })
     }
