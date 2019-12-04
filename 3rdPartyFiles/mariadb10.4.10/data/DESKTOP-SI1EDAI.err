@@ -3054,3 +3054,11 @@ InnoDB: using atomic writes.
 2019-12-04 22:08:32 0 [Note] Plugin 'FEEDBACK' is disabled.
 2019-12-04 22:08:32 0 [ERROR] Unknown/unsupported storage engine: InnoDB
 2019-12-04 22:08:32 0 [ERROR] Aborting
+InnoDB: using atomic writes.
+2019-12-04 23:17:48 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2019-12-04 23:17:48 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2019-12-04 23:17:48 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2019-12-04 23:17:48 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2019-12-04 23:17:48 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-12-04 23:17:48 0 [ERROR] Unknown/unsupported storage engine: InnoDB
+2019-12-04 23:17:48 0 [ERROR] Aborting

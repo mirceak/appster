@@ -2,110 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Missing files.">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/DESKTOP-SI1EDAI.err" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/DESKTOP-SI1EDAI.pid" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/appster/appster_components.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/appster/appster_components.ibd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/appster/db.opt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/aria_log.00000001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/aria_log_control" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/ib_buffer_pool" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/ib_logfile0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/ib_logfile1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/ibdata1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/ibtmp1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/multi-master.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/my.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/column_stats.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/column_stats.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/column_stats.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/columns_priv.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/columns_priv.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/columns_priv.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/db.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/db.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/db.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/event.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/event.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/event.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/func.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/func.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/func.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/general_log.CSM" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/general_log.CSV" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/general_log.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/global_priv.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/global_priv.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/global_priv.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/gtid_slave_pos.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/gtid_slave_pos.ibd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_category.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_category.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_category.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_keyword.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_keyword.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_keyword.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_relation.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_relation.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_relation.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_topic.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_topic.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/help_topic.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/index_stats.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/index_stats.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/index_stats.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/innodb_index_stats.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/innodb_index_stats.ibd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/innodb_table_stats.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/innodb_table_stats.ibd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/plugin.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/plugin.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/plugin.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proc.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proc.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proc.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/procs_priv.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/procs_priv.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/procs_priv.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proxies_priv.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proxies_priv.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/proxies_priv.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/roles_mapping.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/roles_mapping.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/roles_mapping.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/servers.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/servers.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/servers.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/slow_log.CSM" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/slow_log.CSV" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/slow_log.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/table_stats.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/table_stats.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/table_stats.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/tables_priv.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/tables_priv.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/tables_priv.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_leap_second.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_leap_second.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_leap_second.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_name.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_name.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_name.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition_type.MAD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition_type.MAI" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/time_zone_transition_type.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/transaction_registry.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/transaction_registry.ibd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/mysql/user.frm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/performance_schema/db.opt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/data/test/db.opt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/node_modules/.bin/acorn" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/node_modules/.bin/acorn.cmd" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/node_modules/.bin/acorn.ps1" afterDir="false" />
@@ -21592,7 +21488,6 @@
       <change afterPath="$PROJECT_DIR$/app/node_modules/yorkie/src/utils/find-parent.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/node_modules/yorkie/src/utils/get-hook-script.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/node_modules/yorkie/src/utils/is.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteModule.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/mime" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/mime.cmd" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.bin/mime.ps1" afterDir="false" />
@@ -24027,6 +23922,7 @@
       <change afterPath="$PROJECT_DIR$/node_modules/wkx/lib/wkx.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/wkx/lib/zigzag.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/wkx/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system.">
       <change afterPath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" afterDir="false" />
@@ -24147,7 +24043,7 @@
       <workItem from="1575149026735" duration="224000" />
       <workItem from="1575149294001" duration="314000" />
       <workItem from="1575149615536" duration="28850000" />
-      <workItem from="1575484693820" duration="6369000" />
+      <workItem from="1575484693820" duration="7332000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -24170,7 +24066,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575491028561</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Starting to build the base self editing component.">
+      <created>1575491850043</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575491850043</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -24193,7 +24096,8 @@
     <MESSAGE value="Dependencies now loaded the classic way." />
     <MESSAGE value="Building first self editing component system." />
     <MESSAGE value="Missing files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Missing files." />
+    <MESSAGE value="Starting to build the base self editing component." />
+    <option name="LAST_COMMIT_MESSAGE" value="Starting to build the base self editing component." />
   </component>
   <component name="WindowStateProjectService">
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575129362405">
@@ -24204,10 +24108,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575141040335" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575491669800">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575494385342">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491669800" />
+    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494385342" />
     <state width="324" height="442" key="Diff.GoToChangePopup" timestamp="1575491267050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -24236,6 +24140,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="435" key="VCS.ChangelistChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491390126" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575492045202">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575492045202" />
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog" timestamp="1575491343150">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
