@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Missing files.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
@@ -89,7 +90,7 @@
       <workItem from="1575149026735" duration="224000" />
       <workItem from="1575149294001" duration="314000" />
       <workItem from="1575149615536" duration="28850000" />
-      <workItem from="1575484693820" duration="7559000" />
+      <workItem from="1575484693820" duration="7622000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -126,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575494424761</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Missing files.">
+      <created>1575494562262</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1575494562262</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,10 +169,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575141040335" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575494453003">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575494569040">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494453003" />
+    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494569040" />
     <state width="324" height="442" key="Diff.GoToChangePopup" timestamp="1575491267050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -193,10 +201,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="435" key="VCS.ChangelistChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491390126" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575494538369">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575494564738">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494538369" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494564738" />
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog" timestamp="1575491343150">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
