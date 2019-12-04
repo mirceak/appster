@@ -1,7 +1,11 @@
 'use strict'
 
+//appster modules
+
 //remote modules
 const fs = require('fs');
+
+//private vars
 
 class Utils{
     constructor(){
@@ -23,7 +27,7 @@ class Utils{
 
     async get_file_content(path){
         return new Promise(async resolve => {
-            fs.readFile('package.json', function read(err, data) {
+            fs.readFile(path, function read(err, data) {
                 if (err) {
                     throw err;
                 }
@@ -40,9 +44,9 @@ class Utils{
         })
     }
 
-    async package_loaded_in_package_json(pack){
+    async package_loaded_in_package_json(path, pack){
         return new Promise(async resolve => {
-            fs.readFile('package.json', function read(err, data) {
+            fs.readFile(path, function read(err, data) {
                 if (err) {
                     throw err;
                 }
@@ -106,7 +110,7 @@ class Utils{
     }
 
     async require(pack){
-        return await this.package_exists(pack)
+        return await this.package_exists(pack, true)
     }
 }
 

@@ -7,34 +7,15 @@ let shell;
 //remote modules
 
 //private vars
-let dependencies = {
-    "express": "^4.17.1",
-    "mariadb": "^2.1.3",
-    "sequelize": "^5.21.2",
-    "vue": "^2.6.10"
+
+
+let load_backend_packages = async ()=>{
+    await shell.run_command('npm install \n exit \n');
 }
 
-let load_packages = async ()=>{
-    if (!await utils.file_exists('./package.json')){
-        await shell.run_command("npm init -y \n exit \n");
-    }
-
-    for (let dependency in dependencies) {
-        if (!await utils.package_loaded_in_package_json(dependency)){
-            var package_json = JSON.parse(await utils.get_file_content('package.json'));
-            package_json.dependencies = dependencies;
-            package_json = JSON.stringify(package_json);
-            await utils.write_to_file('package.json', package_json)
-
-            await shell.run_command("npm install \n exit \n");
-            break;
-        }
-    }
-
-
+let load_frontend_packages = async ()=>{
+    await shell.run_command('cd app/ \n npm install \n exit \n');
 }
-
-
 
 class Dependencies{
     constructor(){
@@ -42,7 +23,8 @@ class Dependencies{
     }
 
     async load(){
-        await load_packages();
+        await load_backend_packages();
+        await load_frontend_packages();
         console.log("APPSTER____________________________________________________________________________________________________Dependencies loaded!");
     }
 }

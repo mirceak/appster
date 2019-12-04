@@ -476,7 +476,7 @@ ER_CHECKREAD
         serbian "Slog je promenjen od zadnjeg čitanja tabele '%-.192s'"
         slo "Záznam bol zmenený od posledného čítania v tabuľke '%-.192s'"
         spa "El registro ha cambiado desde la ultima lectura de la tabla '%-.192s'"
-        swe "Posten har förändrats sedan den lästes i register '%-.192s'"
+        swe "Posten har förändrats sedan den lästes i entity_register '%-.192s'"
         ukr "Запис було змінено з часу останнього читання з таблиці '%-.192s'"
 ER_DISK_FULL
         cze "Disk je plný (%s), čekám na uvolnění nějakého místa ... (chybový kód: %M)"
@@ -526,7 +526,7 @@ ER_DUP_KEY 23000
         serbian "Ne mogu da pišem pošto postoji duplirani ključ u tabeli '%-.192s'"
         slo "Nemôžem zapísať, duplikát kľúča v tabuľke '%-.192s'"
         spa "No puedo escribir, clave duplicada en la tabla '%-.192s'"
-        swe "Kan inte skriva, dubbel söknyckel i register '%-.192s'"
+        swe "Kan inte skriva, dubbel söknyckel i entity_register '%-.192s'"
         ukr "Не можу записати, дублюючийся ключ в таблиці '%-.192s'"
 ER_ERROR_ON_CLOSE  
 	cze "Chyba při zavírání '%-.192s' (chybový kód: %M)"
@@ -799,7 +799,7 @@ ER_NOT_KEYFILE
         serbian "Pogrešan key file za tabelu: '%-.200s'; probajte da ga ispravite"
         slo "Nesprávny kľúč pre tabuľku '%-.200s'; pokúste sa ho opraviť"
         spa "Clave de archivo erronea para la tabla: '%-.200s'; intente repararlo"
-        swe "Fatalt fel vid hantering av register '%-.200s'; kör en reparation"
+        swe "Fatalt fel vid hantering av entity_register '%-.200s'; kör en reparation"
         ukr "Хибний файл ключей для таблиці: '%-.200s'; Спробуйте його відновити"
 ER_OLD_KEYFILE  
         cze "Starý klíčový soubor pro '%-.192s'; opravte ho"

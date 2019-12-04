@@ -2,26 +2,27 @@
 
 //appster modules
 let utils;
+let shell;
 let api;
 
 //remote modules
-let express;
 
 //private vars
 
-let listen = async ()=>{
+let listen_frontend = async ()=>{
     return new Promise(async resolve => {
-        if (!express) express = await utils.require('express');
-        const app = express()
-        const port = 8080
+        let child_shell = await shell.run_command("cd app \n npm run serve -- --port 80 \n", true);
 
-        app.get('/', (req, res) => res.send('Hello World!'))
-
-        app.listen(port, () => {
-            console.log("APPSTER____________________________________________________________________________________________________http api server started.");
-            resolve();
-        })
+        child_shell.stdout.on('data', (data) => {
+            if (data.includes("To create a production build, run npm run build.")){
+                resolve();
+            }
+        });
     });
+}
+
+let listen_api = async ()=>{
+    await api.start();
 }
 
 class Server{
@@ -30,12 +31,14 @@ class Server{
     }
 
     async start(){
-        await listen();
+        await listen_api();
+        await listen_frontend();
     }
 }
 
 exports.promise = new Promise(async resolve => {
     utils = await require('./utils.js').promise;
+    shell = await require('./shell.js').promise;
 
     api = await require('./api.js').promise;
 
