@@ -20,6 +20,7 @@ import AppstrComponent from "./components/Appster/ApstrComponent/AppstrComponent
 (async ()=>{
     //we use this proxy to create objects that can contain dynamic objects like functions out of strings
     Vue.prototype.$moduleProxy = moduleProxy;
+    Vue.prototype.$remoteModule = remoteModule;
     Vue.prototype.$axios = axios;
 
     Vue.prototype.$appstr = {

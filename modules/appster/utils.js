@@ -110,7 +110,7 @@ class Utils{
     }
 
     async require(pack){
-        return await this.package_exists(pack, true)
+        return this.package_exists(pack, true)
     }
 }
 

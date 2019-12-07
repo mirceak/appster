@@ -7,29 +7,18 @@ let child_process = require('child_process');
 
 //private vars
 let spawn;
-let shell_process;
 
-let has_process = ()=>{
-    return shell_process != null;
-};
+let get_process = ()=>{
+    let process = spawn('cmd');
 
-let get_process = (permanent = false)=>{
-    if (!has_process()){
-        switch (process.platform)
-        {
-            case "win32":
-                shell_process = spawn('cmd');
-                break;
+    process.stdout.on('data', (data) => {
+        console.log("" + data);
+    });
+    process.stderr.on('data', (data) => {
+        console.log("" + data);
+    });
 
-        };
-
-        shell_process.stdout.on('data', (data) => {
-            console.log("" + data);
-        });
-        shell_process.stderr.on('data', (data) => {
-            console.log("" + data);
-        });
-    }
+    return process;
 };
 
 class Shell{
@@ -37,14 +26,12 @@ class Shell{
         return this;
     }
 
-    force_exit(){
-        if (!has_process()) return;
-
-        console.log("APPSTER____________________________________________________________________________________________________Force Kill Shell")
+    force_exit(process){
         switch (process.platform)
         {
             case "win32":
-                child_process.exec('taskkill /pid ' + shell_process.pid + ' /f /t')
+                child_process.exec('taskkill /pid ' + process.pid + ' /f /t')
+                console.log("APPSTER____________________________________________________________________________________________________Force Killed Shell with pid: "+process.pid)
                 break;
 
         };
@@ -52,15 +39,14 @@ class Shell{
 
     async run_command(command, permanent = false){
         return new Promise(resolve => {
-            if (!has_process())
-                get_process(permanent);
+            let process = get_process();
 
-            shell_process.stdin.write(command);
+            process.stdin.write(command);
 
-            shell_process.on('exit', (code) => {
+            process.on('exit', (code) => {
                 console.log(`Shell process exited with code ${code}`);
 
-                shell_process = null;
+                process = null;
 
                 if (!permanent) {
                     resolve();
@@ -68,7 +54,7 @@ class Shell{
             });
 
             if (permanent){
-                resolve(shell_process);
+                resolve(process);
             }
         })
     }

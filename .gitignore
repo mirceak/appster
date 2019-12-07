@@ -1,4 +1,4 @@
 /node_modules/
-/3rdPartyFiles/mariadb10.4.10/data/
+/3rdPartyFiles/mariadb/data/
 /app/node_modules/
 /.idea
