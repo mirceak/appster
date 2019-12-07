@@ -12,7 +12,7 @@
 
     Vue.use(BootstrapVue)
 
-    let remoteModule = (await import ("./components/Appster/mixins/remoteModule")).default;
+    let remoteModule = (await import ("./remoteModule")).default;
     //we use this proxy to create objects that can contain dynamic objects like functions out of strings
     axios.baseUrl = 'http://localhost:8080/appster/';
 
