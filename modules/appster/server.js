@@ -11,10 +11,8 @@ let api;
 
 let listen_frontend = async ()=>{
     return new Promise(async resolve => {
-        console.log(3);
         let child_shell = await shell.run_command("cd app \n npm run serve -- --port 80 \n", true);
 
-        console.log(4);
         child_shell.stdout.on('data', (data) => {
             if (data.includes("To create a production build, run npm run build.")){
                 resolve();
@@ -24,7 +22,6 @@ let listen_frontend = async ()=>{
 }
 
 let listen_api = async ()=>{
-    console.log(1);
     await api.start();
 }
 
@@ -35,7 +32,6 @@ class Server{
 
     async start(){
         await listen_api();
-        console.log(2);
         await listen_frontend();
     }
 }

@@ -11,25 +11,16 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 
-import moduleProxy from "./components/Appster/mixins/moduleProxy";
-import remoteModule from "./components/Appster/mixins/remoteModule";
-
-import Welcome from "./components/Welcome";
-import AppstrComponent from "./components/Appster/ApstrComponent/AppstrComponent"
+import remoteComponent from "./components/Appster/mixins/remoteComponent";
 
 (async ()=>{
     //we use this proxy to create objects that can contain dynamic objects like functions out of strings
-    Vue.prototype.$moduleProxy = moduleProxy;
-    Vue.prototype.$remoteModule = remoteModule;
-    Vue.prototype.$axios = axios;
-
     Vue.prototype.$appstr = {
         baseUrl: 'http://localhost:8080/appster/'
     };
+    axios.baseUrl = Vue.prototype.$appstr.baseUrl;
 
-    Vue.prototype.$axios.baseUrl = Vue.prototype.$appstr.baseUrl;
-
-    Vue.component("AppstrComponent", AppstrComponent);
+    let Welcome = await Vue.component("Welcome", await remoteComponent("Welcome"));
 
     new Vue({
         render: h => h(Welcome)

@@ -1,66 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Missing files.">
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/aria_chk.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/aria_dump_log.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/aria_ftdump.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/aria_pack.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/aria_read_log.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/concrt140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/innochecksum.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mariabackup.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mbstream.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/msvcp140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/myisam_ftdump.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/myisamchk.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/myisamlog.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/myisampack.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mysql.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mysqladmin.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mysqlbinlog.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mysqlcheck.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3rdPartyFiles/mariadb10.4.10/bin/mysqld.exe" beforeDir="false" />
+    <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/ApstrComponent/AppstrComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/dbItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/dbModel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/makesRequests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/moduleProxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/moduleProxy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Welcome.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/entities/appster_component.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mongoose/Mongoose.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mongoose/models/AppsterModel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" afterPath="$PROJECT_DIR$/todo" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -73,6 +30,36 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -98,6 +85,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/3rdPartyFiles/mariadb" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -105,11 +93,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\mariadb" />
       <recent name="C:\Users\mirce\Documents\work\appster\app\src\components\Appster\mixins" />
       <recent name="C:\Users\mirce\Documents\work\appster\modules\appster\entities" />
       <recent name="C:\Users\mirce\Documents\work\appster\app" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
-      <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
@@ -120,7 +108,22 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@60c008a1" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@4f3844eb" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -194,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575494562262</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="updated mariadb files">
+      <created>1575742980742</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1575742980742</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,21 +228,26 @@
     <MESSAGE value="Building first self editing component system." />
     <MESSAGE value="Starting to build the base self editing component." />
     <MESSAGE value="Missing files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Missing files." />
+    <MESSAGE value="updated mariadb files" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated mariadb files" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575747201526">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575747201526" />
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575129362405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575129362405" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575738491360">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575746316601">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575738491360" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575740557049">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575746316601" />
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575742974926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575740557049" />
+    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575742974926" />
     <state width="324" height="442" key="Diff.GoToChangePopup" timestamp="1575491267050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -261,10 +276,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="435" key="VCS.ChangelistChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491390126" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575494564738">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575742984847">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575494564738" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575742984847" />
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog" timestamp="1575491343150">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -273,10 +288,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575234395154" />
-    <state x="656" y="257" width="607" height="526" key="find.popup" timestamp="1575739379713">
+    <state x="656" y="257" width="737" height="526" key="find.popup" timestamp="1575743978335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="257" width="607" height="526" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575739379713" />
+    <state x="656" y="257" width="737" height="526" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575743978335" />
     <state x="741" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1575491368083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

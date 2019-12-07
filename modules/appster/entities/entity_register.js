@@ -9,7 +9,7 @@ let Sequelize;
 //private vars
 
 let entity_register = [
-    {entity: require('./appster_component.js')}
+    {entity: require('./appster_js_module.js')}
 ];
 
 exports.get = async (sequelize) => {
