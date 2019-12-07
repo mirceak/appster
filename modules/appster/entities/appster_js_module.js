@@ -33,7 +33,7 @@ let init = async (Sequelize, sequelize) => {
             code:`
 {
     async start(Vue, axios, remoteModule)
-    {                
+    {                    
         let remoteComponent = await remoteModule("appster_js_module_remoteComponent");
     
         let Welcome = await Vue.component("Welcome", await remoteComponent("Welcome", remoteModule));
