@@ -16,6 +16,12 @@
     //we use this proxy to create objects that can contain dynamic objects like functions out of strings
     axios.baseUrl = 'http://localhost:8080/appster/';
 
+    Vue.$axios = axios;
+    Vue.$remoteModule = remoteModule;
+
+    Vue.prototype.$axios = axios;
+    Vue.prototype.$remoteModule = remoteModule;
+
     let mainModule = await remoteModule("appster_js_module_frontend_main_module");
-    await mainModule.start(Vue, axios, remoteModule);
+    await mainModule.start(Vue);
 })()

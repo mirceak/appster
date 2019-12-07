@@ -32,12 +32,12 @@ let init = async (Sequelize, sequelize) => {
             slug: 'appster_js_module_frontend_main_module',
             code:`
 {
-    async start(Vue, axios, remoteModule)
+    async start(Vue)
     {                    
-        let remoteComponent = await remoteModule("appster_js_module_frontend_remoteComponent");
+        let remoteComponent = await Vue.$remoteModule("appster_js_module_frontend_remoteComponent");
     
-        let Welcome = await Vue.component("Welcome", await remoteComponent("appster_js_module_frontend_remoteComponent_Welcome", remoteModule));
-        await Vue.component("Login", await remoteComponent("appster_js_module_frontend_remoteComponent_Login", remoteModule));
+        let Welcome = await Vue.component("Welcome", await remoteComponent("appster_js_module_frontend_remoteComponent_Welcome", Vue.$remoteModule));
+        await Vue.component("Login", await remoteComponent("appster_js_module_frontend_remoteComponent_Login", Vue.$remoteModule));
         new Vue({
             render: h => h(Welcome)
         }).$mount('#app');
