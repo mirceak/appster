@@ -29,6 +29,46 @@ let init = async (Sequelize, sequelize) => {
 
     await appster_js_module.create(
         {
+            slug: 'appster_js_module_main_module',
+            code:`
+{
+    async start(Vue, axios, remoteModule)
+    {                
+        let remoteComponent = await remoteModule("appster_js_module_remoteComponent");
+    
+        let Welcome = await Vue.component("Welcome", await remoteComponent("Welcome", remoteModule));
+        await Vue.component("Login", await remoteComponent("Login", remoteModule));
+        new Vue({
+            render: h => h(Welcome)
+        }).$mount('#app');
+    }   
+}
+            `,
+            updatedAt: new Date(),
+            createdAt: new Date()
+        }
+    );
+    await appster_js_module.create(
+        {
+            slug: 'appster_js_module_remoteComponent',
+            code:`
+(async (slug, remoteModule)=>{
+    return new Promise(async resolve => {
+        let module = await remoteModule(slug);
+        resolve({
+            template: module.template,
+            mixins: module.mixins
+        });
+    })
+})
+            `,
+            updatedAt: new Date(),
+            createdAt: new Date()
+        }
+    );
+
+    await appster_js_module.create(
+        {
             slug: 'Welcome',
             code:`
             {
@@ -45,27 +85,58 @@ let init = async (Sequelize, sequelize) => {
       An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
     </b-card-text>
     
+    <Login/>
+    
   </b-card>
 </b-container>
                 \`,            
-                mixins: [{
-                    data(){
-                        return {
-                            auth_props:{
-                                display_register_menu: false
-                            }              
-                        }
-                    },
-                    mounted() {
-                        
-                    }
-                }]
+mixins: [{
+    data(){
+        return {
+            auth_props:{
+                display_register_menu: false
+            }              
+        }
+    },
+    mounted() {
+        
+    }
+}]
             }`,
             updatedAt: new Date(),
             createdAt: new Date()
         }
     );
+    await appster_js_module.create(
+        {
+            slug: 'Login',
+            code:`
+            {
+                template: \`
+<b-card
+title="Login"
+>
+<b-card-text>
+  Login here.
+</b-card-text>
 
+</b-card>
+                \`,            
+mixins: [{
+    data(){
+        return {
+                     
+        }
+    },
+    mounted() {
+        
+    }
+}]
+            }`,
+            updatedAt: new Date(),
+            createdAt: new Date()
+        }
+    );
     return {props: {...props, modelName}, model: appster_js_module};
 }
 

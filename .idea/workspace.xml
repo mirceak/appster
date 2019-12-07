@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/ApstrComponent/AppstrComponent.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/dbItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/dbModel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/makesRequests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/moduleProxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/moduleProxy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Welcome.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Appster/mixins/remoteComponent.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/entities/appster_component.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/mongoose/Mongoose.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/mongoose/models/AppsterModel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" afterPath="$PROJECT_DIR$/todo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -113,16 +101,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@60c008a1" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@4f3844eb" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -204,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575742980742</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated modules.&#10;Added remote components and remote modules.&#10;No physical vue files required anymore.">
+      <created>1575747451845</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1575747451845</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +214,8 @@
     <MESSAGE value="Starting to build the base self editing component." />
     <MESSAGE value="Missing files." />
     <MESSAGE value="updated mariadb files" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated mariadb files" />
+    <MESSAGE value="Updated modules.&#10;Added remote components and remote modules.&#10;No physical vue files required anymore." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated modules.&#10;Added remote components and remote modules.&#10;No physical vue files required anymore." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575747201526">
@@ -244,10 +230,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575746316601" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575742974926">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1575747447420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575742974926" />
+    <state x="585" y="114" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575747447420" />
     <state width="324" height="442" key="Diff.GoToChangePopup" timestamp="1575491267050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -276,10 +262,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="435" key="VCS.ChangelistChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491390126" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575742984847">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575747454062">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575742984847" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575747454062" />
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog" timestamp="1575491343150">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
