@@ -29,15 +29,15 @@ let init = async (Sequelize, sequelize) => {
 
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_main_module',
+            slug: 'appster_js_module_frontend_main_module',
             code:`
 {
     async start(Vue, axios, remoteModule)
     {                    
-        let remoteComponent = await remoteModule("appster_js_module_remoteComponent");
+        let remoteComponent = await remoteModule("appster_js_module_frontend_remoteComponent");
     
-        let Welcome = await Vue.component("Welcome", await remoteComponent("Welcome", remoteModule));
-        await Vue.component("Login", await remoteComponent("Login", remoteModule));
+        let Welcome = await Vue.component("Welcome", await remoteComponent("appster_js_module_frontend_remoteComponent_Welcome", remoteModule));
+        await Vue.component("Login", await remoteComponent("appster_js_module_frontend_remoteComponent_Login", remoteModule));
         new Vue({
             render: h => h(Welcome)
         }).$mount('#app');
@@ -50,7 +50,7 @@ let init = async (Sequelize, sequelize) => {
     );
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_remoteComponent',
+            slug: 'appster_js_module_frontend_remoteComponent',
             code:`
 (async (slug, remoteModule)=>{
     return new Promise(async resolve => {
@@ -69,7 +69,7 @@ let init = async (Sequelize, sequelize) => {
 
     await appster_js_module.create(
         {
-            slug: 'Welcome',
+            slug: 'appster_js_module_frontend_remoteComponent_Welcome',
             code:`
             {
                 template: \`
@@ -109,7 +109,7 @@ mixins: [{
     );
     await appster_js_module.create(
         {
-            slug: 'Login',
+            slug: 'appster_js_module_frontend_remoteComponent_Login',
             code:`
             {
                 template: \`

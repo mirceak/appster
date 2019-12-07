@@ -16,6 +16,6 @@
     //we use this proxy to create objects that can contain dynamic objects like functions out of strings
     axios.baseUrl = 'http://localhost:8080/appster/';
 
-    let mainModule = await remoteModule("appster_js_module_main_module");
+    let mainModule = await remoteModule("appster_js_module_frontend_main_module");
     await mainModule.start(Vue, axios, remoteModule);
 })()
