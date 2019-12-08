@@ -17,7 +17,7 @@ exports.get = async (sequelize) => {
     Sequelize = await utils.require('sequelize');
 
     return entity_register.reduce(async (result, current) => {
-        result.push(await current.entity.init(Sequelize, sequelize))
+        result.push(await current.entity.init(Sequelize, sequelize));
         return result;
     }, []);
 }
