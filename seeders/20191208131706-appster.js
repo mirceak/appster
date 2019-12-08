@@ -8,14 +8,14 @@ module.exports = {
 (async ()=>{
     const api = express();
 
-    const port = 8080
-    const ip = '127.0.0.1'
+    const port = config.apiPort;
+    const ip = config.apiIp;
     
     // Add headers
     api.use(function (req, res, next) {
 
         // Website you wish to allow to connect
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+        res.setHeader('Access-Control-Allow-Origin', 'http://' + config.frontEndIp + (config.frontEndPort == '80' ? '' : ":" + config.frontEndPort) );
 
         // Request methods you wish to allow
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -74,15 +74,16 @@ module.exports = {
 (async ()=>{
 Vue.use(BootstrapVue)
 
-axios.baseUrl = 'http://localhost:8080/appster/';
+let baseUrl = 'http://' + config.apiIp + ':' + config.apiPort + '/appster/';
+let itemName = "AppsterJSModule";
 
 Vue.prototype.$axios = axios;
-Vue.prototype.$remoteModule = remoteModule;
+Vue.prototype.$remoteModule = async (slug)=>{ return await remoteModule(axios, baseUrl, itemName, slug)};
 
 var remotes = {
-    module: remoteModule,
-    component: await remoteModule("appster_js_module_frontend_remotes_component"),
-    mixin: await remoteModule("appster_js_module_frontend_remotes_mixin")
+    module: Vue.prototype.$remoteModule,
+    component: await Vue.prototype.$remoteModule("appster_js_module_frontend_remotes_component"),
+    mixin: await Vue.prototype.$remoteModule("appster_js_module_frontend_remotes_mixin")
 }
 
 var Welcome = await Vue.component("Welcome", await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes));

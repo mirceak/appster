@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/appster_config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/appster_config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/appsterjsmodule.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/appsterjsmodule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/remoteModule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" afterPath="$PROJECT_DIR$/seeders/20191208131706-appster.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -75,20 +80,21 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
-      <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\Documents\Git\appster\config" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\mariadb" />
       <recent name="C:\Users\mirce\Documents\work\appster\app\src\components\Appster\mixins" />
       <recent name="C:\Users\mirce\Documents\work\appster\modules\appster\entities" />
       <recent name="C:\Users\mirce\Documents\work\appster\app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
+      <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
     </key>
   </component>
@@ -101,16 +107,6 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@791a5eca" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@60bf0fa8" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -146,7 +142,7 @@
       <workItem from="1575750365890" duration="2020000" />
       <workItem from="1575789479450" duration="530000" />
       <workItem from="1575794972167" duration="393000" />
-      <workItem from="1575799695141" duration="14218000" />
+      <workItem from="1575799695141" duration="19227000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -253,6 +249,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575809203240" />
+    <state x="711" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1575816744396">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="711" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575816744396" />
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575129362405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -309,10 +309,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575234395154" />
-    <state x="656" y="257" width="737" height="596" key="find.popup" timestamp="1575812472997">
+    <state x="295" y="59" width="1098" height="794" key="find.popup" timestamp="1575818188546">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="257" width="737" height="596" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575812472997" />
+    <state x="295" y="59" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575818188546" />
     <state x="741" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1575491368083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -329,9 +329,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575209469123" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1575485997241">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1575817918172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575485997241" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575817918172" />
   </component>
 </project>

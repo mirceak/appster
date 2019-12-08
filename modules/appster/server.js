@@ -1,6 +1,7 @@
 'use strict'
 
 //appster modules
+let config = require('../../config/appster_config.js');
 let utils;
 let shell;
 let api;
@@ -11,7 +12,7 @@ let api;
 
 let listen_frontend = async ()=>{
     return new Promise(async resolve => {
-        let child_shell = await shell.run_command("cd app \n npm run serve -- --port 80 \n", true);
+        let child_shell = await shell.run_command("cd app \n npm run serve -- --host " + config.frontEndIp + " --port " + config.frontEndPort + " \n", true);
 
         child_shell.stdout.on('data', (data) => {
             if (data.includes("To create a production build, run npm run build.")){

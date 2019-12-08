@@ -3,6 +3,7 @@
 //appster modules
 let utils;
 let shell;
+let config = require('../../config/appster_config.js');
 let sequelize;
 
 //remote modules

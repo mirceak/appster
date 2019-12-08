@@ -13,7 +13,7 @@ module.exports = (async ()=>{
   const config = require(__dirname + '/../config/config.json')[env];
   const db = {};
   db.models = {};
-console.log(3);
+
   let sequelize;
   if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);

@@ -1,9 +1,4 @@
-import axios from "axios";
-
-let baseUrl = "http://localhost:8080/appster/";
-let itemName = "AppsterJSModule";
-
-export default async (slug)=>{
+export default async (axios, baseUrl, itemName, slug)=>{
     let module = await axios
         .get(baseUrl + itemName + '/' + slug)
     try {
