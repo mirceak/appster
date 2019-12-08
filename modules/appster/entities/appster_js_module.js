@@ -29,7 +29,7 @@ let init = async (Sequelize, sequelize) => {
 
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_main_module',
+            slug: 'appster_js_module_frontend_remotes_module',
             code:`       
 (async ()=>{
 Vue.use(BootstrapVue)
@@ -39,17 +39,14 @@ axios.baseUrl = 'http://localhost:8080/appster/';
 Vue.prototype.$axios = axios;
 Vue.prototype.$remoteModule = remoteModule;
 
-var remoteComponent = await remoteModule("appster_js_module_frontend_remoteComponent");
-var remoteMixin = await remoteModule("appster_js_module_frontend_remoteMixin");
-
 var remotes = {
     module: remoteModule,
-    component: remoteComponent,
-    mixin: remoteMixin
+    component: await remoteModule("appster_js_module_frontend_remotes_component"),
+    mixin: await remoteModule("appster_js_module_frontend_remotes_mixin")
 }
 
-var Welcome = await Vue.component("Welcome", await remoteComponent("appster_js_module_frontend_remoteComponent_Welcome", remotes));
-await Vue.component("Login", await remoteComponent("appster_js_module_frontend_remoteComponent_Login", remotes));
+var Welcome = await Vue.component("Welcome", await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes));
+await Vue.component("Login", await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes));
 
 const router = new VueRouter({
   routes:[
@@ -69,19 +66,17 @@ new Vue({
     );
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_remoteComponent',
+            slug: 'appster_js_module_frontend_remotes_component',
             code:`
 (async (slug, remotes)=>{
-    return new Promise(async resolve => {
-        let module = await remotes.module(slug);
-        resolve({
-            template: module.template,
-            mixins: await module.mixins.reduce(async (result, current) => {
-                result.push(await remotes.mixin(current, remotes));
-                return result;
-            }, [])
-        })
-    })
+    let module = await remotes.module(slug);
+    return {
+        template: module.template,
+        mixins: await module.mixins.reduce(async (result, current) => {
+            result.push(await remotes.mixin(current, remotes));
+            return result;
+        }, [])
+    }
 })
             `,
             updatedAt: new Date(),
@@ -90,7 +85,7 @@ new Vue({
     );
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_remoteMixin',
+            slug: 'appster_js_module_frontend_remotes_mixin',
             code:`
 (async (slug, remotes)=>{
     return await remotes.module(slug)
@@ -103,7 +98,7 @@ new Vue({
 
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_remoteComponent_Welcome',
+            slug: 'appster_js_module_frontend_remotes_component_Welcome',
             code:`
             {
                 template: \`
@@ -137,7 +132,7 @@ new Vue({
 
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_remoteComponent_mixin_loginCard',
+            slug: 'appster_js_module_frontend_remotes_component_mixin_loginCard',
             code:`         
 {
     data(){
@@ -160,7 +155,7 @@ new Vue({
     );
     await appster_js_module.create(
         {
-            slug: 'appster_js_module_frontend_remoteComponent_Login',
+            slug: 'appster_js_module_frontend_remotes_component_Login',
             code:`
             {
                 template: \`
@@ -175,7 +170,7 @@ title="Login"
                 \`,            
 mixins: 
 [
-    'appster_js_module_frontend_remoteComponent_mixin_loginCard'
+    'appster_js_module_frontend_remotes_component_mixin_loginCard'
 ]
             }`,
             updatedAt: new Date(),
