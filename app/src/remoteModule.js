@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let baseUrl = "http://localhost:8080/appster/";
-let itemName = "appster_js_module";
+let itemName = "AppsterJSModule";
 
 export default async (slug)=>{
     let module = await axios

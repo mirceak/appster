@@ -14,6 +14,6 @@
 
     Vue,VueRouter,BootstrapVue, remoteModule; //eslint bypass
 
-    let module = await axios.get('http://localhost:8080/appster/' + 'appster_js_module' + '/' + 'appster_js_module_frontend_remotes_module_main')
+    let module = await axios.get('http://localhost:8080/appster/' + 'AppsterJSModule' + '/' + 'appster_js_module_frontend_remotes_module_main')
     await eval('(async ()=>{return await ' + module.data.code + '})()');
 })()

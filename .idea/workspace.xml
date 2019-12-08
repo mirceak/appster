@@ -4,9 +4,13 @@
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/remoteModule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/database.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/entity_register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -31,7 +35,37 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="appsterjsmodules: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="sequelizemeta: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -82,7 +116,12 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -116,7 +155,7 @@
       <workItem from="1575750365890" duration="2020000" />
       <workItem from="1575789479450" duration="530000" />
       <workItem from="1575794972167" duration="393000" />
-      <workItem from="1575799695141" duration="8560000" />
+      <workItem from="1575799695141" duration="12537000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -219,10 +258,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Minimized frontend a little" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575747201526">
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575809203240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575747201526" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575809203240" />
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575129362405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -271,6 +310,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491343150" />
+    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1575809922903">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575809922903" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575234395154">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

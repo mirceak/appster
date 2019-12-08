@@ -24,6 +24,7 @@ let start_service = async ()=>{
         if(!await utils.file_exists('./3rdPartyFiles/mariadb/data/appster')){
             await create_database(db_name);
         }
+
         resolve();
     });
 };
