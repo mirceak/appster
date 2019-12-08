@@ -4,7 +4,6 @@
 let utils;
 let shell;
 let sequelize;
-let entity_register;
 
 //remote modules
 let express;
@@ -20,6 +19,7 @@ class Api {
     async start() {
         if (!express) {
             express = await utils.require('express');
+            sequelize = await utils.require('../../models/index.js');
             router = express.Router();
         }
 
@@ -37,8 +37,6 @@ class Api {
 exports.promise = new Promise(async resolve => {
     utils = await require('./utils.js').promise;
     shell = await require('./shell.js').promise;
-    sequelize = require('../../models/index.js');
-    entity_register = await require('./entities/entity_register.js');
 
     resolve(new Api());
 });

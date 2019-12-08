@@ -1,7 +1,11 @@
 'use strict';
-const Sequelize = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+//appster modules
+let utils;
+
+module.exports = (async (sequelize, DataTypes)=>{
+  utils = await require('../modules/appster/utils.js').promise;
+  const Sequelize = await utils.require('sequelize');
   const AppsterJSModule = sequelize.define('AppsterJSModule', {
     slug: {
       type: Sequelize.STRING,
@@ -16,4 +20,4 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
   return AppsterJSModule;
-};
+})
