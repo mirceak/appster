@@ -93,9 +93,7 @@ new Vue({
             slug: 'appster_js_module_frontend_remoteMixin',
             code:`
 (async (slug, remotes)=>{
-    return new Promise(async resolve => {
-        resolve((await remotes.module(slug)));
-    })
+    return await remotes.module(slug)
 })
             `,
             updatedAt: new Date(),
@@ -128,7 +126,7 @@ new Vue({
 \`
                 , mixins: 
 [
-    'appster_js_module_frontend_remoteComponent_mixin_loginCard'
+    
 ]
             }`,
             updatedAt: new Date(),
@@ -150,6 +148,7 @@ new Vue({
         }
     },
     mounted() {
+        console.log("hello world");
     },
     methods: {        
     }
@@ -174,7 +173,10 @@ title="Login"
 
 </b-card>
                 \`,            
-mixins: []
+mixins: 
+[
+    'appster_js_module_frontend_remoteComponent_mixin_loginCard'
+]
             }`,
             updatedAt: new Date(),
             createdAt: new Date()

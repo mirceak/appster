@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/entities/appster_js_module.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
@@ -114,7 +113,7 @@
       <workItem from="1575750365890" duration="2020000" />
       <workItem from="1575789479450" duration="530000" />
       <workItem from="1575794972167" duration="393000" />
-      <workItem from="1575799695141" duration="5660000" />
+      <workItem from="1575799695141" duration="5893000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
