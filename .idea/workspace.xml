@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/appsterjsmodule.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/appsterjsmodule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" afterPath="$PROJECT_DIR$/seeders/20191208131706-appster.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" afterPath="$PROJECT_DIR$/todo" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -153,7 +142,7 @@
       <workItem from="1576194565108" duration="607000" />
       <workItem from="1576271488177" duration="633000" />
       <workItem from="1576303018658" duration="1262000" />
-      <workItem from="1576329340619" duration="16985000" />
+      <workItem from="1576329340619" duration="17263000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -225,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575753694407</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others.">
+      <created>1576360199996</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1576360199996</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +249,8 @@
     <MESSAGE value="Updated modules.&#10;Added remote components and remote modules.&#10;No physical vue files required anymore." />
     <MESSAGE value="restructured frontend a little" />
     <MESSAGE value="Minimized frontend a little" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minimized frontend a little" />
+    <MESSAGE value="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575982111810">
