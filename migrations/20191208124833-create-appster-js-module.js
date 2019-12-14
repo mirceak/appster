@@ -2,10 +2,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('AppsterJSModules', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       slug: {
         allowNull: false,
         unique: true,
-        primaryKey: true,
         type: Sequelize.STRING
       },
       code: {

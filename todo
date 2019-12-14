@@ -1,0 +1,25 @@
+alpha.
+create a mixin module for api requests
+create self editing component module that can save/update itself.
+list all existing modules and add editing capabilities.
+implement remote model definitions with the possibility to link to appsterjsmodules.
+create structure for model, view and controller to be managed by a remote module.
+create a module that displays the database and migrations. (implement basic migrate/undo/etc commands)
+create a module that displays the routes. (implement route modules)
+create a module that edits components.
+create a module that creates mvc models.
+create a module that manages a project. (project->modules->pages->etc)
+
+beta.
+
+create users table.
+associate modules to users.
+implement guards for admins.
+implement password encryption and login logic.
+implement register logic.
+create a module that displays server files and allows edits.
+implement a better logging system.
+list the console output into the browser. (move after completion to later, implement IO for this console)
+error checking all the way.
+
+Gold.

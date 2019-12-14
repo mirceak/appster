@@ -1,23 +1,32 @@
 'use strict';
 
-//appster modules
-let utils;
-
-module.exports = (async (sequelize, DataTypes)=>{
-  utils = await require('../modules/appster/utils.js').promise;
-  const Sequelize = await utils.require('sequelize');
+module.exports = (sequelize, DataTypes)=>{
   const AppsterJSModule = sequelize.define('AppsterJSModule', {
-    slug: {
-      type: Sequelize.STRING,
+    id: {
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      unique: true
+      type: DataTypes.INTEGER
+    },
+    slug: {
+      allowNull: false,
+      unique: true,
+      type: DataTypes.STRING
     },
     code: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
   }, {});
   AppsterJSModule.associate = function(models) {
     // associations can be defined here
   };
   return AppsterJSModule;
-})
+}

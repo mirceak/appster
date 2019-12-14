@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/appster_config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/appster_config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/remoteModule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/appsterjsmodule.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/appsterjsmodule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" afterPath="$PROJECT_DIR$/seeders/20191208131706-appster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" afterPath="$PROJECT_DIR$/todo" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -58,6 +62,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -79,12 +84,19 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/admin/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\Documents\Git\appster\app\public" />
+      <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
+      <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
+      <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\mirce\Documents\Git\appster\config" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\mariadb" />
@@ -92,23 +104,13 @@
       <recent name="C:\Users\mirce\Documents\work\appster\modules\appster\entities" />
       <recent name="C:\Users\mirce\Documents\work\appster\app" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
-      <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
-      <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
-    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
       <list>
         <serviceView>
           <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </treeState>
         </serviceView>
@@ -143,6 +145,15 @@
       <workItem from="1575789479450" duration="530000" />
       <workItem from="1575794972167" duration="393000" />
       <workItem from="1575799695141" duration="19227000" />
+      <workItem from="1575904274182" duration="15020000" />
+      <workItem from="1576012229784" duration="11370000" />
+      <workItem from="1576056277782" duration="1048000" />
+      <workItem from="1576184276723" duration="1147000" />
+      <workItem from="1576185692507" duration="154000" />
+      <workItem from="1576194565108" duration="607000" />
+      <workItem from="1576271488177" duration="633000" />
+      <workItem from="1576303018658" duration="1262000" />
+      <workItem from="1576329340619" duration="16985000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -245,10 +256,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Minimized frontend a little" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575809203240">
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575982111810">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575809203240" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575982111810" />
     <state x="711" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1575816744396">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -273,14 +284,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="85" key="DiffContextDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491553371" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1576353187369">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576353187369" />
     <state x="567" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1575142283940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="567" y="0" key="FileDocumentManager.FileCacheConflict/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575142283940" />
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom" timestamp="1576012499517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576012499517" />
+    <state width="1293" height="282" key="GridCell.Tab.0.center" timestamp="1576012499517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576012499517" />
+    <state width="1293" height="282" key="GridCell.Tab.0.left" timestamp="1576012499517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576012499517" />
+    <state width="1293" height="282" key="GridCell.Tab.0.right" timestamp="1576012499517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576012499517" />
     <state x="672" y="235" key="MultipleFileMergeDialog" timestamp="1575491375590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="672" y="235" key="MultipleFileMergeDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491375590" />
+    <state x="763" y="334" key="NewPhpClassDialog" timestamp="1576185712283">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="763" y="334" key="NewPhpClassDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576185712283" />
     <state x="761" y="241" key="RollbackChangesDialog" timestamp="1575491223168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -293,10 +328,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="807" y="435" key="VCS.ChangelistChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491390126" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575753696682">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576348052197">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575753696682" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576348052197" />
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog" timestamp="1575491343150">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -309,10 +344,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575234395154" />
-    <state x="295" y="59" width="1098" height="794" key="find.popup" timestamp="1575818188546">
+    <state x="295" y="59" width="1098" height="794" key="find.popup" timestamp="1576354650162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="295" y="59" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575818188546" />
+    <state x="295" y="59" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576354650162" />
     <state x="741" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1575491368083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -325,13 +360,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="757" y="384" key="git4idea.rebase.GitRebaseDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575149362517" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1575209469123">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1575985471258">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575209469123" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1575817918172">
+    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575985471258" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576354245223">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575817918172" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576354245223" />
   </component>
 </project>

@@ -10,15 +10,10 @@ let api;
 
 //private vars
 
-let listen_frontend = async ()=>{
+let build_frontend = async ()=>{
     return new Promise(async resolve => {
-        let child_shell = await shell.run_command("cd app \n npm run serve -- --host " + config.frontEndIp + " --port " + config.frontEndPort + " \n", true);
-
-        child_shell.stdout.on('data', (data) => {
-            if (data.includes("To create a production build, run npm run build.")){
-                resolve();
-            }
-        });
+        await shell.run_command("cd app \n npm run build \n exit \n");
+        resolve();
     });
 }
 
@@ -33,7 +28,7 @@ class Server{
 
     async start(){
         await listen_api();
-        await listen_frontend();
+        await build_frontend();
     }
 }
 
