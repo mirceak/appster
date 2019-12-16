@@ -1,25 +1,21 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('AppsterJSModules', {
+    return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      guards: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      slug: {
-        allowNull: false,
+      username: {
         unique: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
-      code: {
+      password: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +28,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('AppsterJSModules');
+    return queryInterface.dropTable('Users');
   }
 };

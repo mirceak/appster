@@ -1,25 +1,20 @@
 'use strict';
-
-module.exports = (sequelize, DataTypes)=>{
-  const AppsterJSModule = sequelize.define('AppsterJSModule', {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    slug: {
-      allowNull: false,
+    username: {
       unique: true,
+      allowNull: false,
       type: DataTypes.STRING
     },
-    guards: {
-      allowNull: true,
-      type: DataTypes.TEXT
-    },
-    code: {
+    password: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
@@ -30,8 +25,8 @@ module.exports = (sequelize, DataTypes)=>{
       type: DataTypes.DATE
     }
   }, {});
-  AppsterJSModule.associate = function(models) {
+  User.associate = function(models) {
     // associations can be defined here
   };
-  return AppsterJSModule;
-}
+  return User;
+};

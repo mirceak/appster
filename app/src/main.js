@@ -33,7 +33,7 @@
 
     config, Vue, Vuex, VueRouter, VueAceEditor, BootstrapVue, remoteModule; //eslint bypass, not explicitly accessing these variables will throw an error.
 
-    let baseUrl = 'http://' + config.apiIp + ':' + config.apiPort + '/api/appster/';
+    let baseUrl = 'http://' + config.apiIp + ':' + config.apiPort + config.apiExt;
     Vue.prototype.baseUrl = baseUrl;
 
     let module = await axios.get(baseUrl + 'AppsterJSModule' + '/' + 'appster_js_module_frontend_remotes_module_main')

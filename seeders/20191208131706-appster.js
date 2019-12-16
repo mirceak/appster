@@ -5,20 +5,11 @@ module.exports = {
         return queryInterface.bulkInsert('AppsterJSModules', [{
             slug: 'appster_js_module_backend_remotes_module_main',
             code: `
-(async ()=>{    
-    const port = config.apiPort;
-    const ip = config.apiIp;
-    
-    const frontPort = config.frontEndPort;
-    const frontIp = config.frontEndIp;
-    
+(async ()=>{            
     const appsterApi = express();
     appsterApi.use(cors());
-    appsterApi.use(bodyParser.urlencoded({ extended: false }));
+    appsterApi.use(bodyParser.urlencoded({ extended: true }));
     appsterApi.use(bodyParser.json());
-    appsterApi.use(cookieParser(crypto.randomBytes(256), {
-        sameSite: 'none'
-    }));
     
     var options = {
         host: 'localhost',
@@ -28,38 +19,48 @@ module.exports = {
         database: 'appster',
     };
      
-    var sessionStore = new MySQLStore(options);
+    var sessionStore = new MySQLStore(options);    
+    const secret = crypto.randomBytes(256).toString(); 
     
     appsterApi.use(session({
-        secret: crypto.randomBytes(256),
+        secret: secret,
         store: sessionStore,
         resave: false,
         saveUninitialized: false
     }));
     
-    passport.use(new LocalStrategy(
-      function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
-        });
-      }
-    ));
+    let remoteModule = async (code)=>{
+        return await eval('(async ()=>{return await '+code+'})()');;
+    }
     
-    Object.keys(sequelize.models).forEach(key => {
+    Object.keys(sequelize.models).forEach(key => {    
         let entity = sequelize[key];
-        router.route('/' + key)
-            .all(function (req, res, next) {
-                // runs for all HTTP verbs first
-                // think of it as route specific middleware!
-                next()
-            })
+        let isLoggedIn = async (req, res, next) => {
+            if (req.params && req.params.slug){
+                req.model = await entity.findOne({where: {slug: req.params.slug}});
+                if (req.model.guards){
+                    let guards = JSON.parse(req.model.guards);
+                    if (guards.indexOf('auth') != -1){    
+                        if (req.isAuthenticated())
+                            return next();   
+                            
+                        return res.send({
+                            code: "{}",
+                            guards: req.model.guards
+                        });
+                    }else{      
+                        return next();                            
+                    }
+                }else{                     
+                    return next();                    
+                }
+            }else{
+                return next();
+            }
+        };
+        
+        appsterRouter.route('/' + key)
+            .all(isLoggedIn)
             .get(async (req, res, next) => {
                 await entity.findAll().then(result => {
                     res.send(result)
@@ -67,13 +68,12 @@ module.exports = {
                     res.send(err)
                 })
             })
-        router.route('/' + key + '/:slug')
-            .all(function (req, res, next) {
-                // runs for all HTTP verbs first
-                // think of it as route specific middleware!
-                next()
-            })
+        appsterRouter.route('/' + key + '/:slug')
+            .all(isLoggedIn)
             .get(async (req, res, next) => {
+                if (req.model) {
+                    return res.send(req.model);
+                }
                 await entity.findOne({where: {slug: req.params.slug}}).then(result => {
                     res.send(result)
                 }).catch(err => {
@@ -97,20 +97,60 @@ module.exports = {
                 next(new Error('not implemented'))
             })
     });
-   
-    appsterApi.use(passport.initialize());
-    appsterApi.use(passport.session());
-    appsterApi.use('/api/appster', router); 
     
-    appsterApi.listen(port, ip, () => {
-        console.log("APPSTER____________________________________________________________________________________________________http api server started.");
+    passport.serializeUser(function(user, done) {
+      done(null, user.id);
     });
     
-    let frontEntApi = express();
-    frontEntApi.use(express.static('app/dist'));
+    passport.deserializeUser((id, done)=> {
+        sequelize.User.findOne({ where: { id: id } }).then(result=>{
+            if (result){            
+                done(null, result.dataValues);
+            }else{
+                done(null, false, { message: 'Invalid User' })
+            }
+        })      
+    });
     
-    frontEntApi.listen(frontPort, frontIp, () => {
-        console.log("APPSTER____________________________________________________________________________________________________front-end server started.");
+    passport.use(new LocalStrategy({
+            usernameField: 'username',
+            passwordField: 'password'
+        },
+        
+        function(username, password, done) {    
+            sequelize.User.findOne({ where: { username: username } }).then( result => {     
+              if (!result) {
+                return done(null, false, { message: 'Incorrect username.' });
+              }
+              if (result.dataValues.password != password) {
+                return done(null, false, { message: 'Incorrect password.' });
+              }
+              return done(null, result.dataValues);
+            });
+        }
+    ));
+    
+    let frontEntApi = express();
+    frontEndRouter.get('/user/authenticated', (req, res, next) => {
+        res.send(req.isAuthenticated())
+    })
+        
+    frontEndRouter.post('/login',
+        passport.authenticate('local', 
+            { 
+                successRedirect: '/#/welcome',
+                failureRedirect: '/#/login'
+             }
+         )
+    );
+   
+    appsterApi.use(passport.initialize());
+    appsterApi.use(passport.session());    
+    appsterApi.use(express.static('app/dist'), frontEndRouter);
+    appsterApi.use(config.apiExt, appsterRouter); 
+    
+    appsterApi.listen(config.apiPort, config.apiIp, () => {
+        console.log("APPSTER____________________________________________________________________________________________________http api server started.");
     });
 })()
       `,
@@ -120,31 +160,81 @@ module.exports = {
             slug: 'appster_js_module_frontend_remotes_module_main',
             code: `
 (async ()=>{
-    Vue.use(BootstrapVue)
-    
-    let itemName = "AppsterJSModule";
+    Vue.use(BootstrapVue);    
     
     Vue.prototype.axios = axios;
-    let _remoteModule = async (slug)=>{ return await remoteModule(axios, baseUrl, itemName, slug)};
-    let remotes = {
-        module: _remoteModule,
-        component: await _remoteModule("appster_js_module_frontend_remotes_component"),
-        template: await _remoteModule("appster_js_module_frontend_remotes_template")
-    }
+    
+    let needsAuthRedirect = false;
+        
+    let itemName = "AppsterJSModule";
+    let _remoteModule = async (slug)=>{return await remoteModule(axios, baseUrl, itemName, slug)};    
+    let remotes = await (await _remoteModule('appster_js_module_frontend_remotes')).compiled(_remoteModule);
+    
     Vue.prototype.$remotes = remotes;
     await Vue.component("VueAceEditor", VueAceEditor);
-        
-    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes"))(remotes);
-    const router = new VueRouter({
-      routes
+    
+    Vue.use(Vuex);    
+    const remoteStore = await (await remotes.module("appster_js_module_frontend_remotes_store")).compiled(remotes);
+    const store = new Vuex.Store(remoteStore)
+    Vue.prototype.store = store;        
+    
+    axios.interceptors.response.use(async (response) => {
+        if (response && (response.data.slug == 'appster_js_module_frontend_remotes_component_Login' && !response.config.url.includes('appster_js_module_frontend_remotes_component_Login'))){
+            store.commit('changeState', {authenticated:false});
+        }
+        return response;
+    }, async (error) => {
+        // Do something with response error
+        return Promise.reject(error);
+    });    
+    
+    await axios.get('/user/authenticated').then(response=>{
+        store.commit('changeState', {authenticated: response.data});
     });
     
+    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes")).compiled(remotes);
+    const router = new VueRouter({
+        routes: routes
+    });    
     Vue.use(VueRouter);
-    Vue.use(Vuex);
     
-    const remoteStore = await (await remotes.module("appster_js_module_frontend_remotes_store"))(remotes);
-    const store = new Vuex.Store(remoteStore)
-    Vue.prototype.store = store;
+    router.beforeEach((to, from, next) => {    
+        if (!store.state.authenticated 
+            && routes.reduce((result, current)=>{
+                if (current.path == to.path && current.component.guards.indexOf('auth') != -1){
+                    result = true;
+                }
+                return result;
+            }, null) != null
+            && to.path != '/login')
+        {                      
+            if (from.path !== '/login') {
+                return router.push('/login');     
+            }else{
+                return router.go(-1);    
+            }
+            return;
+        } 
+         
+        if (store.state.authenticated 
+            && routes.reduce((result, current)=>{
+                if (current.path == to.path && current.component.guards.indexOf('auth') == -1){
+                    result = true;
+                }
+                return result;
+            }, null) != null
+            && to.path == '/login')
+        {      
+            if (from.path != '/'){
+                if (from.path != '/welcome'){
+                    return router.replace(from.path);
+                }
+                return router.go(-1);
+            }
+            return router.push('/welcome');
+        }      
+        return next();
+    })
     
     new Vue({
         router
@@ -154,16 +244,30 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
+            slug: 'appster_js_module_frontend_remotes',
+            code: `
+(async (remoteModule)=>{     
+    return {
+        module: remoteModule,
+        component: (await remoteModule("appster_js_module_frontend_remotes_component")).compiled,
+        template: (await remoteModule("appster_js_module_frontend_remotes_template")).compiled
+    }    
+})   
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
             slug: 'appster_js_module_frontend_remotes_store',
             code: `
 (async (remotes)=>{     
     return {
       state: {
+        authenticated: false,
         msg: "hi from store"
       },
       mutations: {
-        changeMessage (state) {
-          state.msg = state.msg;
+        changeState (state, newVal) {
+            this.state = Object.assign(state, newVal);
         }
       }
     }    
@@ -178,6 +282,14 @@ module.exports = {
     return [
         { 
             path: '/', 
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes) 
+        },
+        { 
+            path: '/login', 
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes) 
+        },
+        { 
+            path: '/welcome', 
             component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes) 
         }
     ]
@@ -190,13 +302,16 @@ module.exports = {
             slug: 'appster_js_module_frontend_remotes_component',
             code: `
 (async (slug, remotes)=>{
-    let module = await remotes.module(slug);
+    let model = (await remotes.module(slug))
+    let module = model.compiled ? model.compiled : {};
+    module.guards = model.guards;
+    
     if (module.template && typeof module.template === 'object'){
-      module.template = await remotes.module(current, remotes);
+      module.template = (await remotes.module(current, remotes)).compiled;
     };
     if (module.mixins && Array.isArray(module.mixins)){
       module.mixins = await module.mixins.reduce(async (result, current) => {
-          await (typeof current === 'string' || current instanceof String) ? result.push(await remotes.module(current, remotes)) : result.push(current);
+          await (typeof current === 'string' || current instanceof String) ? result.push((await remotes.module(current, remotes)).compiled) : result.push(current);
           return result;
       }, []);
     };
@@ -226,21 +341,24 @@ module.exports = {
             updatedAt: new Date()
         }, {
             slug: 'appster_js_module_frontend_remotes_component_Welcome',
+            guards:
+                `[
+                    "auth"
+                ]`,
             code: `
             {
                 name: \'Welcome\',
                 template: \`
 <b-container>
   <b-card
-    title="Appster"
+    title="Welcome"
     img-height="128"
-    img-src="https://picsum.photos/600/300/?image=25"
+    img-src="https://picsum.photos/600/300/?image=33"
     img-alt="Image"
     img-top
     tag="article"
   >
     <b-card-text>
-      An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
     </b-card-text>
     
     <AppsterModuleEditor/>
@@ -250,15 +368,93 @@ module.exports = {
 \`
                 , mixins: 
 [
-    {
-        mounted(){
-            console.log(this.store.state.msg);
-        }
-    }
 ]
                 , components:
 {
     AppsterModuleEditor:'appster_js_module_frontend_remotes_component_AppsterModuleEditor'
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_Home',
+            guards:
+                `[
+                    "web"
+                ]`,
+            code: `
+            {
+                name: \'Home\',
+                template: \`
+<b-container>
+  <b-card
+    title="Home"
+    img-height="128"
+    img-src="https://picsum.photos/600/300/?image=25"
+    img-alt="Image"
+    img-top
+    tag="article"
+  >
+    <b-card-text>
+      An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
+    </b-card-text>
+        
+  </b-card>
+</b-container>
+\`
+                , mixins: 
+[
+]
+                , components:
+{
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_Login',
+            guards:
+            `[
+                "guest"
+            ]`,
+            code: `
+            {
+                name: \'Login\',
+                template: \`
+<b-container>
+  <b-card
+    title="Login"
+    img-height="128"
+    img-src="https://picsum.photos/600/300/?image=66"
+    img-alt="Image"
+    img-top
+    tag="article"
+  >
+    
+    <form action="/login" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <input type="submit" value="Log In"/>
+        </div>
+    </form>
+        
+  </b-card>
+</b-container>
+\`
+                , mixins: 
+[
+]
+                , components:
+{
 }
             }
       `,
@@ -280,7 +476,7 @@ module.exports = {
     },
     methods: {        
         async getAll(){
-             await this.axios.get(this.baseUrl + 'AppsterJSModule').then(result=>{
+             await this.axios.get(this.baseUrl + 'AppsterJSModule').then(result=>{                           
                   this.modules.push(...result.data.map(current=>{
                       return {value: {slug: current.slug, code:current.code}, text: current.slug};
                   }));
@@ -302,7 +498,34 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
+            slug: 'appster_js_module_frontend_remotes_mixin_AppsterModuleEditor',
+            code: `      
+{
+    props:[
+        'content'
+    ],
+        data(){
+        return {
+        }
+    },
+    methods:{
+        update(){
+            this.$emit('update:content', this.$refs.editor.getValue());
+        }
+    },
+    mounted() {
+        console.log("hello worldz");
+    },
+}
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
             slug: 'appster_js_module_frontend_remotes_component_AppsterModuleEditor',
+            guards:
+            `[
+                "auth"
+            ]`,
             code: `      
 {
     name: 'AppsterModuleEditor',
@@ -357,33 +580,17 @@ module.exports = {
     \`,            
     mixins: 
     [
-      {          
-          props:[
-            'content'
-          ],   
-          data(){
-              return {
-              }
-          },
-          methods:{
-              update(){
-                  this.$emit('update:content', this.$refs.editor.getValue());
-              }
-          },
-          mounted() {
-              console.log("hello worldz");
-          },
-      }
+        'appster_js_module_frontend_remotes_mixin_AppsterModuleEditor'
     ]
 }
       `,
             createdAt: new Date(),
             updatedAt: new Date()
-        }
-
+        },
 
         ], {});
     },
+
 
     down: (queryInterface, Sequelize) => {
         return queryInterface.bulkDelete('AppsterJSModules', {slug: {[Sequelize.Op.like]: "appster_js_module_%"}}, {});

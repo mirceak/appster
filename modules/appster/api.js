@@ -18,7 +18,8 @@ let sequelize;
 let express;
 
 //private vars
-let router;
+let appsterRouter;
+let frontEndRouter;
 
 class Api {
     constructor() {
@@ -37,7 +38,8 @@ class Api {
             bodyParser = require("body-parser");
             cookieParser = require("cookie-parser");
             sequelize = await utils.require('../../models/index.js');
-            router = express.Router();
+            appsterRouter = express.Router();
+            frontEndRouter = express.Router();
         }
 
         await shell.run_command('npx sequelize-cli db:migrate:undo:all \n exit \n');

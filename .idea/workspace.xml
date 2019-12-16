@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others.">
+      <change afterPath="$PROJECT_DIR$/migrations/20191214215926-create-user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seeders/20191215210502-user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/appster_git.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/appster_git.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/appster_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/appster_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/remoteModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/remoteModule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/appster_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/appster_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/20191208124833-create-appster-js-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/appsterjsmodule.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/appsterjsmodule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/appster/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" afterPath="$PROJECT_DIR$/seeders/20191208131706-appster.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -99,7 +111,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@66563032" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -142,7 +164,7 @@
       <workItem from="1576194565108" duration="607000" />
       <workItem from="1576271488177" duration="633000" />
       <workItem from="1576303018658" duration="1262000" />
-      <workItem from="1576329340619" duration="17263000" />
+      <workItem from="1576329340619" duration="63202000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -269,10 +291,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575753484894" />
-    <state x="457" y="85" key="CommitChangelistDialog2" timestamp="1576360199219">
+    <state x="457" y="85" key="CommitChangelistDialog2" timestamp="1576360325749">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="457" y="85" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576360199219" />
+    <state x="457" y="85" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576360325749" />
     <state width="324" height="442" key="Diff.GoToChangePopup" timestamp="1575491267050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -341,10 +363,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575234395154" />
-    <state x="295" y="59" width="1098" height="794" key="find.popup" timestamp="1576354650162">
+    <state x="295" y="59" width="1098" height="794" key="find.popup" timestamp="1576444548981">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="295" y="59" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576354650162" />
+    <state x="295" y="59" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576444548981" />
     <state x="741" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1575491368083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -357,13 +379,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="757" y="384" key="git4idea.rebase.GitRebaseDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575149362517" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1575985471258">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1576374680305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575985471258" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576354245223">
+    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576374680305" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576439296132">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576354245223" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1576439296132" />
   </component>
 </project>
