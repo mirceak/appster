@@ -18,7 +18,7 @@ let sequelize;
 let express;
 
 //private vars
-let appsterRouter;
+let appsterApiRouter;
 let frontEndRouter;
 
 class Api {
@@ -38,7 +38,7 @@ class Api {
             bodyParser = require("body-parser");
             cookieParser = require("cookie-parser");
             sequelize = await utils.require('../../models/index.js');
-            appsterRouter = express.Router();
+            appsterApiRouter = express.Router();
             frontEndRouter = express.Router();
         }
 
