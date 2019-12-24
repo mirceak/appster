@@ -1,6 +1,4 @@
 alpha.
-implement remote model definitions with the possibility to link to appsterjsmodules.
-
 create structure for model, view and controller to be managed by a remote module.
 create a module that displays the database and migrations. (implement basic migrate/undo/etc commands)
 create a module that displays the routes. (implement route modules)
@@ -16,6 +14,6 @@ implement register logic.
 create a module that displays server files and allows edits.
 implement a better logging system.
 list the console output into the browser. (move after completion to later, implement IO for this console)
-error checking all the way.
+transparent error checking all the way.
 
 Gold.

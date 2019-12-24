@@ -99,12 +99,12 @@ module.exports = {
             && to.path == '/login')
         {      
             if (from.path != '/'){
-                if (from.path != '/welcome'){
+                if (from.path != '/admin'){
                     return router.replace(from.path);
                 }
                 return router.go(-1);
             }
-            return router.push('/welcome');
+            return router.push('/admin');
         }      
         return next();
     })
@@ -175,7 +175,7 @@ module.exports = {
     frontRouter.post('/login',
         passport.authenticate('local', 
             { 
-                successRedirect: '/#/welcome',
+                successRedirect: '/#/admin',
                 failureRedirect: '/#/login'
              }
          )
@@ -266,26 +266,23 @@ module.exports = {
         current = models[current];
         if (current.model == "Migration") return;
         
-        await sequelize.Migration.findOne({where:{slug: current.migration.name}}).then(async migration=>{
-            if (migration == null){           
-                await current.migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
-                await sequelize.sequelize.getQueryInterface().bulkInsert("Migrations", [
-                    {
-                        slug: current.migration.name,
-                        createdAt: new Date(),
-                        updatedAt: new Date()
-                    }
-                ]);
-                await sequelize.sequelize.getQueryInterface().bulkInsert(current.table, [
-                    {
-                        password: "1",
-                        username: "1",
-                        createdAt: new Date(),
-                        updatedAt: new Date()
-                    }
-                ])
-            }
-        })        
+        if (current.migration){        
+            await sequelize.Migration.findOne({where:{slug: current.migration.name}}).then(async migration=>{
+                if (migration == null){           
+                    await current.migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
+                    await sequelize.sequelize.getQueryInterface().bulkInsert("Migrations", [
+                        {
+                            slug: current.migration.name,
+                            createdAt: new Date(),
+                            updatedAt: new Date()
+                        }
+                    ]);
+                    if (current.seeder){                          
+                        await sequelize.sequelize.getQueryInterface().bulkInsert(current.table, current.seeder)
+                    } 
+                }
+            })  
+        }      
     });
 })   
       `,
@@ -304,6 +301,22 @@ module.exports = {
         },
         name: "appster_js_module_backend_appster_model_user_migration"
     }    
+})()      
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_backend_appster_model_user_seeder',
+            code: `
+(async ()=>{
+    return [
+        {
+            password: "1",
+            username: "1",
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+    ]    
 })()      
       `,
             createdAt: new Date(),
@@ -328,6 +341,7 @@ module.exports = {
         table: "Users",
         model: "User",
         migration: await remoteModule("appster_js_module_backend_appster_model_user_migration"),
+        seeder: await remoteModule("appster_js_module_backend_appster_model_user_seeder"),
         fields: await (await remoteModule("appster_js_module_backend_appster_model_user_fields"))(sequelize),
         associations: await remoteModule("appster_js_module_backend_appster_model_user_associations")          
     }
@@ -551,15 +565,22 @@ module.exports = {
     return [
         { 
             path: '/', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes) 
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes)
         },
         { 
             path: '/login', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes) 
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes)
         },
         { 
-            path: '/welcome', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes) 
+            path: '/admin', 
+            component: await remotes.component("appster_js_module_frontend_remotes_component_admin", remotes) ,
+            children: [
+                {
+                    path: '',
+                    name: 'Dashboard',
+                    component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes)
+                },
+            ]
         }
     ]
 })
@@ -567,7 +588,7 @@ module.exports = {
       `,
             createdAt: new Date(),
             updatedAt: new Date()
-        },{
+        }, {
             slug: 'appster_js_module_frontend_remotes_component',
             code: `
 (async (slug, remotes)=>{
@@ -585,14 +606,13 @@ module.exports = {
       }, []);
     };
     if (module.components && !Array.isArray(module.components)){
-      module.components = await Object.keys(module.components).reduce(async (result, current) => {
-          var label = current;
-          current = module.components[current];
-          result[label] = async ()=> {
-              return await remotes.component(current, remotes);
-          };
-          return await result;
-      }, {});
+        module.components = await Object.keys(module.components).reduce(async (result, current) => {            
+            var label = current;
+            current = module.components[current];
+            result = await result;
+            result[label] = await remotes.component(current, remotes);
+            return result;
+        }, {});
     };
     return module;
 })
@@ -609,30 +629,25 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
-            slug: 'appster_js_module_frontend_remotes_component_Welcome',
+            slug: 'appster_js_module_frontend_remotes_component_admin',
             guards:
                 `[
                     "auth"
                 ]`,
             code: `
             {
-                name: \'Welcome\',
+                name: \'Admin\',
                 template: \`
-<b-container>
-  <b-card
-    title="Welcome"
-    img-height="128"
-    img-src="https://picsum.photos/600/300/?image=33"
-    img-alt="Image"
-    img-top
-    tag="article"
-  >
-    <b-card-text>
-    </b-card-text>
-    
-    <AppsterModuleEditor/>
-    
-  </b-card>
+<b-container style="padding: 0; margin: 0; max-width: 100%;">
+    <b-row style="margin: 0; padding: 0;">
+        <b-col style="margin: 0; padding: 0; min-width: 200px; max-width: 200px; min-height: 100vh; max-height: 100vh">
+            <AppsterSidebar></AppsterSidebar>         
+        </b-col>   
+        <b-col style="width: auto; margin: 0; padding: 0;">
+            <AppsterNavbar></AppsterNavbar>
+            <router-view style="max-height: calc(100vh - 56px); width: auto; overflow-y: auto;"></router-view>
+        </b-col>   
+    </b-row>
 </b-container>
 \`
                 , mixins: 
@@ -640,13 +655,119 @@ module.exports = {
 ]
                 , components:
 {
-    AppsterModuleEditor:'appster_js_module_frontend_remotes_component_AppsterModuleEditor'
+    AppsterSidebar:'appster_js_module_frontend_remotes_component_AppsterSidebar',
+    AppsterNavbar:'appster_js_module_frontend_remotes_component_AppsterNavbar'
 }
             }
       `,
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
+            slug: 'appster_js_module_frontend_remotes_component_AppsterSidebar',
+            guards:
+                `[
+                    "auth"
+                ]`,
+            code: `
+            {
+                name: \'AppsterSidebar\',
+                template: \`       
+<div>
+    <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
+        asdasdasddsadas
+    </div>
+</div>
+\`
+                , mixins: 
+[
+]
+                , components:
+{
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_AppsterNavbar',
+            guards:
+                `[
+                    "auth"
+                ]`,
+            code: `
+            {
+                name: \'AppsterNavbar\',
+                template: \`
+<b-navbar toggleable="lg" type="dark" variant="info" style="margin: 0; padding: 8px 0;">
+    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item href="#">Link</b-nav-item>
+        <b-nav-item href="#" disabled>Disabled</b-nav-item>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-nav-form>
+
+        <b-nav-item-dropdown text="Lang" right>
+          <b-dropdown-item href="#">EN</b-dropdown-item>
+          <b-dropdown-item href="#">ES</b-dropdown-item>
+          <b-dropdown-item href="#">RU</b-dropdown-item>
+          <b-dropdown-item href="#">FA</b-dropdown-item>
+        </b-nav-item-dropdown>
+
+        <b-nav-item-dropdown right>
+          <!-- Using 'button-content' slot -->
+          <template v-slot:button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+</b-navbar>
+\`
+                , mixins: 
+[
+
+]
+                , components:
+{
+
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_Welcome',
+            code: `
+            {
+                name: \'Welcome\',
+                template: \`
+<b-container style="margin: 0; padding: 0;">
+asd
+</b-container>
+\`
+    ,mixins: 
+[
+]
+    ,components:
+{
+}
+}
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        },{
             slug: 'appster_js_module_frontend_remotes_component_Home',
             guards:
                 `[
@@ -686,7 +807,7 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_component_Login',
             guards:
-            `[
+                `[
                 "guest"
             ]`,
             code: `
@@ -793,7 +914,7 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_component_AppsterModuleEditor',
             guards:
-            `[
+                `[
                 "auth"
             ]`,
             code: `      
