@@ -12,6 +12,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.4.3",
+    "jquery": "^3.4.1",
     "vue": "^2.6.10",
     "vue2x-ace-editor": "^0.1.3"
   },

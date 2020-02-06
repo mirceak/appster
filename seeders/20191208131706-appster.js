@@ -65,7 +65,7 @@ module.exports = {
         store.commit('changeState', {authenticated: response.data});
     });
     
-    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes")).compiled(remotes);
+    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes")).compiled(remotes, $);
     const router = new VueRouter({
         routes: routes
     });    
@@ -571,24 +571,24 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_routes',
             code: `
-(async (remotes)=>{     
+(async (remotes, $)=>{     
     return [
         { 
             path: '/', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes)
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes, $)
         },
         { 
             path: '/login', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes)
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes, $)
         },
         { 
             path: '/admin', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Admin", remotes) ,
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Admin", remotes, $) ,
             children: [
                 {
                     path: '',
                     name: 'Dashboard',
-                    component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes)
+                    component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes, $)
                 },
             ]
         }
@@ -601,14 +601,16 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_component',
             code: `
-(async (slug, remotes)=>{
-    var model = (await remotes.module(slug))
+(async (slug, remotes, $)=>{
+    var model = (await remotes.module(slug));
     var module = model.compiled ? model.compiled : {};
     module.guards = model.guards;
     
-    if (module.template && typeof module.template === 'object'){
-      module.template = (await remotes.module(current, remotes)).compiled;
-    };
+    var classManager = await (await remotes.module('appster_js_module_frontend_class_manager')).compiled(remotes, $);
+    var stringParser = await (await remotes.module('appster_js_module_frontend_remotes_component_string_parser')).compiled(remotes, classManager);
+    if (module.template){
+        module.template = await stringParser(module.template);
+    }
     if (module.mixins && Array.isArray(module.mixins)){
       module.mixins = await module.mixins.reduce(async (result, current) => {
           await (typeof current === 'string' || current instanceof String) ? result.push((await remotes.module(current, remotes)).compiled) : result.push(current);
@@ -620,13 +622,127 @@ module.exports = {
             var label = current;
             current = module.components[current];
             result = await result;
-            result[label] = await remotes.component(current, remotes);
+            result[label] = await remotes.component(current, remotes, $);
             return result;
         }, {});
     };
     return module;
 })
       `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_string_parser',
+            code: `
+(async (remotes, classManager)=>{
+    return async (string)=>{        
+        var separators = [
+            ['{#class=#{', '}#=class#}']
+        ];
+        for (var i=0; i<separators.length; i++){
+            if (string.includes(separators[i][0]) && string.includes(separators[i][0])){
+                var current = separators[i];
+                var classId = string.split(current[0]).pop().split(current[1])[0];
+                var classObject = await classManager(classId);
+                string = string.replace(/({#class=#{)([a-zA-Z_0-9 ]*)(}#=class#})/g, classObject.id);            
+            }
+        };
+        
+        return string;
+    }
+})
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_class_manager',
+            code: `
+(async (remotes, $)=>{
+    var loadedClasses = [];
+    
+    return async (id)=>{
+        if (!loadedClasses.reduce((result, current)=>{
+           if (current.id == id){
+                result = current;
+                return result;
+           } 
+        }, null)){
+            var classString = await (await remotes.module('appster_js_module_frontend_class_manager_id_'+id)).compiled(); 
+            var classObject = {
+                id: id,
+                code: classString
+            };
+            loadedClasses.push(classObject);   
+            $("<style type='text/css'> " + classString + " </style>").appendTo("head");         
+            return classObject;  
+        }
+    }
+})
+            `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_class_manager_id_main_container',
+            code: `
+(async ()=>{
+    return \`   
+        .main_container_router_view {
+            max-height: calc(100vh - 56px);
+            width: auto; 
+            overflow-y: auto;
+        }
+        .main_container_sidebar_col {
+            margin: 0; 
+            padding: 0; 
+            min-width: 200px; 
+            max-width: 200px;
+            min-height: 100vh; 
+            max-height: 100vh
+        }
+        .main_container_col {
+            width: auto; 
+            margin: 0; 
+            padding: 0;
+        }
+        .main_container_row {
+            margin: 0; 
+            padding: 0;
+        }
+        .main_container {
+            padding: 0; 
+            margin: 0; 
+            max-width: 100%;
+        } 
+        .side_nav_right {
+            border-left-style: solid;        
+        }
+        .side_nav_left {
+            border-right-style: solid;   
+        }
+        .side_nav {
+            border-color: lightgray; 
+            min-width: 100%; 
+            max-width: 100%; 
+            min-height: 100vh; 
+            max-height: 100vh;
+        }        
+        .sidebar_accordion_button {
+            text-align: left
+        }
+        .sidebar_action_button {
+            text-align: left;
+            width: 100%
+        }
+        .sidebar_accordion_card_body {
+            padding: 4px;
+        }
+        .top_navbar {
+            margin: 0px; 
+            padding: 8px 4px
+        }
+    \`
+})
+            `,
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
@@ -648,16 +764,16 @@ module.exports = {
             {
                 name: \'Admin\',
                 template: \`
-<b-container style="padding: 0; margin: 0; max-width: 100%;">
-    <b-row style="margin: 0; padding: 0;">
-        <b-col style="margin: 0; padding: 0; min-width: 200px; max-width: 200px; min-height: 100vh; max-height: 100vh">
+<b-container class='{#class=#{main_container}#=class#}'>
+    <b-row class="main_container_row">
+        <b-col class="main_container_sidebar_col">
             <AppsterSidebarNav></AppsterSidebarNav>         
         </b-col>
-        <b-col style="width: auto; margin: 0; padding: 0;">
+        <b-col class="main_container_col">
             <AppsterNavbar></AppsterNavbar>
-            <router-view style="max-height: calc(100vh - 56px); width: auto; overflow-y: auto;"></router-view>
+            <router-view class="main_container_router_view"></router-view>
         </b-col>   
-        <b-col style="margin: 0; padding: 0; min-width: 200px; max-width: 200px; min-height: 100vh; max-height: 100vh">
+        <b-col class="main_container_sidebar_col">
             <AppsterSidebarTools></AppsterSidebarTools>         
         </b-col>
     </b-row>
@@ -687,9 +803,9 @@ module.exports = {
                 name: \'AppsterSidebarNav\',
                 template: \`       
 <div>
-    <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
-        <div class="navbar navbar-light bg-warning">
-            <b-navbar-brand>Navigation</b-navbar-brand>
+    <div class="side_nav side_nav_left">
+        <div class="navbar navbar-light bg-info">
+            <b-navbar-brand><strong>Navigation</strong></b-navbar-brand>
         </div>   
     </div>
 </div>
@@ -715,24 +831,24 @@ module.exports = {
                 name: \'AppsterSidebarTools\',
                 template: \`       
 <div>
-    <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
-        <div class="navbar navbar-light bg-warning">
-            <b-navbar-brand>Tools</b-navbar-brand>
+    <div class="side_nav side_nav_right">
+        <div class="navbar navbar-light bg-info">
+            <b-navbar-brand><strong>Tools</strong></b-navbar-brand>
         </div>
         
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block href="#" v-b-toggle.accordion-1 variant="info">Database</b-button>
+            <b-button class="sidebar_accordion_button" block href="#" v-b-toggle.accordion-1 variant="info">Database</b-button>
           </b-card-header>
           <b-collapse id="accordion-1" accordion="my-accordion1" role="tabpanel">
-            <b-card-body style="padding: 4px">
+            <b-card-body class="sidebar_accordion_card_body">
                 <b-card no-body class="mb-1">
                   <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button block href="#" v-b-toggle.accordion-2 variant="info">CLI Commands</b-button>
+                    <b-button class="sidebar_accordion_button" block href="#" v-b-toggle.accordion-2 variant="info">CLI Commands</b-button>
                   </b-card-header>
                   <b-collapse id="accordion-2" accordion="my-accordion2" role="tabpanel">
-                    <b-card-body style="padding: 4px">
-                      <b-button variant="info" @click="onReRunMainSeederFile">Clear+Run Seeder</b-button>
+                    <b-card-body class="sidebar_accordion_card_body">
+                      <b-button class="sidebar_action_button" variant="warning" @click="onReRunMainSeederFile">Clear+Run Seeder</b-button>
                     </b-card-body>
                   </b-collapse>
                 </b-card>
@@ -771,7 +887,7 @@ module.exports = {
             {
                 name: \'AppsterNavbar\',
                 template: \`
-<b-navbar toggleable="lg" type="dark" variant="info" style="margin: 0; padding: 8px 0;">
+<b-navbar toggleable="lg" type="dark" variant="info" class="top_navbar"">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -826,7 +942,7 @@ module.exports = {
             {
                 name: \'Welcome\',
                 template: \`
-<b-container style="margin: 0; padding: 0;">
+<b-container>
     asd
 </b-container>
 \`

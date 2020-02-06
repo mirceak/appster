@@ -1,4 +1,6 @@
+
 (async ()=>{
+    let $ = (await import("jquery")).default;
     let config = ((await import('./appster_config.js')).default).default;
     let Vue = (await import("vue")).default;
     let VueRouter = (await import ('vue-router')).default;
@@ -31,7 +33,7 @@
     await import('bootstrap-vue/dist/bootstrap-vue.css');
     let remoteModule = (await import ("./remoteModule")).default;
 
-    config, Vue, Vuex, VueRouter, VueAceEditor, BootstrapVue, remoteModule; //eslint bypass, not explicitly accessing these variables will throw an error.
+    $, config, Vue, Vuex, VueRouter, VueAceEditor, BootstrapVue, remoteModule; //eslint bypass, not explicitly accessing these variables will throw an error.
 
     let baseUrl = 'http://' + config.apiIp + ':' + config.apiPort + config.apiExt;
     Vue.prototype.baseUrl = baseUrl;

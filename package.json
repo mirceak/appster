@@ -1,11 +1,11 @@
 {
+  "scripts": {
+    "reseed": "npx sequelize-cli db:seed:undo:all & npx sequelize-cli db:seed:all"
+  },
   "name": "appster",
   "version": "1.0.0",
   "description": "self managing node web platform",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mirceak/appster.git"
