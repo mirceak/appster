@@ -688,7 +688,9 @@ module.exports = {
                 template: \`       
 <div>
     <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
-        <h3 style="background-color: aqua">Navigation Bar</h3>        
+        <div class="navbar navbar-light bg-warning">
+            <b-navbar-brand>Navigation</b-navbar-brand>
+        </div>   
     </div>
 </div>
 \`
@@ -714,7 +716,9 @@ module.exports = {
                 template: \`       
 <div>
     <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
-        <h3 style="background-color: aqua">Tools</h3>
+        <div class="navbar navbar-light bg-warning">
+            <b-navbar-brand>Tools</b-navbar-brand>
+        </div>
         
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
