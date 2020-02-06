@@ -16,6 +16,7 @@ let sequelize;
 
 //remote modules
 let express;
+let passwordHash;
 
 //private vars
 let appsterApiRouter;
@@ -34,6 +35,7 @@ class Api {
             MySQLStore = (await utils.require('express-mysql-session'))(session);
             LocalStrategy = (await utils.require('passport-local')).Strategy;
             crypto = await utils.require('crypto');
+            passwordHash = await utils.require('password-hash');
             cors = await utils.require('cors');
             bodyParser = require("body-parser");
             cookieParser = require("cookie-parser");

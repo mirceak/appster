@@ -20,10 +20,10 @@ module.exports = {
             })
         };
         
-        await (await remoteModule("appster_js_module_backend_appster_config"))(appsterApi, MySQLStore, bodyParser, cors, session, config);
+        await (await remoteModule("appster_js_module_backend_appster_config"))(appsterApi, MySQLStore, bodyParser, cors, session, config, passwordHash);
         await (await remoteModule("appster_js_module_backend_appster_sequelize"))(sequelize, remoteModule);
         await (await remoteModule("appster_js_module_backend_login_scaffold"))(passport, frontEndRouter, appsterApi, sequelize);
-        await (await remoteModule("appster_js_module_backend_appster_router"))(frontEndRouter, appsterApiRouter, appsterApi, sequelize, config, resolve);
+        await (await remoteModule("appster_js_module_backend_appster_router"))(frontEndRouter, appsterApiRouter, appsterApi, sequelize, config, resolve, shell);
     });
 })()
       `,
@@ -187,8 +187,8 @@ module.exports = {
         }, {
             slug: 'appster_js_module_backend_appster_config',
             code: `
-(async (appsterApi, MySQLStore, bodyParser, cors, session, config)=>{       
-    const secret = crypto.randomBytes(256).toString();     
+(async (appsterApi, MySQLStore, bodyParser, cors, session, config, passwordHash)=>{       
+    const secret = passwordHash.generate(crypto.randomBytes(256).toString() + new Date());     
     var options = {
         host: 'localhost',
         port: 3306,
@@ -414,7 +414,7 @@ module.exports = {
             slug: 'appster_js_module_backend_appster_model_user_associations',
             code: `
 (async (models)=>{
-    
+
 })
       `,
             createdAt: new Date(),
@@ -465,7 +465,7 @@ module.exports = {
         }, {
             slug: 'appster_js_module_backend_appster_router',
             code: `
-(async (frontRouter, apiRouter, api, sequelize, config, resolve)=>{
+(async (frontRouter, apiRouter, api, sequelize, config, resolve, shell)=>{
     await Object.keys(sequelize.models).forEach(key => {    
         var entity = sequelize[key];
         var isLoggedIn = async (req, res, next) => {
@@ -492,6 +492,7 @@ module.exports = {
             }
         };
         apiRouter.route('/' + key)
+            .all(isLoggedIn)
             .get(async (req, res, next) => {
                 await entity.findAll().then(result => {
                     res.send(result)
@@ -500,6 +501,7 @@ module.exports = {
                 })
             })
         apiRouter.route('/' + key + '/:slug')
+            .all(isLoggedIn)
             .get(async (req, res, next) => {
                 if (req.model) {
                     return res.send(req.model);
@@ -525,6 +527,14 @@ module.exports = {
             })
             .delete(function (req, res, next) {
                 next(new Error('not implemented'))
+            })
+        apiRouter.route('/reRunMainSeederFile')
+            .all(isLoggedIn)
+            .get(async (req, res, next) => {                
+                await shell.run_command('npx sequelize-cli db:seed:undo:all \\n exit \\n');
+                await shell.run_command('npx sequelize-cli db:seed:all \\n exit \\n');
+                
+                res.send({message: "success", status: 200})
             })
     });    
     
@@ -573,7 +583,7 @@ module.exports = {
         },
         { 
             path: '/admin', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_admin", remotes) ,
+            component: await remotes.component("appster_js_module_frontend_remotes_component_Admin", remotes) ,
             children: [
                 {
                     path: '',
@@ -629,7 +639,7 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
-            slug: 'appster_js_module_frontend_remotes_component_admin',
+            slug: 'appster_js_module_frontend_remotes_component_Admin',
             guards:
                 `[
                     "auth"
@@ -641,12 +651,15 @@ module.exports = {
 <b-container style="padding: 0; margin: 0; max-width: 100%;">
     <b-row style="margin: 0; padding: 0;">
         <b-col style="margin: 0; padding: 0; min-width: 200px; max-width: 200px; min-height: 100vh; max-height: 100vh">
-            <AppsterSidebar></AppsterSidebar>         
-        </b-col>   
+            <AppsterSidebarNav></AppsterSidebarNav>         
+        </b-col>
         <b-col style="width: auto; margin: 0; padding: 0;">
             <AppsterNavbar></AppsterNavbar>
             <router-view style="max-height: calc(100vh - 56px); width: auto; overflow-y: auto;"></router-view>
         </b-col>   
+        <b-col style="margin: 0; padding: 0; min-width: 200px; max-width: 200px; min-height: 100vh; max-height: 100vh">
+            <AppsterSidebarTools></AppsterSidebarTools>         
+        </b-col>
     </b-row>
 </b-container>
 \`
@@ -655,7 +668,8 @@ module.exports = {
 ]
                 , components:
 {
-    AppsterSidebar:'appster_js_module_frontend_remotes_component_AppsterSidebar',
+    AppsterSidebarNav:'appster_js_module_frontend_remotes_component_AppsterSidebarNav',
+    AppsterSidebarTools:'appster_js_module_frontend_remotes_component_AppsterSidebarTools',
     AppsterNavbar:'appster_js_module_frontend_remotes_component_AppsterNavbar'
 }
             }
@@ -663,23 +677,78 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
-            slug: 'appster_js_module_frontend_remotes_component_AppsterSidebar',
+            slug: 'appster_js_module_frontend_remotes_component_AppsterSidebarNav',
             guards:
                 `[
                     "auth"
                 ]`,
             code: `
             {
-                name: \'AppsterSidebar\',
+                name: \'AppsterSidebarNav\',
                 template: \`       
 <div>
     <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
-        asdasdasddsadas
+        <h3 style="background-color: aqua">Navigation Bar</h3>        
     </div>
 </div>
 \`
                 , mixins: 
 [
+]
+                , components:
+{
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_AppsterSidebarTools',
+            guards:
+                `[
+                    "auth"
+                ]`,
+            code: `
+            {
+                name: \'AppsterSidebarTools\',
+                template: \`       
+<div>
+    <div style="min-width: 100%; max-width: 100%; min-height: 100vh; max-height: 100vh;">
+        <h3 style="background-color: aqua">Tools</h3>
+        
+        <b-card no-body class="mb-1">
+          <b-card-header header-tag="header" class="p-1" role="tab">
+            <b-button block href="#" v-b-toggle.accordion-1 variant="info">Database</b-button>
+          </b-card-header>
+          <b-collapse id="accordion-1" accordion="my-accordion1" role="tabpanel">
+            <b-card-body style="padding: 4px">
+                <b-card no-body class="mb-1">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button block href="#" v-b-toggle.accordion-2 variant="info">CLI Commands</b-button>
+                  </b-card-header>
+                  <b-collapse id="accordion-2" accordion="my-accordion2" role="tabpanel">
+                    <b-card-body style="padding: 4px">
+                      <b-button variant="info" @click="onReRunMainSeederFile">Clear+Run Seeder</b-button>
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
+            </b-card-body>
+          </b-collapse>
+        </b-card>
+    </div>
+</div>
+\`
+                , mixins: 
+[
+    {
+        methods:{
+            onReRunMainSeederFile(){
+                this.axios.get('/appster/api/reRunMainSeederFile').then((result)=>{
+                    window.location.reload();
+                });
+            }
+        }
+    }
 ]
                 , components:
 {
@@ -754,7 +823,7 @@ module.exports = {
                 name: \'Welcome\',
                 template: \`
 <b-container style="margin: 0; padding: 0;">
-asd
+    asd
 </b-container>
 \`
     ,mixins: 
@@ -763,11 +832,12 @@ asd
     ,components:
 {
 }
+
 }
       `,
             createdAt: new Date(),
             updatedAt: new Date()
-        },{
+        }, {
             slug: 'appster_js_module_frontend_remotes_component_Home',
             guards:
                 `[
