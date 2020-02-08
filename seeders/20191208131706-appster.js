@@ -8,22 +8,25 @@ module.exports = {
 (async ()=>{
     await new Promise(async(resolve) => {  
         var appsterApi = express();    
-        var proxyModule = async (code)=>{
-            return await eval('(async ()=>{return await '+code+'})()');
+        var proxyModule = async (module)=>{
+            return {
+                guards: module.guards ? JSON.parse(module.guards) : undefined,
+                compiled: await eval('(async ()=>{return await ' + module.code + '})()')
+            };
         };
         
         var remoteModule = async (slug)=>{
             return new Promise(async _resolve=>{
                 await sequelize.AppsterJSModule.findOne({where:{slug: slug}}).then(async result=>{    
-                    _resolve(await proxyModule(result.dataValues.code));
+                    _resolve(await proxyModule(result.dataValues));
                 })
             })
         };
         
-        await (await remoteModule("appster_js_module_backend_appster_config"))(appsterApi, MySQLStore, bodyParser, cors, session, config, passwordHash);
-        await (await remoteModule("appster_js_module_backend_appster_sequelize"))(sequelize, remoteModule);
-        await (await remoteModule("appster_js_module_backend_login_scaffold"))(passport, frontEndRouter, appsterApi, sequelize);
-        await (await remoteModule("appster_js_module_backend_appster_router"))(frontEndRouter, appsterApiRouter, appsterApi, sequelize, config, resolve, shell);
+        await (await remoteModule("appster_js_module_backend_appster_config")).compiled(appsterApi, MySQLStore, bodyParser, cors, session, config, passwordHash);
+        await (await remoteModule("appster_js_module_backend_appster_sequelize")).compiled(sequelize, remoteModule);
+        await (await remoteModule("appster_js_module_backend_login_scaffold")).compiled(passport, frontEndRouter, appsterApi, sequelize);
+        await (await remoteModule("appster_js_module_backend_appster_router")).compiled(frontEndRouter, appsterApiRouter, appsterApi, sequelize, config, resolve, shell, remoteModule);
     });
 })()
       `,
@@ -36,8 +39,6 @@ module.exports = {
     Vue.use(BootstrapVue);    
     
     Vue.prototype.axios = axios;
-    
-    var needsAuthRedirect = false;
         
     var itemName = "AppsterJSModule";
     var _remoteModule = async (slug)=>{return await remoteModule(axios, baseUrl, itemName, slug)};    
@@ -65,49 +66,12 @@ module.exports = {
         store.commit('changeState', {authenticated: response.data});
     });
     
-    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes")).compiled(remotes, $);
+    const routes = await (await remotes.module("appster_js_module_frontend_remotes_routes")).compiled(remotes, $, window.location.pathname);
     const router = new VueRouter({
+        mode: 'history',
         routes: routes
     });    
     Vue.use(VueRouter);
-    
-    router.beforeEach((to, from, next) => {    
-        if (!store.state.authenticated 
-            && routes.reduce((result, current)=>{
-                if (current.path == to.path && current.component.guards.indexOf('auth') != -1){
-                    result = true;
-                }
-                return result;
-            }, null) != null
-            && to.path != '/login')
-        {                      
-            if (from.path !== '/login') {
-                return router.push('/login');     
-            }else{
-                return router.go(-1);    
-            }
-            return;
-        } 
-         
-        if (store.state.authenticated 
-            && routes.reduce((result, current)=>{
-                if (current.path == to.path && current.component.guards.indexOf('auth') == -1){
-                    result = true;
-                }
-                return result;
-            }, null) != null
-            && to.path == '/login')
-        {      
-            if (from.path != '/'){
-                if (from.path != '/admin'){
-                    return router.replace(from.path);
-                }
-                return router.go(-1);
-            }
-            return router.push('/admin');
-        }      
-        return next();
-    })
     
     new Vue({
         router
@@ -175,8 +139,8 @@ module.exports = {
     frontRouter.post('/login',
         passport.authenticate('local', 
             { 
-                successRedirect: '/#/admin',
-                failureRedirect: '/#/login'
+                successRedirect: '/admin',
+                failureRedirect: '/login'
              }
          )
     );
@@ -216,7 +180,7 @@ module.exports = {
             slug: 'appster_js_module_backend_appster_sequelize',
             code: `
 (async (sequelize, remoteModule)=>{       
-    var models = await (await remoteModule("appster_js_module_backend_appster_models"))(sequelize, remoteModule);
+    var models = await (await remoteModule("appster_js_module_backend_appster_models")).compiled(sequelize, remoteModule);
     
     Object.keys(models).map(async (current)=>{
         current = models[current];
@@ -294,7 +258,7 @@ module.exports = {
 (async ()=>{
     return {
         up: async (queryInterface, Sequelize, remoteModule) => {
-            return queryInterface.createTable('Users', await (await remoteModule("appster_js_module_backend_appster_model_user_fields"))(sequelize) );
+            return queryInterface.createTable('Users', await (await remoteModule("appster_js_module_backend_appster_model_user_fields")).compiled(sequelize) );
         },
         down: async (queryInterface, Sequelize) => {
             return queryInterface.dropTable('Users');
@@ -326,8 +290,8 @@ module.exports = {
             code: `
 (async (sequelize, remoteModule)=>{   
     return {
-        user: await (await remoteModule("appster_js_module_backend_appster_model_user"))(sequelize, remoteModule),
-        migration: await (await remoteModule("appster_js_module_backend_appster_model_migration"))(sequelize, remoteModule)   
+        user: await (await remoteModule("appster_js_module_backend_appster_model_user")).compiled(sequelize, remoteModule),
+        migration: await (await remoteModule("appster_js_module_backend_appster_model_migration")).compiled(sequelize, remoteModule)   
     }
 })   
       `,
@@ -340,10 +304,10 @@ module.exports = {
     return {
         table: "Users",
         model: "User",
-        migration: await remoteModule("appster_js_module_backend_appster_model_user_migration"),
-        seeder: await remoteModule("appster_js_module_backend_appster_model_user_seeder"),
-        fields: await (await remoteModule("appster_js_module_backend_appster_model_user_fields"))(sequelize),
-        associations: await remoteModule("appster_js_module_backend_appster_model_user_associations")          
+        migration: await remoteModule("appster_js_module_backend_appster_model_user_migration").compiled,
+        seeder: await remoteModule("appster_js_module_backend_appster_model_user_seeder").compiled,
+        fields: await (await remoteModule("appster_js_module_backend_appster_model_user_fields")).compiled(sequelize),
+        associations: await remoteModule("appster_js_module_backend_appster_model_user_associations").compiled          
     }
 })
       `,
@@ -357,7 +321,7 @@ module.exports = {
         table: "Migrations",
         model: "Migration",
         migration: await remoteModule("appster_js_module_backend_appster_model_migration_migration"),
-        fields: await (await remoteModule("appster_js_module_backend_appster_model_migration_fields"))(sequelize) 
+        fields: await (await remoteModule("appster_js_module_backend_appster_model_migration_fields")).compiled(sequelize) 
     }
 })
       `,
@@ -369,7 +333,7 @@ module.exports = {
 (async ()=>{
     return {
         up: async (queryInterface, Sequelize, remoteModule) => {
-            return queryInterface.createTable('Migrations', await (await remoteModule("appster_js_module_backend_appster_model_migration_fields"))(sequelize) );
+            return queryInterface.createTable('Migrations', await (await remoteModule("appster_js_module_backend_appster_model_migration_fields")).compiled(sequelize) );
         },
         down: async (queryInterface, Sequelize, remoteModule) => {
             return queryInterface.dropTable('Migrations');
@@ -413,8 +377,8 @@ module.exports = {
         }, {
             slug: 'appster_js_module_backend_appster_model_user_associations',
             code: `
-(async (models)=>{
-
+(async (sequelize)=>{
+    
 })
       `,
             createdAt: new Date(),
@@ -465,29 +429,32 @@ module.exports = {
         }, {
             slug: 'appster_js_module_backend_appster_router',
             code: `
-(async (frontRouter, apiRouter, api, sequelize, config, resolve, shell)=>{
+(async (frontRouter, apiRouter, api, sequelize, config, resolve, shell, remoteModule)=>{
     await Object.keys(sequelize.models).forEach(key => {    
         var entity = sequelize[key];
         var isLoggedIn = async (req, res, next) => {
+            return next();
             if (req.params && req.params.slug){
                 req.model = await entity.findOne({where: {slug: req.params.slug}});
+                if (req.model.slug == 'appster_js_module_frontend_remotes_component_Login' && req.isAuthenticated()){      
+                    return res.redirect('/appster/api/AppsterJSModule/appster_js_module_frontend_remotes_component_Admin');
+                }  
+                    
                 if (req.model.guards){
                     var guards = JSON.parse(req.model.guards);
                     if (guards.indexOf('auth') != -1){    
-                        if (req.isAuthenticated())
-                            return next();   
+                        if (req.isAuthenticated()){
+                            return next();                           
+                        }
                             
-                        return res.send({
-                            code: "{}",
-                            guards: req.model.guards
-                        });
+                        return res.redirect('/appster/api/AppsterJSModule/appster_js_module_frontend_remotes_component_Login');
                     }else{      
                         return next();                            
                     }
-                }else{                     
+                }else{              
                     return next();                    
                 }
-            }else{
+            }else{   
                 return next();
             }
         };
@@ -541,6 +508,22 @@ module.exports = {
     api.use(express.static('app/dist'), frontRouter);
     api.use(config.apiExt, apiRouter); 
     
+    var remotes = await (await remoteModule('appster_js_module_frontend_remotes')).compiled(remoteModule);
+    
+    var front_end_routes = await (await remoteModule("appster_js_module_frontend_remotes_routes")).compiled(remotes, null);
+    for (var i=0; i<front_end_routes.length; i++){
+        var current = front_end_routes[i];
+        current.controller = (req, res, next)=> {            
+            if (req.originalUrl != '/login' && current.component && current.component.guards && current.component.guards.indexOf('auth') != -1 && !req.isAuthenticated()){
+                return res.redirect('/login');          
+            }else if (req.originalUrl == '/login' && req.isAuthenticated()){
+                return res.redirect('/admin');          
+            }
+            
+            res.sendFile('app/dist/index.html', { root: './' });
+        };
+        api.use(current.path, current.controller);
+    }
     await api.listen(config.apiPort, config.apiIp, () => {
         console.log("APPSTER____________________________________________________________________________________________________http api server started.");
         resolve();
@@ -571,28 +554,33 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_routes',
             code: `
-(async (remotes, $)=>{     
-    return [
-        { 
-            path: '/', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Home", remotes, $)
+(async (remotes, $, currentRoute = null)=>{     
+    var routes = [
+        {
+            path: '/',
+            component: 'appster_js_module_frontend_remotes_component_Welcome'
         },
-        { 
-            path: '/login', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Login", remotes, $)
+        {
+            path: '/login',
+            component: 'appster_js_module_frontend_remotes_component_Login'
         },
-        { 
-            path: '/admin', 
-            component: await remotes.component("appster_js_module_frontend_remotes_component_Admin", remotes, $) ,
-            children: [
-                {
-                    path: '',
-                    name: 'Dashboard',
-                    component: await remotes.component("appster_js_module_frontend_remotes_component_Welcome", remotes, $)
-                },
-            ]
+        {
+            path: '/admin',
+            component: 'appster_js_module_frontend_remotes_component_Admin'
         }
-    ]
+    ];
+    
+    var result = [];
+    for (var i=0; i<routes.length; i++){
+        var current = routes[i];
+        if (currentRoute && currentRoute == current.path){      
+            current.component = await remotes.component(current.component, remotes, $);      
+        }else if (!currentRoute){       
+            current.component = await remotes.component(current.component, remotes, $);     
+        }
+        result.push(current);
+    };
+    return result;
 })
        
       `,
@@ -620,7 +608,7 @@ module.exports = {
     if (module.components && !Array.isArray(module.components)){
         module.components = await Object.keys(module.components).reduce(async (result, current) => {            
             var label = current;
-            current = module.components[current];
+            current = module.components[label];
             result = await result;
             result[label] = await remotes.component(current, remotes, $);
             return result;
@@ -659,7 +647,6 @@ module.exports = {
             code: `
 (async (remotes, $)=>{
     var loadedClasses = [];
-    
     return async (id)=>{
         if (!loadedClasses.reduce((result, current)=>{
            if (current.id == id){
@@ -673,7 +660,9 @@ module.exports = {
                 code: classString
             };
             loadedClasses.push(classObject);   
-            $("<style type='text/css'> " + classString + " </style>").appendTo("head");         
+            if ($ != null){
+                $("<style type='text/css'> " + classString + " </style>").appendTo("head");
+            }                     
             return classObject;  
         }
     }
@@ -691,6 +680,7 @@ module.exports = {
             width: auto; 
             overflow-y: auto;
         }
+        
         .main_container_sidebar_col {
             margin: 0; 
             padding: 0; 
@@ -943,7 +933,19 @@ module.exports = {
                 name: \'Welcome\',
                 template: \`
 <b-container>
-    asd
+  <b-card
+    title="Home"
+    img-height="128"
+    img-src="https://picsum.photos/600/300/?image=25"
+    img-alt="Image"
+    img-top
+    tag="article"
+  >
+    <b-card-text>
+      An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
+    </b-card-text>
+        
+  </b-card>
 </b-container>
 \`
     ,mixins: 
@@ -958,29 +960,17 @@ module.exports = {
             createdAt: new Date(),
             updatedAt: new Date()
         }, {
-            slug: 'appster_js_module_frontend_remotes_component_Home',
+            slug: 'appster_js_module_frontend_remotes_component_Base',
             guards:
                 `[
                     "web"
                 ]`,
             code: `
             {
-                name: \'Home\',
+                name: \'Base\',
                 template: \`
-<b-container>
-  <b-card
-    title="Home"
-    img-height="128"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    img-top
-    tag="article"
-  >
-    <b-card-text>
-      An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
-    </b-card-text>
-        
-  </b-card>
+<b-container class='{#class=#{main_container}#=class#}'>
+    <router-view></router-view>
 </b-container>
 \`
                 , mixins: 
@@ -998,13 +988,13 @@ module.exports = {
             slug: 'appster_js_module_frontend_remotes_component_Login',
             guards:
                 `[
-                "guest"
-            ]`,
+                    "guest"
+                ]`,
             code: `
             {
                 name: \'Login\',
                 template: \`
-<b-container>
+<b-container class='{#class=#{main_container}#=class#}'>
   <b-card
     title="Login"
     img-height="128"
