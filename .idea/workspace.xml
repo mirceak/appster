@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" afterPath="$PROJECT_DIR$/seeders/20191208131706-appster.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
@@ -159,7 +160,11 @@
       <workItem from="1579905922357" duration="3663000" />
       <workItem from="1580941936320" duration="12000" />
       <workItem from="1580941972627" duration="5204000" />
-      <workItem from="1581007869964" duration="39888000" />
+      <workItem from="1581007869964" duration="74884000" />
+      <workItem from="1581354879883" duration="31415000" />
+      <workItem from="1581526270189" duration="4118000" />
+      <workItem from="1581548578433" duration="24184000" />
+      <workItem from="1581698843477" duration="610000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -288,10 +293,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="711" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575816744396" />
-    <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580941944370">
+    <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1581460550088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1580941944370" />
+    <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581460550088" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575753484894">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -308,10 +313,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="85" key="DiffContextDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491553371" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1577636440798">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1581551156298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1577636440798" />
+    <state x="740" y="274" key="FileChooserDialogImpl/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581551156298" />
     <state x="567" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1575142283940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -376,10 +381,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1578695948585" />
-    <state x="308" y="128" width="1098" height="794" key="find.popup" timestamp="1581105244860">
+    <state x="486" y="163" width="1098" height="794" key="find.popup" timestamp="1581627809121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="308" y="128" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581105244860" />
+    <state x="486" y="163" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581627809121" />
     <state x="741" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1575491368083">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -392,13 +397,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="757" y="384" key="git4idea.rebase.GitRebaseDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575149362517" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1581120638561">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1581635771594">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581120638561" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581119279150">
+    <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581635771594" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581468461685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581119279150" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1581468461685" />
   </component>
 </project>
