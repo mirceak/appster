@@ -44,13 +44,13 @@ module.exports = {
     var _remoteModule = async (slug)=>{return await remoteModule(axios, baseUrl, itemName, slug)};    
     var remotes = await (await _remoteModule('appster_js_module_frontend_remotes')).compiled(_remoteModule, $);
     
-    Vue.prototype.$remotes = remotes;
     await Vue.component("VueAceEditor", VueAceEditor);
     
     Vue.use(Vuex);    
     const remoteStore = await (await remotes.module("appster_js_module_frontend_remotes_store")).compiled(remotes);
     const store = new Vuex.Store(remoteStore)
     Vue.prototype.store = store;
+    Vue.prototype.remotes = remotes;
     
     const router = new VueRouter({
         mode: 'history',
@@ -495,29 +495,20 @@ module.exports = {
     });    
     
     var remotes = await (await remoteModule('appster_js_module_backend_remotes')).compiled(remoteModule);
-    for (var i=remotes.routes.length-1; i>=0; i--){
+    var _controller = await (await remoteModule('appster_js_module_backend_remotes_route_controller')).compiled;
+    
+    for (var route of remotes.routes){
         ((route)=> {
-            var controller = function(req, res, next) {     
-                if (route.guards){
-                    for (var guard of route.guards){
-                        if (guard.condition && !guard.condition(req)){
-                            return res.redirect('/' + guard.redirectRoute);
-                        }
-                    }
-                };
-                if (route.module){
-                    route.module(req, res, next);
-                    return;
-                };
-                res.sendFile('app/dist/appster_index.html', { root: './' });
-            };
-            frontRouter.get(route.fullPath, controller);
-        })(remotes.routes[i]);
+            frontRouter.get(route.fullPath, function(req, res, next) {
+                return _controller(route, req, res, next);
+            });
+        })(route);
     };
         
     api.use(express.static('app/dist'), frontRouter);
     api.use(config.apiExt, apiRouter);      
     api.use(frontRouter);
+    
     
     await api.listen(config.apiPort, config.apiIp, () => {
         console.log("APPSTER____________________________________________________________________________________________________http api server started.");
@@ -548,32 +539,69 @@ module.exports = {
         }, {
             slug: 'appster_js_module_frontend_remotes_routes_manager',
             code: `
-(async (remotes)=>{     
+(async (remotes)=>{    
     var routes = await (await remotes.module('appster_js_module_frontend_remotes_routes')).compiled;
     
-    var loadComponents = async (current)=>{
-        current.component = await remotes.component(current.component);
-        if (current.children) {
-            for (var i=0; i<current.children.length; i++){
-                current.children[i] = await loadComponents(current.children[i]);
-            };
-        };
-        return current;
-    };    
     var result = [];
-    for (var i=0; i<routes.length; i++){
-        var current = routes[i];    
-        for (var guard of current.guards){
-            current.guards[current.guards.indexOf(guard)] = await (await remotes.module(guard)).compiled;
-        };
-        current = await loadComponents(current);  
-        result.push(current);         
-    };    
-    return result.map((current)=>{
-        var mapped = Object.assign({}, current);
-        delete mapped.module;
-        return mapped; 
-    })
+    var parseRoutes = async (routes, parent = null)=>{
+        for (var route of routes){  
+            delete route.module;
+              
+            if (!parent){
+                if (route.path.indexOf('/') == 0){
+                    route.fullPath = route.path.substr(1);
+                }
+                route.fullPath = '/' + route.fullPath;
+            }else{
+                route.parent = parent;
+                route.fullPath = parent.fullPath + '/' + route.path;                
+            }
+        
+            route.component = await remotes.component(route.component);
+            
+            if (route.guards){
+                for (var guard of route.guards){
+                    route.guards[route.guards.indexOf(guard)] = await (await remotes.module(guard)).compiled;
+                };
+            };
+                        
+            if (route.module){
+                route.module = await (await remotes.module(route.module)).compiled;
+            };
+                     
+            if (!parent){
+                result.push(route);
+            };            
+            
+            if (route.children){
+                await parseRoutes(route.children, route);
+            }
+        }    
+    };
+    await parseRoutes(routes);
+    
+    return result;
+})
+       
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_backend_remotes_route_controller',
+            code: `
+(async (route, req, res, next)=>{        
+    if (route.guards){
+        for (var guard of route.guards){
+            if (guard.condition && !guard.condition(req)){
+                return res.redirect('/' + guard.redirectRoute);
+            }
+        }
+    };
+    if (route.module){
+        route.module(req, res, next);
+        return;
+    };
+    res.sendFile('app/dist/appster_index.html', { root: './' });
 })
        
       `,
@@ -613,7 +641,7 @@ module.exports = {
             result.push(route);
             
             if (route.children){
-                parseRoutes(route.children, route.fullPath);
+                parseRoutes(route.children, route);
             }
         }    
     };
@@ -717,6 +745,12 @@ module.exports = {
                 path: 'admin',
                 component: 'appster_js_module_frontend_remotes_component_Admin',
                 // module: 'appster_js_module_frontend_remotes_route_module__admin',
+            },
+            {
+                name: 'admin_database_models',
+                path: 'admin_database_models',
+                component: 'appster_js_module_frontend_remotes_component_DatabaseModels',
+                // module: 'appster_js_module_frontend_remotes_route_module__admin_database_models',
             }
         ]
     }
@@ -874,10 +908,18 @@ module.exports = {
         }
         .sidebar_action_button {
             text-align: left;
-            width: 100%
+            display: block;   
+            width: auto;
+        }
+        .sidebar_accordion_button_body {
+            padding: 0px;
+            padding-left: 8px;        
+        }
+        .sidebar_accordion_button_body_top_level {
+            padding-left: 0px;                 
         }
         .sidebar_accordion_card_body {
-            padding: 4px;
+            padding: 0px;  
         }
         .top_navbar {
             margin: 0px; 
@@ -952,11 +994,121 @@ module.exports = {
         <div class="navbar navbar-dark bg-info navbar_side">
             <b-navbar-brand><strong>Navigation</strong></b-navbar-brand>
         </div>   
+        
+        <AccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'FrontEnd'" :accordionId="'FrontEnd'" :accordionGroupId="'LeftSideNav'">    
+                    
+            <AccordionSidebarButton :text="'Routes'" :accordionId="'Routes'" :accordionGroupId="'FrontEnd'">                
+                <b-card-body class="sidebar_accordion_card_body">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            <AccordionSidebarButton :text="'Components'" :accordionId="'Components'" :accordionGroupId="'FrontEnd'">               
+                <b-card-body class="sidebar_accordion_card_body">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            <AccordionSidebarButton :text="'Javascript'" :accordionId="'Javascript'" :accordionGroupId="'FrontEnd'">        
+                <b-card-body class="sidebar_accordion_card_body">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            
+        </AccordionSidebarButton>
+        <AccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'BackEnd'" :accordionId="'BackEnd'" :accordionGroupId="'LeftSideNav'">      
+                  
+            <AccordionSidebarButton :text="'API Endpoints'" :accordionId="'API'" :accordionGroupId="'BackEnd'">                
+                <b-card-body class="sidebar_accordion_card_body">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            <AccordionSidebarButton :text="'Route Controllers'" :accordionId="'Route'" :accordionGroupId="'BackEnd'">                
+                <b-card-body class="sidebar_accordion_card_body">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            
+        </AccordionSidebarButton>
+        <AccordionSidebarButton 
+            :collapsed="$route.matched.some(({ name }) => ['admin_database_models'].indexOf(name) != -1)"
+            class="sidebar_accordion_button_body_top_level" 
+            :text="'Database'" 
+            :accordionId="'Database'" 
+            :accordionGroupId="'LeftSideNav'"
+        >                        
+            <AccordionSidebarButton 
+                :collapsed="$route.matched.some(({ name }) => ['admin_database_models'].indexOf(name) != -1)"
+                :text="'Models'" 
+                :accordionId="'Models'" 
+                :accordionGroupId="'Database'"
+            >
+                <b-card-body class="sidebar_accordion_card_body">                
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button class="sidebar_action_button" variant="success" :href="$router.resolve({name: 'admin_database_models'}).href">List All</b-button>
+                  </b-card-header>                  
+                </b-card-body>
+            </AccordionSidebarButton>
+            
+        </AccordionSidebarButton>
     </div>
 </div>
 \`
                 , mixins: 
 [
+{
+    mounted(){
+        console.log(this.$route.matched.some(({ name }) => ['admin_database_models'].indexOf(name) != -1));
+    }
+}
+]
+                , components:
+{
+    AccordionSidebarButton:'appster_js_module_frontend_remotes_component_AccordionSidebarButton'
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_AccordionSidebarButton',
+            guards:
+                `[
+                    "web"
+                ]`,
+            code: `
+            {
+                name: \'AccordionSidebarButton\',
+                template: \`
+<b-card-body class="sidebar_accordion_button_body">
+    <b-card no-body>
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-button class="sidebar_accordion_button" block href="#" v-b-toggle="'accordion_' + accordionId" variant="info">{{text}}</b-button>
+      </b-card-header>
+      <b-collapse v-bind="(collapsed ? {visible: true} : null)" :id="'accordion_' + accordionId" :accordion="'accordion_' + accordionGroupId" role="tabpanel">
+        <slot></slot>
+      </b-collapse>
+    </b-card>
+</b-card-body>
+\`
+                , mixins: 
+[
+    {   
+        props:{
+            text: String,
+            accordionId: String,
+            accordionGroupId: String,
+            collapsed: Boolean
+        }
+    }
 ]
                 , components:
 {
@@ -979,27 +1131,19 @@ module.exports = {
     <div class="side_nav side_nav_right">
         <div class="navbar navbar-dark bg-info navbar_side">
             <b-navbar-brand><strong>Tools</strong></b-navbar-brand>
-        </div>
+        </div>        
         
-        <b-card no-body class="mb-1">
-          <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button class="sidebar_accordion_button" block href="#" v-b-toggle.accordion-1 variant="info">Database</b-button>
-          </b-card-header>
-          <b-collapse id="accordion-1" accordion="my-accordion1" role="tabpanel">
-            <b-card-body class="sidebar_accordion_card_body">
-                <b-card no-body class="mb-1">
+        <AccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'CLI Commands'" :accordionId="'CLI'" :accordionGroupId="'RightSideNav'"> 
+           
+            <AccordionSidebarButton :text="'Database'" :accordionId="'DatabaseCli'" :accordionGroupId="'CLI'">           
+                <b-card-body class="sidebar_accordion_card_body">                
                   <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_accordion_button" block href="#" v-b-toggle.accordion-2 variant="info">CLI Commands</b-button>
-                  </b-card-header>
-                  <b-collapse id="accordion-2" accordion="my-accordion2" role="tabpanel">
-                    <b-card-body class="sidebar_accordion_card_body">
-                      <b-button class="sidebar_action_button" variant="warning" @click="onReRunMainSeederFile">Clear+Run Seeder</b-button>
-                    </b-card-body>
-                  </b-collapse>
-                </b-card>
-            </b-card-body>
-          </b-collapse>
-        </b-card>
+                    <b-button class="sidebar_action_button" variant="success" :href="'#'" @click="onReRunMainSeederFile">Clear+Run Seeder</b-button>
+                  </b-card-header>                  
+                </b-card-body>          
+            </AccordionSidebarButton>
+            
+        </AccordionSidebarButton>
     </div>
 </div>
 \`
@@ -1017,6 +1161,7 @@ module.exports = {
 ]
                 , components:
 {
+    AccordionSidebarButton:'appster_js_module_frontend_remotes_component_AccordionSidebarButton'
 }
             }
       `,
@@ -1101,8 +1246,8 @@ module.exports = {
       An abstract framework based on node.js, Vue.js, Bootstrap and mariadb.
     </b-card-text>
     
-    <a v-bind:href="this.$router.resolve({name: 'login'}).href">Login</a>
-    <a v-bind:href="this.$router.resolve({name: 'admin'}).href">Admin</a>
+    <a v-bind:href="$router.resolve({name: 'login'}).href">Login</a>
+    <a v-bind:href="$router.resolve({name: 'admin'}).href">Admin</a>
     
   </b-card>
 </b-container>
@@ -1138,6 +1283,32 @@ module.exports = {
 ]
                 , components:
 {
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_DatabaseModels',
+            guards:
+                `[
+                    "web"
+                ]`,
+            code: `
+            {
+                name: \'DatabaseModels\',
+                template: \`
+<b-container class='{#class=#{main_container}#=#}'>
+    <ModuleEditor></ModuleEditor>
+</b-container>
+\`
+                , mixins: 
+[
+
+]
+                , components:
+{
+    "ModuleEditor":'appster_js_module_frontend_remotes_component_AppsterModuleEditor'
 }
             }
       `,
