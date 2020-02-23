@@ -8,12 +8,6 @@ module.exports = {
 (async ()=>{
     await new Promise(async(resolve) => {  
         var appsterApi = express();    
-        var proxyModule = async (module)=>{
-            return {
-                guards: module.guards ? JSON.parse(module.guards) : undefined,
-                compiled: await eval('(async ()=>{return await ' + module.code + '})()')
-            };
-        };
         
         var remoteModule = async (slug)=>{
             return new Promise(async _resolve=>{
@@ -172,7 +166,10 @@ module.exports = {
         secret: secret,
         store: sessionStore,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+          maxAge: 30 * 24 * 60 * 60 * 1000
+        }
     }));
 })   
       `,
@@ -215,7 +212,9 @@ module.exports = {
                 };
                 return reduced;
             }, null);
-            await migrationModel.migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
+            for (var migration of migrationModel.migrations){       
+                await migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
+            };
             await sequelize.sequelize.getQueryInterface().bulkInsert(migrationModel.table, [
                 {
                     slug: "appster_js_module_backend_appster_model_migration_migration",
@@ -232,23 +231,27 @@ module.exports = {
         current = models[current];
         if (current.model == "Migration") return;
         
-        if (current.migration){        
-            await sequelize.Migration.findOne({where:{slug: current.migration.name}}).then(async migration=>{
-                if (migration == null){           
-                    await current.migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
-                    await sequelize.sequelize.getQueryInterface().bulkInsert("Migrations", [
-                        {
-                            slug: current.migration.name,
-                            createdAt: new Date(),
-                            updatedAt: new Date()
-                        }
-                    ]);
-                    if (current.seeder){                          
-                        await sequelize.sequelize.getQueryInterface().bulkInsert(current.table, current.seeder)
-                    } 
-                }
-            })  
-        }      
+        if (current.migrations){
+            for (var migration of current.migrations){                
+                await sequelize.Migration.findOne({where:{slug: migration.name}}).then(async db_migration=>{
+                    if (db_migration == null){           
+                        await migration.up(sequelize.sequelize.getQueryInterface(), sequelize.Sequelize, remoteModule);
+                        await sequelize.sequelize.getQueryInterface().bulkInsert("Migrations", [
+                            {
+                                slug: migration.name,
+                                createdAt: new Date(),
+                                updatedAt: new Date()
+                            }
+                        ]);
+                        if (current.seeders){      
+                            for (var seeder of current.seeders){
+                                await sequelize.sequelize.getQueryInterface().bulkInsert(current.table, seeder);
+                            }                        
+                        }  
+                    }
+                })              
+            }                     
+        }     
     });
 })   
       `,
@@ -306,8 +309,8 @@ module.exports = {
     return {
         table: "Users",
         model: "User",
-        migration: await remoteModule("appster_js_module_backend_appster_model_user_migration").compiled,
-        seeder: await remoteModule("appster_js_module_backend_appster_model_user_seeder").compiled,
+        migrations: [await (await remoteModule("appster_js_module_backend_appster_model_user_migration")).compiled],
+        seeders: [await (await remoteModule("appster_js_module_backend_appster_model_user_seeder")).compiled],
         fields: await (await remoteModule("appster_js_module_backend_appster_model_user_fields")).compiled(sequelize),
         associations: await remoteModule("appster_js_module_backend_appster_model_user_associations").compiled          
     }
@@ -322,7 +325,7 @@ module.exports = {
     return {
         table: "Migrations",
         model: "Migration",
-        migration: await remoteModule("appster_js_module_backend_appster_model_migration_migration"),
+        migrations: [await (await remoteModule("appster_js_module_backend_appster_model_migration_migration")).compiled],
         fields: await (await remoteModule("appster_js_module_backend_appster_model_migration_fields")).compiled(sequelize) 
     }
 })
@@ -381,7 +384,7 @@ module.exports = {
             code: `
 (async (sequelize)=>{
     
-})
+})()
       `,
             createdAt: new Date(),
             updatedAt: new Date()
@@ -476,7 +479,7 @@ module.exports = {
             })
             .post(async (req, res, next) => {
                 await entity.update({code: req.body.code}, {where: {slug: req.body.slug}}).then(result => {
-                    res.send( req.body.slug)
+                    res.send(req.body.slug)
                 }).catch(err => {
                     res.send(err)
                 })
@@ -589,14 +592,22 @@ module.exports = {
         }, {
             slug: 'appster_js_module_backend_remotes_route_controller',
             code: `
-(async (route, req, res, next)=>{        
-    if (route.guards){
-        for (var guard of route.guards){
-            if (guard.condition && !guard.condition(req)){
-                return res.redirect('/' + guard.redirectRoute);
+(async (route, req, res, next)=>{       
+    var checkGuards = (guards)=> {         
+        if (guards){
+            for (var guard of guards){
+                if (guard.condition && !guard.condition(req)){
+                    return res.redirect('/' + guard.redirectRoute);
+                }
             }
-        }
-    };
+        }        
+    }
+    checkGuards(route.guards);
+    var parent = route.parent;
+    while(parent != null){  
+        checkGuards(parent.guards);    
+        parent = parent.parent;
+    }
     if (route.module){
         route.module(req, res, next);
         return;
@@ -772,10 +783,10 @@ module.exports = {
         };
         
         if (module.mixins && Array.isArray(module.mixins)){
-          module.mixins = await module.mixins.reduce(async (result, current) => {
-              await (typeof current === 'string' || current instanceof String) ? result.push((await remotes.module(current, remotes)).compiled) : result.push(current);
-              return result;
-          }, []);
+            module.mixins = await module.mixins.reduce(async (result, current) => {
+                await (typeof current === 'string' || current instanceof String) ? result.push((await remotes.module(current, remotes)).compiled) : (await result).push(current);
+                return result;
+            }, []);
         };
         if (module.components && !Array.isArray(module.components)){
             module.components = await Object.keys(module.components).reduce(async (result, current) => {            
@@ -863,14 +874,12 @@ module.exports = {
             width: auto; 
             overflow-y: auto;
         }
-        
+        .no-padding {
+            padding: 0; 
+        }        
         .main_container_sidebar_col {
             margin: 0; 
             padding: 0; 
-            min-width: 200px; 
-            max-width: 200px;
-            min-height: 100vh; 
-            max-height: 100vh
         }
         .main_container_col {
             width: auto; 
@@ -898,6 +907,7 @@ module.exports = {
         }
         .side_nav {
             border-color: lightgray; 
+            border-width: 1px;
             min-width: 100%; 
             max-width: 100%; 
             min-height: 100vh; 
@@ -955,13 +965,13 @@ module.exports = {
                 template: \`
 <b-container class='{#class=#{main_container}#=#}'>
     <b-row class="main_container_row">
-        <b-col class="main_container_sidebar_col">
+        <b-col cols="2" class="main_container_sidebar_col">
             <AppsterSidebarNav></AppsterSidebarNav>         
         </b-col>
-        <b-col class="main_container_col">
+        <b-col cols="8" class="main_container_col">
             <router-view class="main_container_router_view"></router-view>
         </b-col>   
-        <b-col class="main_container_sidebar_col">
+        <b-col cols="2" class="main_container_sidebar_col">
             <AppsterSidebarTools></AppsterSidebarTools>         
         </b-col>
     </b-row>
@@ -1064,11 +1074,6 @@ module.exports = {
 \`
                 , mixins: 
 [
-{
-    mounted(){
-        console.log(this.$route.matched.some(({ name }) => ['admin_database_models'].indexOf(name) != -1));
-    }
-}
 ]
                 , components:
 {
@@ -1299,16 +1304,167 @@ module.exports = {
                 name: \'DatabaseModels\',
                 template: \`
 <b-container class='{#class=#{main_container}#=#}'>
-    <ModuleEditor></ModuleEditor>
+    <b-row>
+        <b-col cols="6">
+            
+        </b-col>
+    </b-row>
+    <!-- Main table element -->
+    <b-table
+      show-empty
+      small
+      stacked="md"
+      :items="items"
+      :fields="fields"
+      :current-page="currentPage"
+      :per-page="perPage"
+      :filter="filter"
+      :filterIncludedFields="filterOn"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :sort-direction="sortDirection"
+    >
+      <template v-slot:cell(name)="row">
+        {{ row.value.first }} {{ row.value.last }}
+      </template>
+
+      <template v-slot:cell(actions)="row">
+        <b-button size="sm" @click="row.toggleDetails">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+      </template>
+
+      <template v-slot:row-details="row">
+            <DbItem :itemProps="{code: row.item.code, slug: row.item.slug}" />
+      </template>
+    </b-table>
 </b-container>
 \`
                 , mixins: 
 [
-
+    'appster_js_module_frontend_remotes_mixin_DBList',
+    {
+        data() {
+          return {          
+            fields: [
+              { key: 'id', label: 'ID', sortable: true, sortDirection: 'desc' },
+              { key: 'slug', label: 'Slug', sortable: true, class: 'text-center' },
+              { key: 'actions', label: 'Actions' }
+            ],
+            form: {
+              email: '',
+              name: '',
+              food: null,
+              checked: []
+            },
+            totalRows: 1,
+            currentPage: 1,
+            perPage: 100,
+            pageOptions: [5, 10, 15],
+            sortBy: '',
+            sortDesc: false,
+            sortDirection: 'asc',
+            filter: null,
+            filterOn: []
+          }
+        },
+        async mounted() {
+          await this.get();
+        },
+        methods: {
+        
+        }
+    }
 ]
                 , components:
 {
-    "ModuleEditor":'appster_js_module_frontend_remotes_component_AppsterModuleEditor'
+    "ModuleEditor":'appster_js_module_frontend_remotes_component_AppsterModuleEditor',
+    "DbItem":'appster_js_module_frontend_remotes_component_DbItem'
+}
+            }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_component_DbItem',
+            guards:
+                `[
+                    "web"
+                ]`,
+            code: `
+            {
+                name: \'DbItem\',
+                template: \`
+<b-container class='{#class=#{main_container}#=#}'>
+  <b-card
+    v-if="show"
+    tag="article"
+  >    
+    <b-card-body>
+        <b-form @submit="onSubmit" @reset="onReset">    
+            <div v-if="label=='code'" v-for="(input, label) in form">
+                <div class="mt-2">{{ label }}:</div>
+                <b-form-textarea 
+                    rows="10"
+                    max-rows="10000"
+                    v-model="form[label]" 
+                    placeholder="Enter your name">
+                    
+                </b-form-textarea>
+            </div>
+            
+            <hr/>
+        
+            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+        </b-form>    
+    </b-card-body>        
+  </b-card>
+</b-container>
+\`
+    , mixins: 
+[
+    {
+        props:[
+            'itemProps'
+        ],
+        data(){
+            return{
+                show: true,
+                form: Object.assign({}, this.itemProps),
+                
+            }
+        },
+        methods:{   
+            async save(){
+                console.log(this.form);
+                 await this.axios.post(this.baseUrl + 'AppsterJSModule/' + this.form.slug, this.form)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },   
+          onSubmit(evt) {
+            evt.preventDefault()
+            this.save();
+          },
+          onReset(evt) {
+            evt.preventDefault()
+            // Reset our form values
+            this.form = Object.assign(this.form, this.itemProps);
+            this.show = false
+            this.$nextTick(() => {
+              this.show = true
+            })
+          }
+        }
+    }
+]
+    , components:
+{
+
 }
             }
       `,
@@ -1358,6 +1514,26 @@ module.exports = {
 {
 }
             }
+      `,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }, {
+            slug: 'appster_js_module_frontend_remotes_mixin_DBList',
+            code: `      
+{
+    data(){
+        return {
+            items: [], 
+        }
+    },
+    methods: {        
+        async get() {
+             await this.axios.get(this.baseUrl + 'AppsterJSModule').then(result=>{                         
+                  this.items.push(...result.data);
+             })
+        }
+    }
+}
       `,
             createdAt: new Date(),
             updatedAt: new Date()

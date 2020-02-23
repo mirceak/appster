@@ -12,7 +12,7 @@ let api;
 
 let build_frontend = async ()=>{
     return new Promise(async resolve => {
-        await shell.run_command("cd app \n npm run build \n exit \n");
+        // await shell.run_command("cd app \n npm run build \n exit \n");
         resolve();
     });
 }

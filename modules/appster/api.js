@@ -3,24 +3,11 @@
 //appster modules
 let utils;
 let shell;
-let cors;
-let bodyParser;
-let cookieParser;
-let session;
-let passport;
-let crypto;
-let MySQLStore;
-let LocalStrategy;
-let config = require('../../config/appster_config.js');
-let sequelize;
 
 //remote modules
-let express;
-let passwordHash;
+let sequelize;
 
 //private vars
-let appsterApiRouter;
-let frontEndRouter;
 
 class Api {
     constructor() {
@@ -28,21 +15,7 @@ class Api {
     }
 
     async start() {
-        if (!express) {
-            express = await utils.require('express');
-            session = await utils.require('express-session');
-            passport = await utils.require('passport');
-            MySQLStore = (await utils.require('express-mysql-session'))(session);
-            LocalStrategy = (await utils.require('passport-local')).Strategy;
-            crypto = await utils.require('crypto');
-            passwordHash = await utils.require('password-hash');
-            cors = await utils.require('cors');
-            bodyParser = require("body-parser");
-            cookieParser = require("cookie-parser");
-            sequelize = await utils.require('../../models/index.js');
-            appsterApiRouter = express.Router();
-            frontEndRouter = express.Router();
-        }
+        sequelize = await utils.require('../../models/index.js');
 
         await shell.run_command('npx sequelize-cli db:migrate:undo:all \n exit \n');
         await shell.run_command('npx sequelize-cli db:migrate \n exit \n');
@@ -50,9 +23,23 @@ class Api {
         await shell.run_command('npx sequelize-cli db:seed:undo:all \n exit \n');
         await shell.run_command('npx sequelize-cli db:seed:all \n exit \n');
 
-        await sequelize.AppsterJSModule.findOne({where: {slug: 'appster_js_module_backend_remotes_module_main'}}).then(async result => {
-            await eval(`(async ()=>{return await ${result.dataValues.code}})()`);
-        })
+        var appster = {
+            proxyModule: async (module)=>{
+                return {
+                    compiled: await eval('(async ()=>{return await (' + module + ')})()')
+                };
+            }
+        };
+        appster.settings = await sequelize.Settings.findOne({
+            include:[
+                {
+                    all: true,
+                    nested: true
+                }
+            ]
+        });
+
+        await appster.proxyModule(appster.settings.mainBackendModule.javascript.code);
     }
 }
 

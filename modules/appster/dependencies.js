@@ -23,8 +23,8 @@ class Dependencies{
     }
 
     async load(){
-        await load_backend_packages();
-        await load_frontend_packages();
+        // await load_backend_packages();
+        // await load_frontend_packages();
         console.log("APPSTER____________________________________________________________________________________________________Dependencies loaded!");
     }
 }

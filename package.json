@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "node index.js",
     "reseed": "npx sequelize-cli db:seed:undo:all & npx sequelize-cli db:seed:all"
   },
   "name": "appster",

@@ -1,25 +1,24 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes)=>{
-  const AppsterJSModule = sequelize.define('AppsterJSModule', {
+  const Script = sequelize.define('Script', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    slug: {
+    name: {
       allowNull: false,
-      unique: true,
       type: DataTypes.STRING
-    },
-    guards: {
-      allowNull: true,
-      type: DataTypes.TEXT
     },
     code: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING(20000)
+    },
+    type: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
@@ -29,9 +28,17 @@ module.exports = (sequelize, DataTypes)=>{
       allowNull: false,
       type: DataTypes.DATE
     }
-  }, {});
-  AppsterJSModule.associate = function(models) {
+  },
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: ['name', 'type']
+      }
+    ]
+  });
+  Script.associate = function(models) {
     // associations can be defined here
   };
-  return AppsterJSModule;
+  return Script;
 }

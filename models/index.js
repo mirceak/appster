@@ -21,7 +21,7 @@ module.exports = (async ()=>{
     sequelize = new Sequelize(config.database, config.username, config.password, config);
   }
 
-  fs
+  await fs
       .readdirSync(__dirname)
       .filter(file => {
         return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
@@ -32,9 +32,9 @@ module.exports = (async ()=>{
         db.models[model.name] = db[model.name];
       }, null);
 
-  Object.keys(db).forEach( modelName => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db);
+  Object.keys(db.models).forEach( modelName => {
+    if (db.models[modelName].associate) {
+      db.models[modelName].associate(db.models);
     }
   });
 
