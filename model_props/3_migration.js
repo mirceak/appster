@@ -17,6 +17,10 @@
       },
       allowNull: false
     },
+    index: {
+      allowNull: false,
+      type: 'INTEGER'
+    },
     type: {
       allowNull: false,
       type: 'STRING'

@@ -21,6 +21,16 @@
       },
       allowNull: false
     },
+    mixinId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'scripts'
+        },
+        key: 'id'
+      },
+      allowNull: false
+    },
     type: {
       allowNull: false,
       type: 'STRING'
@@ -46,6 +56,7 @@
   var associate = function(models) {
     // associations can be defined here
     models.Component.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'htmlId', as: 'html'});
+    models.Component.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'mixinId', as: 'mixin'});
     models.Script.belongsTo(models.Component, {foreignKey: 'id'});
   }
 

@@ -65,21 +65,21 @@
       return queryInterface.bulkInsert('Modules', [
         {
           name: 'mainBackend',
-          javascriptId: 7,
+          javascriptId: 51,
           type: 'kernel',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'mainFrontend',
-          javascriptId: 8,
+          javascriptId: 52,
           type: 'kernel',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'databaseManager',
-          javascriptId: 9,
+          javascriptId: 53,
           type: 'appster_module',
           createdAt: new Date(),
           updatedAt: new Date()

@@ -254,7 +254,7 @@
                         };
                         appster.modules = appster_modules;
                         
-                        console.log(1, appster.modules.databaseManager);
+                        console.log(11);
                     })()
                 `,
           type: 'javascript',

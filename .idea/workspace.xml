@@ -2,32 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others.">
-      <change afterPath="$PROJECT_DIR$/model_props/0_script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/10_route.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/1_model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/2_module.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/3_migration.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/4_settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/5_user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/6_role.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/7_guard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/8_component.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_props/9_mixin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20191208124834-create-script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20191208124835-create-model.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20191208124836-create-module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/20191208124837-create-settings.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/settings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/0_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/0_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/1_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/1_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/2_module.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/2_module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/3_migration.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/3_migration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/8_component.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/8_component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/appster/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131705-scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131706-modules.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131707-models.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131708-settings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -220,7 +202,7 @@
       <workItem from="1582312713177" duration="608000" />
       <workItem from="1582313628628" duration="1304000" />
       <workItem from="1582331145896" duration="46298000" />
-      <workItem from="1582577456713" duration="21352000" />
+      <workItem from="1582577456713" duration="29977000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -377,22 +359,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="567" y="0" key="FileDocumentManager.FileCacheConflict/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575142283940" />
-    <state width="1877" height="259" key="GridCell.Tab.0.bottom" timestamp="1582759648713">
+    <state width="1877" height="518" key="GridCell.Tab.0.bottom" timestamp="1582767095887">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="259" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759648713" />
-    <state width="1877" height="259" key="GridCell.Tab.0.center" timestamp="1582759648713">
+    <state width="1877" height="518" key="GridCell.Tab.0.bottom/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582767095887" />
+    <state width="1877" height="518" key="GridCell.Tab.0.center" timestamp="1582767095886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="259" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759648713" />
-    <state width="1877" height="259" key="GridCell.Tab.0.left" timestamp="1582759648713">
+    <state width="1877" height="518" key="GridCell.Tab.0.center/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582767095886" />
+    <state width="1877" height="518" key="GridCell.Tab.0.left" timestamp="1582767095886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="259" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759648713" />
-    <state width="1877" height="259" key="GridCell.Tab.0.right" timestamp="1582759648713">
+    <state width="1877" height="518" key="GridCell.Tab.0.left/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582767095886" />
+    <state width="1877" height="518" key="GridCell.Tab.0.right" timestamp="1582767095886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="259" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759648713" />
+    <state width="1877" height="518" key="GridCell.Tab.0.right/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582767095886" />
     <state x="672" y="235" key="MultipleFileMergeDialog" timestamp="1575491375590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -421,10 +403,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="673" y="253" key="VcsDiffUtil.ChangesDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575491343150" />
-    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1582759646731">
+    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1582765957210">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759646731" />
+    <state x="818" y="409" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582765957210" />
     <state x="661" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578101013360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -457,9 +439,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582681799425" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1582759241703">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1582764191669">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582759241703" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582764191669" />
   </component>
 </project>

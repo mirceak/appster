@@ -16,7 +16,6 @@ class Api {
     }
 
     async start() {
-
         var databaseModule = await (async ()=>{
             const root = await require('path').dirname(require.main.filename || process.mainModule.filename);
             const DataTypes = await require('mysql');
@@ -29,9 +28,29 @@ class Api {
             const fs = require('fs');
 
             var parseModel = (modelModule)=>{
-                var keys = Object.keys(modelModule.fields);
+                var module = JSON.parse(JSON.stringify(modelModule));
+                var keys = Object.keys(module.fields);
                 for (var field of keys){
-                    field = modelModule.fields[field];
+                    field = module.fields[field];
+
+                    var type = null;
+                    var option = null;
+                    if (field.type.includes('(')){
+                        type = field.type.split('(')[0];
+                        option = field.type.split('(')[1].replace(')','');
+                    }else{
+                        type = field.type;
+                    }
+
+                    if (option){
+                        field.type = Sequelize[type](option);
+                    }else{
+                        field.type = Sequelize[type];
+                    }
+                };
+                keys = Object.keys(module.attributes);
+                for (field of keys){
+                    field = module.attributes[field];
 
                     var type = null;
                     var option = null;
@@ -49,9 +68,10 @@ class Api {
                     }
                 };
 
-                const Model = sequelize.define(modelModule.name, modelModule.fields, modelModule.options);
-                Model.associate = modelModule.associate;
-                return Model;
+                const Model = sequelize.define(module.name, module.fields, module.options);
+                Model.associate = module.associate;
+                module.Model = Model;
+                return module;
             }
 
             await fs
@@ -61,7 +81,8 @@ class Api {
                 })
                 .reduce(async (result, file) => {
                     var modelModule = await eval('(async ()=>{return await (' + (await utils.get_file_content(root + '\\model_props\\' + file)).toString() + ')})()');
-                    sequelize[modelModule.name] = parseModel(modelModule);
+                    modelModule.module = parseModel(modelModule);
+                    sequelize[modelModule.name] = modelModule.module.Model;
                     modelModule.fileName = file;
                     models.push(modelModule);
                     return result;
@@ -69,50 +90,87 @@ class Api {
 
             models.sort((a,b) => (parseInt(a.fileName.substr(0, a.fileName.indexOf('_'))) > parseInt(b.fileName.substr(0, b.fileName.indexOf('_')))) ? 1 : ((parseInt(b.fileName.substr(0, b.fileName.indexOf('_'))) > parseInt(a.fileName.substr(0, a.fileName.indexOf('_')))) ? -1 : 0));
 
-            for (var i=models.length-1; i>=0; i--){
-                var model = models[i];
-                await sequelize.getQueryInterface().dropTable(model.table);
-            }
             for (var i=0; i<models.length; i++){
                 var model = models[i];
-                await sequelize.getQueryInterface().createTable(model.table, model.attributes);
-            }
-            for (var i=0; i<models.length; i++){
-                var model = models[i];
-                console.log(model.name);
-                if (model.associate) {
-                    await model.associate(sequelize);
-                }
-            }
-            for (var i=0; i<models.length; i++){
-                var model = models[i];
-                await model.seeder.up(sequelize.getQueryInterface(), sequelize);
+                await model.associate(sequelize);
             }
 
             return {
                 async undoMigrations(){
-
+                    for (var i=models.length-1; i>=0; i--){
+                        var model = models[i];
+                        await sequelize.getQueryInterface().dropTable(model.table);
+                    }
                 },
                 async runMigrations(){
-                    await sequelize.Settings.findAll({
-                        include:[
-                            {
-                                all: true,
-                                nested: true
-                            }
-                        ]
-                    })
+                    for (var i=0; i<models.length; i++){
+                        var model = models[i];
+                        await sequelize.getQueryInterface().createTable(model.table, model.module.attributes);
+                    }
                 },
                 async undoSeeders(){
-
+                    for (var i=0; i<models.length; i++){
+                        var model = models[i];
+                        await model.seeder.down(sequelize.getQueryInterface(), sequelize);
+                    }
                 },
                 async runSeeders(){
-
+                    for (var i=0; i<models.length; i++){
+                        var model = models[i];
+                        await model.seeder.up(sequelize.getQueryInterface(), sequelize);
+                    }
+                },
+                async registerModels(){
+                    for (var i=0; i<models.length; i++){
+                        var model = models[i];
+                        const fields = await sequelize.Script.create({
+                            name: 'model_' + model.name + '_fields',
+                            code: JSON.stringify(model.fields),
+                            type: "json",
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                        const attributes = await sequelize.Script.create({
+                            name: 'model_' + model.name + '_attributes',
+                            code: JSON.stringify(model.attributes),
+                            type: "json",
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                        const associate = await sequelize.Script.create({
+                            name: 'model_' + model.name + '_associate',
+                            code: model.associate.toString(),
+                            type: "javascript",
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                        const options = await sequelize.Script.create({
+                            name: 'model_' + model.name + '_options',
+                            code: model.options.toString(),
+                            type: "javascript",
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                        const db_model = await sequelize.Model.create({
+                            name: model.name,
+                            tableName: model.table,
+                            fieldsId: fields.id,
+                            attributesId: attributes.id,
+                            optionsId: options ? options.id : null,
+                            associateId: associate.id,
+                            type: "kernel_table",
+                            createdAt: new Date(),
+                            updatedAt: new Date(),
+                        });
+                    }
                 }
             }
         })();
 
+        await databaseModule.undoMigrations();
         await databaseModule.runMigrations();
+        await databaseModule.registerModels();
+        await databaseModule.runSeeders();
 
         var appster = {
             proxyModule: async (module)=>{
