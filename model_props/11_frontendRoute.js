@@ -11,29 +11,43 @@
       allowNull: false,
       type: 'STRING'
     },
-    htmlId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'scripts'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    mixinId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'scripts'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     type: {
       allowNull: false,
       type: 'STRING'
+    },
+    path: {
+      allowNull: false,
+      type: 'STRING'
+    },
+    backendJavascriptId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'scripts'
+        },
+        key: 'id'
+      },
+      allowNull: true
+    },
+    frontendJavascriptId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'scripts'
+        },
+        key: 'id'
+      },
+      allowNull: true
+    },
+    componentId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'components'
+        },
+        key: 'id'
+      },
+      allowNull: true
     },
     createdAt: {
       allowNull: false,
@@ -50,26 +64,28 @@
   }, attributes);
 
   var options = {
-
   }
 
   var associate = function(models) {
     // associations can be defined here
-    models.Component.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'htmlId', as: 'html'});
-    models.Component.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'mixinId', as: 'mixin'});
-    models.Script.belongsTo(models.Component, {foreignKey: 'id'});
+    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'backendJavascriptId', as: 'backendJavascript'});
+    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'frontendJavascriptId', as: 'frontendJavascript'});
+    models.Script.belongsTo(models.Route, {foreignKey: 'id'});
+
+    models.Route.hasOne(models.Component, {foreignKey: 'id', sourceKey: 'componentId', as: 'component'});
+    models.Component.belongsTo(models.Route, {foreignKey: 'id'});
   }
 
   var seeder = {
     up: (queryInterface, Sequelize) => {
       return;
-      return queryInterface.bulkInsert('Components', [
+      return queryInterface.bulkInsert('Routes', [
       ], {});
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Components', {}, {});
+      return queryInterface.bulkDelete('Routes', {}, {});
     }
   };
 
@@ -78,8 +94,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Component',
-    table: 'Components',
+    name: 'Route',
+    table: 'Routes',
     seeder: seeder,
   }
 })()

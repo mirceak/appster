@@ -38,7 +38,11 @@
     let baseUrl = 'http://' + config.apiIp + ':' + config.apiPort + config.apiExt;
     Vue.prototype.baseUrl = baseUrl;
 
-    let module = await axios.get(baseUrl + 'AppsterJSModule' + '/' + 'appster_js_module_frontend_remotes_module_main')
+    let settings = await axios.get(baseUrl + 'settings');
 
-    await eval('(async ()=>{return await ' + module.data.code + '})()');
+    let mainModule = await axios.get(baseUrl + 'module/' + settings.data[0].mainFrontendModuleId);
+    let mainModuleScript = await axios.get(baseUrl + 'script/' + mainModule.data.javascriptId);
+
+    mainModule = await eval('(async ()=>{return await ' + mainModuleScript.data.code + '})()');
+    mainModule();
 })()

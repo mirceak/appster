@@ -19,21 +19,31 @@
       allowNull: false,
       type: 'STRING'
     },
-    backendRoute: {
+    backendJavascriptId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'apiRoute'
+          tableName: 'scripts'
         },
         key: 'id'
       },
       allowNull: true
     },
-    frontendRoute: {
+    frontendJavascriptId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'apiRoute'
+          tableName: 'scripts'
+        },
+        key: 'id'
+      },
+      allowNull: true
+    },
+    componentId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'components'
         },
         key: 'id'
       },
