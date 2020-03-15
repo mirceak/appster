@@ -6,24 +6,25 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    name: {
-      unique: true,
-      allowNull: false,
-      type: 'STRING'
-    },
-    moduleId: {
+    routeId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'modules'
+          tableName: 'routes'
         },
         key: 'id'
       },
       allowNull: false
     },
-    type: {
-      allowNull: false,
-      type: 'STRING'
+    guardId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'guards'
+        },
+        key: 'id'
+      },
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -45,20 +46,23 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
-    models.Script.belongsTo(models.Mixin, {foreignKey: 'id'});
+    models.Route.belongsToMany(models.Guard, { through: 'RouteGuards' });
+    models.Guard.belongsToMany(models.Route, { through: 'RouteGuards' });
+
+    models.RouteGuard.hasMany(models.Guard, {foreignKey: 'id', sourceKey: 'guardId', as: 'guards'});
+    models.Guard.belongsTo(models.RouteGuard, {foreignKey: 'id'});
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
+    up: async (queryInterface, Sequelize) => {
       return;
-      return queryInterface.bulkInsert('Mixins', [
+      await queryInterface.bulkInsert('RouteGuards', [
       ], {});
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Mixins', {}, {});
+      return queryInterface.bulkDelete('RouteGuards', {}, {});
     }
   };
 
@@ -67,8 +71,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Mixin',
-    table: 'Mixins',
+    name: 'RouteGuard',
+    table: 'RouteGuards',
     seeder: seeder,
   }
 })()

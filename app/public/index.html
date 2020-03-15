@@ -7,4 +7,73 @@
 <body>
 <div id=app><router-view></router-view></div>
 </body>
+<style>
+    .main_container_router_view {
+        max-height: calc(100vh - 56px);
+        min-height: 100vh;
+        width: auto;
+        overflow-y: auto;
+    }
+    .no-padding {
+        padding: 0;
+    }
+    .main_container_sidebar_col {
+        margin: 0;
+        padding: 0;
+    }
+    .main_container_col {
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .main_container_row {
+        margin: 0;
+        padding: 0;
+    }
+    .main_container {
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+    }
+    .side_nav_right {
+        border-left-style: solid;
+    }
+    .side_nav_left {
+        border-right-style: solid;
+    }
+    .navbar_side {
+        border-bottom-style: solid;
+        border-color: lightgray;
+    }
+    .side_nav {
+        border-color: lightgray;
+        border-width: 1px;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100vh;
+        max-height: 100vh;
+    }
+    .sidebar_accordion_button {
+        text-align: left
+    }
+    .sidebar_action_button {
+        text-align: left;
+        display: block;
+        width: auto;
+    }
+    .sidebar_accordion_button_body {
+        padding: 0px;
+        padding-left: 8px;
+    }
+    .sidebar_accordion_button_body_top_level {
+        padding-left: 0px;
+    }
+    .sidebar_accordion_card_body {
+        padding: 0px;
+    }
+    .top_navbar {
+        margin: 0px;
+        padding: 8px 4px
+    }
+</style>
 </html>

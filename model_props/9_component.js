@@ -66,8 +66,24 @@
       return queryInterface.bulkInsert('Components', [
         {
           name: 'Login',
-          mixinId: (await Sequelize.Script.findOne({where:{name: 'mainBackendModule'}})).id,
+          mixinId: null,
           htmlId: (await Sequelize.Script.findOne({where:{name: 'LoginPageComponent'}})).id,
+          type: 'page',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'Welcome',
+          mixinId: null,
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'WelcomePageComponent'}})).id,
+          type: 'page',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'Admin',
+          mixinId: null,
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminPageComponent'}})).id,
           type: 'page',
           createdAt: new Date(),
           updatedAt: new Date()

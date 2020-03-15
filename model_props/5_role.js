@@ -6,12 +6,12 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    username: {
+    name: {
       unique: true,
       allowNull: false,
       type: 'STRING'
     },
-    password: {
+    type: {
       allowNull: false,
       type: 'STRING'
     },
@@ -38,11 +38,11 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Users', [
+    up: async (queryInterface, Sequelize) => {
+      return queryInterface.bulkInsert('Roles', [
         {
-          password: "1",
-          username: "1",
+          name: 'auth',
+          type: 'user',
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -51,7 +51,7 @@
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Users', {}, {});
+      return queryInterface.bulkDelete('Roles', {}, {});
     }
   };
 
@@ -60,8 +60,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'User',
-    table: 'Users',
+    name: 'Role',
+    table: 'Roles',
     seeder: seeder,
   }
 })()

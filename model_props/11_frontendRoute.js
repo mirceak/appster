@@ -15,29 +15,15 @@
       allowNull: false,
       type: 'STRING'
     },
-    path: {
-      allowNull: false,
-      type: 'STRING'
-    },
-    backendJavascriptId: {
+    routeId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'scripts'
+          tableName: 'routes'
         },
         key: 'id'
       },
-      allowNull: true
-    },
-    frontendJavascriptId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'scripts'
-        },
-        key: 'id'
-      },
-      allowNull: true
+      allowNull: false
     },
     componentId: {
       type: 'INTEGER',
@@ -68,24 +54,62 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'backendJavascriptId', as: 'backendJavascript'});
-    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'frontendJavascriptId', as: 'frontendJavascript'});
-    models.Script.belongsTo(models.Route, {foreignKey: 'id'});
+    models.FrontendRoute.hasOne(models.Route, {foreignKey: 'id', sourceKey: 'routeId', as: 'route'});
+    models.FrontendRoute.hasOne(models.Component, {foreignKey: 'id', sourceKey: 'componentId', as: 'component'});
 
-    models.Route.hasOne(models.Component, {foreignKey: 'id', sourceKey: 'componentId', as: 'component'});
-    models.Component.belongsTo(models.Route, {foreignKey: 'id'});
+    models.Route.belongsTo(models.FrontendRoute, {foreignKey: 'id'});
+    models.Component.belongsTo(models.FrontendRoute, {foreignKey: 'id'});
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return;
-      return queryInterface.bulkInsert('Routes', [
+    up: async (queryInterface, Sequelize) => {
+      return queryInterface.bulkInsert('FrontendRoutes', [
+        {
+          name: 'root',
+          type: 'page',
+          routeId: (await Sequelize.Route.findOne({where: {name: 'root'}})).id,
+          componentId: (await Sequelize.Component.findOne({where: {name: 'Welcome'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'login',
+          type: 'page',
+          routeId: (await Sequelize.Route.findOne({where: {name: 'login'}})).id,
+          componentId: (await Sequelize.Component.findOne({where: {name: 'Login'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'admin',
+          type: 'page',
+          routeId: (await Sequelize.Route.findOne({where: {name: 'admin'}})).id,
+          componentId: (await Sequelize.Component.findOne({where: {name: 'Admin'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        // {
+        //   name: 'admin_root',
+        //   type: 'page',
+        //   routeId: (await Sequelize.Route.findOne({where: {name: 'admin_root'}})).id,
+        //   componentId: (await Sequelize.Component.findOne({where: {name: 'Admin'}})).id,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date()
+        // },
+        // {
+        //   name: 'admin_database',
+        //   type: 'page',
+        //   routeId: (await Sequelize.Route.findOne({where: {name: 'admin_database'}})).id,
+        //   componentId: (await Sequelize.Component.findOne({where: {name: 'admin_database'}})).id,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date()
+        // }
       ], {});
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Routes', {}, {});
+      return queryInterface.bulkDelete('FrontendRoutes', {}, {});
     }
   };
 
@@ -94,8 +118,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Route',
-    table: 'Routes',
+    name: 'FrontendRoute',
+    table: 'FrontendRoutes',
     seeder: seeder,
   }
 })()

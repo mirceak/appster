@@ -11,33 +11,9 @@
       allowNull: false,
       type: 'STRING'
     },
-    type: {
-      allowNull: false,
-      type: 'STRING'
-    },
     path: {
       allowNull: false,
       type: 'STRING'
-    },
-    backendRoute: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'apiRoute'
-        },
-        key: 'id'
-      },
-      allowNull: true
-    },
-    frontendRoute: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'apiRoute'
-        },
-        key: 'id'
-      },
-      allowNull: true
     },
     createdAt: {
       allowNull: false,
@@ -58,18 +34,42 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'backendJavascriptId', as: 'backendJavascript'});
-    models.Route.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'frontendJavascriptId', as: 'frontendJavascript'});
-    models.Script.belongsTo(models.Route, {foreignKey: 'id'});
 
-    models.Route.hasOne(models.Component, {foreignKey: 'id', sourceKey: 'componentId', as: 'component'});
-    models.Component.belongsTo(models.Route, {foreignKey: 'id'});
   }
 
   var seeder = {
     up: (queryInterface, Sequelize) => {
-      return;
       return queryInterface.bulkInsert('Routes', [
+        {
+          name: 'root',
+          path: '/',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'login',
+          path: '/login',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'admin',
+          path: '/admin',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        // {
+        //   name: 'admin_root',
+        //   path: '',
+        //   createdAt: new Date(),
+        //   updatedAt: new Date()
+        // },
+        // {
+        //   name: 'admin_database',
+        //   path: '/database',
+        //   createdAt: new Date(),
+        //   updatedAt: new Date()
+        // },
       ], {});
     },
 

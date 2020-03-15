@@ -6,24 +6,25 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    name: {
-      unique: true,
-      allowNull: false,
-      type: 'STRING'
-    },
-    moduleId: {
+    childId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'modules'
+          tableName: 'components'
         },
         key: 'id'
       },
       allowNull: false
     },
-    type: {
-      allowNull: false,
-      type: 'STRING'
+    parentId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'components'
+        },
+        key: 'id'
+      },
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -45,20 +46,20 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
-    models.Script.belongsTo(models.Mixin, {foreignKey: 'id'});
+    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Parents', foreignKey: 'parentId' });
+    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Siblings', foreignKey: 'childId' });
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
+    up: async (queryInterface, Sequelize) => {
       return;
-      return queryInterface.bulkInsert('Mixins', [
+      await queryInterface.bulkInsert('ComponentChildren', [
       ], {});
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Mixins', {}, {});
+      return queryInterface.bulkDelete('ComponentChildren', {}, {});
     }
   };
 
@@ -67,8 +68,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Mixin',
-    table: 'Mixins',
+    name: 'ComponentChild',
+    table: 'ComponentChildren',
     seeder: seeder,
   }
 })()

@@ -6,12 +6,12 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    name: {
+    username: {
       unique: true,
       allowNull: false,
       type: 'STRING'
     },
-    type: {
+    password: {
       allowNull: false,
       type: 'STRING'
     },
@@ -38,15 +38,23 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return;
-      return queryInterface.bulkInsert('Roles', [
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Users', [
+        {
+          password: "1",
+          username: "1",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ], {});
+
+      var adminUser = await Sequelize.User.findOne({where:{username: '1'}})
+      adminUser.addRole(await Sequelize.Role.findOne({where:{name: 'auth', type: 'user'}}))
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Roles', {}, {});
+      return queryInterface.bulkDelete('Users', {}, {});
     }
   };
 
@@ -55,8 +63,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Role',
-    table: 'Roles',
+    name: 'User',
+    table: 'Users',
     seeder: seeder,
   }
 })()

@@ -6,24 +6,25 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    name: {
-      unique: true,
-      allowNull: false,
-      type: 'STRING'
-    },
-    moduleId: {
+    userId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'modules'
+          tableName: 'users'
         },
         key: 'id'
       },
       allowNull: false
     },
-    type: {
-      allowNull: false,
-      type: 'STRING'
+    roleId: {
+      type: 'INTEGER',
+      references: {
+        model: {
+          tableName: 'roles'
+        },
+        key: 'id'
+      },
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -45,20 +46,20 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
-    models.Script.belongsTo(models.Mixin, {foreignKey: 'id'});
+    models.User.belongsToMany(models.Role, { through: 'UserRoles' });
+    models.Role.belongsToMany(models.User, { through: 'UserRoles' });
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
+    up: async (queryInterface, Sequelize) => {
       return;
-      return queryInterface.bulkInsert('Mixins', [
+      await queryInterface.bulkInsert('UserRoles', [
       ], {});
     },
 
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Mixins', {}, {});
+      return queryInterface.bulkDelete('UserRoles', {}, {});
     }
   };
 
@@ -67,8 +68,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'Mixin',
-    table: 'Mixins',
+    name: 'UserRole',
+    table: 'UserRoles',
     seeder: seeder,
   }
 })()

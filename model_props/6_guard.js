@@ -11,11 +11,11 @@
       allowNull: false,
       type: 'STRING'
     },
-    javascriptId: {
+    moduleId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'scripts'
+          tableName: 'modules'
         },
         key: 'id'
       },
@@ -45,14 +45,20 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Guard.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'javascriptId', as: 'javascript'});
-    models.Script.belongsTo(models.Guard, {foreignKey: 'id'});
+    models.Guard.hasOne(models.Module, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
+    models.Module.belongsTo(models.Guard, {foreignKey: 'id'});
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return;
+    up: async (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('Guards', [
+        {
+          name: 'auth',
+          type: 'user',
+          moduleId: (await Sequelize.Module.findOne({where:{name: 'authGuard'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ], {});
     },
 
