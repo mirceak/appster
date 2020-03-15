@@ -6,11 +6,11 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    childId: {
+    siblingId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'components'
+          tableName: 'mixins'
         },
         key: 'id'
       },
@@ -20,7 +20,7 @@
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'components'
+          tableName: 'mixins'
         },
         key: 'id'
       },
@@ -46,8 +46,8 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'Parents', foreignKey: 'parentId' });
-    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'Siblings', foreignKey: 'childId' });
+    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'parents', foreignKey: 'siblingId' });
+    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'siblings', foreignKey: 'parentId' });
   }
 
   var seeder = {

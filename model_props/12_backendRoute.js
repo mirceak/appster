@@ -58,16 +58,16 @@
     models.BackendRoute.hasOne(models.Route, {foreignKey: 'id', sourceKey: 'routeId', as: 'route'});
     models.BackendRoute.hasOne(models.Module, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
 
-    models.Route.belongsTo(models.BackendRoute, {foreignKey: 'id'});
+    models.Route.belongsTo(models.BackendRoute, {foreignKey: 'id', sourceKey: 'routeId', as: 'backendRoute'});
     models.Module.belongsTo(models.BackendRoute, {foreignKey: 'id'});
   }
 
   var seeder = {
     up: async (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('BackendRoutes', [
+      await queryInterface.bulkInsert('BackendRoutes', [
         {
           name: 'root',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'root'}})).id,
           moduleId: (await Sequelize.Module.findOne({where: {name: 'routeModuleRootPage'}})).id,
           createdAt: new Date(),
@@ -75,7 +75,7 @@
         },
         {
           name: 'login',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'login'}})).id,
           moduleId: (await Sequelize.Module.findOne({where: {name: 'routeModuleLoginPage'}})).id,
           createdAt: new Date(),
@@ -83,7 +83,7 @@
         },
         {
           name: 'admin',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'admin'}})).id,
           moduleId: (await Sequelize.Module.findOne({where: {name: 'routeModuleAdminPage'}})).id,
           createdAt: new Date(),

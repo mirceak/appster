@@ -39,7 +39,7 @@
 
   var seeder = {
     up: async (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Roles', [
+      await queryInterface.bulkInsert('Roles', [
         {
           name: 'auth',
           type: 'user',

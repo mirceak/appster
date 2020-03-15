@@ -61,25 +61,74 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Modules', [
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Modules', [
         {
           name: 'mainBackend',
-          javascriptId: 51,
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'mainBackendModule'}})).id,
           type: 'kernel',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'appsterConfig',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'appsterConfigModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'appsterRouter',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'appsterRouterModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'appsterLoginScaffold',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'appsterLoginScaffoldModule'}})).id,
+          type: 'appster_module',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'mainFrontend',
-          javascriptId: 52,
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'mainFrontendModule'}})).id,
           type: 'kernel',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'databaseManager',
-          javascriptId: 53,
+          name: 'authGuard',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'authGuardModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'routeModuleRootPage',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'routeModuleControllerModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'routeModuleLoginPage',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'routeModuleLoginPageControllerModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'routeModuleAdminPage',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'routeModuleControllerModule'}})).id,
+          type: 'appster_module',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'routeModuleController',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'routeModuleControllerModule'}})).id,
           type: 'appster_module',
           createdAt: new Date(),
           updatedAt: new Date()

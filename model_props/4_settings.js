@@ -52,11 +52,11 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Settings', [
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Settings', [
         {
-          mainBackendModuleId: 1,
-          mainFrontendModuleId: 2,
+          mainBackendModuleId: (await Sequelize.Module.findOne({where:{name: 'mainBackend'}})).id,
+          mainFrontendModuleId: (await Sequelize.Module.findOne({where:{name: 'mainFrontend'}})).id,
           createdAt: new Date(),
           updatedAt: new Date()
         },

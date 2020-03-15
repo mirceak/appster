@@ -11,11 +11,11 @@
       allowNull: false,
       type: 'STRING'
     },
-    moduleId: {
+    javascriptId: {
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'modules'
+          tableName: 'scripts'
         },
         key: 'id'
       },
@@ -45,15 +45,38 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'moduleId', as: 'module'});
+    models.Mixin.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'javascriptId', as: 'javascript'});
     models.Script.belongsTo(models.Mixin, {foreignKey: 'id'});
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      return;
-      return queryInterface.bulkInsert('Mixins', [
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Mixins', [
+        {
+          name: 'AdminAccordionSidebarButtonMixin',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentAccordionSidebarButtonMixin'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminSidebarToolsMixin',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentSidebarToolsMixin'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminDatabaseModelsMixin',
+          javascriptId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentDatabaseModelsMixin'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ], {});
+
+      var mixin = await Sequelize.Mixin.findOne({where:{name: 'AdminAccordionSidebarButtonMixin'}});
+      // await mixin.addSibling( (await Sequelize.Mixin.findOne({where:{name: 'AdminAccordionSidebarButtonMixinTest'}})) );
     },
 
 

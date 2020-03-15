@@ -10,7 +10,7 @@
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'mixins'
+          tableName: 'routes'
         },
         key: 'id'
       },
@@ -20,7 +20,7 @@
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'mixins'
+          tableName: 'routes'
         },
         key: 'id'
       },
@@ -46,19 +46,19 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'parents', foreignKey: 'siblingId' });
-    models.Mixin.belongsToMany(models.Mixin, { through: 'MixinChildren', as: 'siblings', foreignKey: 'parentId' });
+    models.Route.belongsToMany(models.Route, { through: 'RouteChildren', as: 'parents', foreignKey: 'siblingId' });
+    models.Route.belongsToMany(models.Route, { through: 'RouteChildren', as: 'siblings', foreignKey: 'parentId' });
   }
 
   var seeder = {
     up: async (queryInterface, Sequelize) => {
       return;
-      await queryInterface.bulkInsert('MixinChildren', [
+      await queryInterface.bulkInsert('RouteChildren', [
       ], {});
     },
 
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('MixinChildren', {}, {});
+      return queryInterface.bulkDelete('RouteChildren', {}, {});
     }
   };
 
@@ -67,8 +67,8 @@
     attributes: attributes,
     options: options,
     associate: associate,
-    name: 'MixinChild',
-    table: 'MixinChildren',
+    name: 'RouteChild',
+    table: 'RouteChildren',
     seeder: seeder,
   }
 })()

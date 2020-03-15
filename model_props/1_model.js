@@ -88,7 +88,7 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
+    up: async (queryInterface, Sequelize) => {
       return;
       return queryInterface.bulkInsert('Models', [
         {

@@ -57,16 +57,16 @@
     models.FrontendRoute.hasOne(models.Route, {foreignKey: 'id', sourceKey: 'routeId', as: 'route'});
     models.FrontendRoute.hasOne(models.Component, {foreignKey: 'id', sourceKey: 'componentId', as: 'component'});
 
-    models.Route.belongsTo(models.FrontendRoute, {foreignKey: 'id'});
+    models.Route.belongsTo(models.FrontendRoute, {foreignKey: 'id', as: "frontEndRoute"});
     models.Component.belongsTo(models.FrontendRoute, {foreignKey: 'id'});
   }
 
   var seeder = {
     up: async (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('FrontendRoutes', [
+      await queryInterface.bulkInsert('FrontendRoutes', [
         {
           name: 'root',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'root'}})).id,
           componentId: (await Sequelize.Component.findOne({where: {name: 'Welcome'}})).id,
           createdAt: new Date(),
@@ -74,7 +74,7 @@
         },
         {
           name: 'login',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'login'}})).id,
           componentId: (await Sequelize.Component.findOne({where: {name: 'Login'}})).id,
           createdAt: new Date(),
@@ -82,28 +82,28 @@
         },
         {
           name: 'admin',
-          type: 'page',
+          type: 'root_page',
           routeId: (await Sequelize.Route.findOne({where: {name: 'admin'}})).id,
           componentId: (await Sequelize.Component.findOne({where: {name: 'Admin'}})).id,
           createdAt: new Date(),
           updatedAt: new Date()
         },
-        // {
-        //   name: 'admin_root',
-        //   type: 'page',
-        //   routeId: (await Sequelize.Route.findOne({where: {name: 'admin_root'}})).id,
-        //   componentId: (await Sequelize.Component.findOne({where: {name: 'Admin'}})).id,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date()
-        // },
-        // {
-        //   name: 'admin_database',
-        //   type: 'page',
-        //   routeId: (await Sequelize.Route.findOne({where: {name: 'admin_database'}})).id,
-        //   componentId: (await Sequelize.Component.findOne({where: {name: 'admin_database'}})).id,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date()
-        // }
+        {
+          name: 'admin_root',
+          type: 'page',
+          routeId: (await Sequelize.Route.findOne({where: {name: 'admin_root'}})).id,
+          componentId: (await Sequelize.Component.findOne({where: {name: 'AdminContent'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'admin_database',
+          type: 'page',
+          routeId: (await Sequelize.Route.findOne({where: {name: 'view_all'}})).id,
+          componentId: (await Sequelize.Component.findOne({where: {name: 'AdminDatabaseModels'}})).id,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
       ], {});
     },
 

@@ -21,16 +21,6 @@
       },
       allowNull: false
     },
-    mixinId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'mixins'
-        },
-        key: 'id'
-      },
-      allowNull: true
-    },
     type: {
       allowNull: false,
       type: 'STRING'
@@ -56,17 +46,14 @@
   var associate = function(models) {
     // associations can be defined here
     models.Component.hasOne(models.Script, {foreignKey: 'id', sourceKey: 'htmlId', as: 'html'});
-    models.Component.hasOne(models.Mixin, {foreignKey: 'id', sourceKey: 'mixinId', as: 'mixin'});
     models.Script.belongsTo(models.Component, {foreignKey: 'id'});
-    models.Mixin.belongsTo(models.Component, {foreignKey: 'id'});
   }
 
   var seeder = {
     up: async (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Components', [
+      await queryInterface.bulkInsert('Components', [
         {
           name: 'Login',
-          mixinId: null,
           htmlId: (await Sequelize.Script.findOne({where:{name: 'LoginPageComponent'}})).id,
           type: 'page',
           createdAt: new Date(),
@@ -74,7 +61,6 @@
         },
         {
           name: 'Welcome',
-          mixinId: null,
           htmlId: (await Sequelize.Script.findOne({where:{name: 'WelcomePageComponent'}})).id,
           type: 'page',
           createdAt: new Date(),
@@ -82,15 +68,67 @@
         },
         {
           name: 'Admin',
-          mixinId: null,
           htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminPageComponent'}})).id,
           type: 'page',
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          name: 'AdminSidebarNav',
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentSidebarNav'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminSidebarTools',
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentSidebarTools'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminContent',
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentContent'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminAccordionSidebarButton',
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentAccordionSidebarButton'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'AdminDatabaseModels',
+          htmlId: (await Sequelize.Script.findOne({where:{name: 'AdminComponentDatabaseModels'}})).id,
+          type: 'component',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ], {});
-    },
 
+      var component = await Sequelize.Component.findOne({where:{name: 'Admin'}});
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminSidebarNav'}})) );
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminSidebarTools'}})) );
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminContent'}})) );
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminDatabaseModels'}})) );
+
+      component = await Sequelize.Component.findOne({where:{name: 'AdminSidebarNav'}});
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminAccordionSidebarButton'}})) );
+
+      component = await Sequelize.Component.findOne({where:{name: 'AdminDatabaseModels'}});
+      await component.addMixin( (await Sequelize.Mixin.findOne({where:{name: 'AdminDatabaseModelsMixin'}})) );
+
+      component = await Sequelize.Component.findOne({where:{name: 'AdminSidebarTools'}});
+      await component.addSibling( (await Sequelize.Component.findOne({where:{name: 'AdminAccordionSidebarButton'}})) );
+      await component.addMixin( (await Sequelize.Mixin.findOne({where:{name: 'AdminSidebarToolsMixin'}})) );
+
+      component = await Sequelize.Component.findOne({where:{name: 'AdminAccordionSidebarButton'}});
+      await component.addMixin( (await Sequelize.Mixin.findOne({where:{name: 'AdminAccordionSidebarButtonMixin'}})) );
+    },
 
     down: (queryInterface, Sequelize) => {
       return queryInterface.bulkDelete('Components', {}, {});

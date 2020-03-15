@@ -11,7 +11,7 @@
       type: 'INTEGER',
       references: {
         model: {
-          tableName: 'modules'
+          tableName: 'scripts'
         },
         key: 'id'
       },
@@ -24,6 +24,10 @@
     type: {
       allowNull: false,
       type: 'STRING'
+    },
+    ran: {
+      allowNull: false,
+      type: 'BOOLEAN'
     },
     createdAt: {
       allowNull: false,
@@ -50,10 +54,11 @@
   }
 
   var seeder = {
-    up: (queryInterface, Sequelize) => {
-      // return queryInterface.bulkInsert('Migrations', [
-      //
-      // ], {});
+    up: async (queryInterface, Sequelize) => {
+      return;
+      return queryInterface.bulkInsert('Migrations', [
+
+      ], {});
     },
 
     down: (queryInterface, Sequelize) => {
