@@ -17,7 +17,7 @@ let start_service = async ()=>{
             await start_mysql_service(shell_process);
         }else{
             console.log('Installing mysql databases.');
-            await shell.run_command("cd 3rdPartyFiles/mariadb/bin \n mysql_install_db start \n exit \n");
+            await shell.run_command("cd 3rdPartyFiles/mariadb/bin && mysql_install_db start");
             await start_mysql_service(shell_process);
         }
 

@@ -10,11 +10,11 @@ let shell;
 
 
 let load_backend_packages = async ()=>{
-    await shell.run_command('npm install \n exit \n');
+    await shell.run_command('npm install');
 }
 
 let load_frontend_packages = async ()=>{
-    await shell.run_command('cd app/ \n npm install \n exit \n');
+    await shell.run_command('cd app/ && npm install');
 }
 
 class Dependencies{
