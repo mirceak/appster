@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deploy.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/dependencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/dependencies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/appster/shell.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/appster/shell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seeders/20191208131706-appster.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -123,8 +116,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.index.js" />
       <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+      <item itemvalue="Node.js.index.js" />
     </list>
     <recent_temporary>
       <list>
@@ -182,6 +175,7 @@
       <workItem from="1576303018658" duration="1262000" />
       <workItem from="1576329340619" duration="17263000" />
       <workItem from="1585417679022" duration="9899000" />
+      <workItem from="1585428882806" duration="1718000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -324,10 +318,10 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="311" key="GridCell.Tab.0.right/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585425967906" />
-    <state x="1985" y="233" width="500" height="621" key="RollbackChangesDialog" timestamp="1585422958365">
+    <state x="1985" y="233" width="500" height="621" key="RollbackChangesDialog" timestamp="1585429299396">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1985" y="233" width="500" height="621" key="RollbackChangesDialog/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585422958365" />
+    <state x="1985" y="233" width="500" height="621" key="RollbackChangesDialog/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585429299396" />
     <state x="1965" y="372" width="540" height="343" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1585423610416">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
