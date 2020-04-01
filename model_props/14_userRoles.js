@@ -6,26 +6,6 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    userId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'users'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    roleId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'roles'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     createdAt: {
       allowNull: false,
       type: 'DATE'

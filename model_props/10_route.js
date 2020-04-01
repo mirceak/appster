@@ -88,15 +88,15 @@
       ], {});
 
       var route = await Sequelize.Route.findOne({where:{name: 'admin'}})
-      await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
+      // await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
       await route.addSibling( (await Sequelize.Route.findOne({where:{name: 'admin_root'}})) );
       await route.addSibling( (await Sequelize.Route.findOne({where:{name: 'view_all'}})) );
 
-      route = await Sequelize.Route.findOne({where:{name: 'admin_root'}})
-      await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
-
-      route = await Sequelize.Route.findOne({where:{name: 'view_all'}})
-      await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
+      // route = await Sequelize.Route.findOne({where:{name: 'admin_root'}})
+      // await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
+      //
+      // route = await Sequelize.Route.findOne({where:{name: 'view_all'}})
+      // await route.addGuard(await Sequelize.Guard.findOne({where:{name: 'auth', type: 'user'}}))
     },
 
 

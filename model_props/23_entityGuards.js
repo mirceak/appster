@@ -6,26 +6,6 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    entityModelId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'models'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    guardsModelId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'models'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     createdAt: {
       allowNull: false,
       type: 'DATE'
@@ -46,9 +26,8 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.EntityGuard.hasOne(models.Model, {foreignKey: 'id', sourceKey: 'entityModelId', as: 'entityModel'});
-    models.EntityGuard.hasOne(models.Model, {foreignKey: 'id', sourceKey: 'guardsModelId', as: 'guardsModel'});
-    models.Model.belongsTo(models.EntityGuard, {foreignKey: 'id'});
+    models.EntityGuard.belongsTo(models.Model, {foreignKey: 'entityModelId', as: 'EntityModel'});
+    models.EntityGuard.belongsTo(models.Model, {foreignKey: 'guardsModelId', as: 'GuardsModel'});
   }
 
   var seeder = {

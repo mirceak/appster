@@ -76,7 +76,9 @@
                                   }
                               }).then(async result => {    
                                   _resolve(await appster.proxyModule(result.dataValues.javascript.code));
-                              })
+                              }).catch(async err => {
+                              
+                              });
                           })
                       },
                       modules: (await sequelize.Module.scope('appster_modules').findAll({
@@ -87,6 +89,7 @@
                           ]
                       }))
                   }, appster);  
+                  
                   appster = Object.assign({                        
                       MySQLStore: (await utils.require('express-mysql-session'))(appster.session),       
                       apiRouter: appster.express.Router(),          
@@ -95,9 +98,9 @@
                   }, appster);  
 
                   for (var module of appster.modules){
-                      appster.modules[module.name] = await appster.proxyModule(module.dataValues.javascript.dataValues.code);
+                      appster.modules[module.name] = await appster.proxyModule(module.Javascript.dataValues.code);
                   };
-
+                  
                   var appsterConfigModule = await appster.modules.appsterConfig();                  
                   var appsterLoginScaffold = await appster.modules.appsterLoginScaffold();      
                   var appsterRouter = await appster.modules.appsterRouter();
@@ -318,6 +321,7 @@
                   var siblings = await route.getSiblings();
                   
                   for (var sibling of siblings){
+                  console.log(1234231, sibling);
                       var frontRoute = await sibling.getFrontEndRoute();
                       frontRoute.route = sibling;
                       frontRoute.dataValues.route = sibling;
@@ -329,14 +333,16 @@
               }
               
               var parseFrontRoute = async (frontRoute)=> {
-                  frontRoute.siblings = await frontRouteSiblings(frontRoute.route);
+                  frontRoute.siblings = await frontRouteSiblings(frontRoute.Route);
                   
                   var routeGuards = await sequelize.RouteGuard.findAll({
                       where: {
-                          routeId: frontRoute.route.id
+                          routeId: frontRoute.Route.dataValues.id
                       },
                       include: [
-                          'guards'
+                          [{
+                              model: sequelize.Guard
+                          }]
                       ]
                   });
                   for (var routeGuard of routeGuards){

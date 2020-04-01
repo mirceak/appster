@@ -29,7 +29,7 @@ class Utils{
         return new Promise(async resolve => {
             fs.readFile(path, function read(err, data) {
                 if (err) {
-                    throw err;
+                    reject(err);
                 }
                 resolve(data);
             });

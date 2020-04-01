@@ -6,26 +6,6 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    siblingId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'components'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    parentId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'components'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     createdAt: {
       allowNull: false,
       type: 'DATE'
@@ -46,8 +26,8 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'parents', foreignKey: 'siblingId' });
-    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'siblings', foreignKey: 'parentId' });
+    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Parents', foreignKey: 'siblingId' });
+    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Siblings', foreignKey: 'parentId' });
   }
 
   var seeder = {

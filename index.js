@@ -17,7 +17,6 @@
     await main.load_dependencies();
 
     //start services
-    await main.start_database();
     await main.start_server();
 
     console.log("APPSTER____________________________________________________________________________________________________EXECUTION ENDED. The server is ready!");

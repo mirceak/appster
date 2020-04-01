@@ -6,26 +6,6 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    componentId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'components'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    mixinId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'mixins'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     createdAt: {
       allowNull: false,
       type: 'DATE'

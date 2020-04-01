@@ -21,8 +21,8 @@ class Api {
             const DataTypes = await require('mysql');
             Sequelize = await utils.require('sequelize');
             const env = process.env.NODE_ENV || 'development';
-            const config = JSON.parse((await utils.get_file_content(root + '\\config\\config.json')).toString()).development;
-            sequelize = new Sequelize(config.database, config.username, config.password, config);
+            const config = JSON.parse((await utils.get_file_content(root + '/config/config.json')).toString()).development;
+            sequelize = new Sequelize(config);
             var models = [];
 
             const fs = require('fs');
@@ -70,12 +70,13 @@ class Api {
 
             sequelize.models = [];
             await fs
-                .readdirSync(root + '\\model_props')
+                .readdirSync(root + '/model_props')
                 .filter(async file => {
                     return await (file.indexOf('.') !== 0) && (file.slice(-3) === '.js');
                 })
                 .reduce(async (result, file) => {
-                    var modelModule = await eval('(async ()=>{return await (' + (await utils.get_file_content(root + '\\model_props\\' + file)).toString() + ')})()');
+                    var modelModule = await eval('(async ()=>{return await (' + (await utils.get_file_content(root + '/model_props/' + file)).toString() + ')})()');
+
                     modelModule.module = parseModel(modelModule);
                     sequelize[modelModule.name] = modelModule.module.Model;
                     modelModule.fileName = file;
@@ -85,7 +86,6 @@ class Api {
                 }, null);
 
             models.sort((a,b) => (parseInt(a.fileName.substr(0, a.fileName.indexOf('_'))) > parseInt(b.fileName.substr(0, b.fileName.indexOf('_')))) ? 1 : ((parseInt(b.fileName.substr(0, b.fileName.indexOf('_'))) > parseInt(a.fileName.substr(0, a.fileName.indexOf('_')))) ? -1 : 0));
-
 
             for (var i=0; i<models.length; i++){
                 var model = models[i];
@@ -108,8 +108,11 @@ class Api {
                     })
                 },
                 async runKernelMigrations(){
+                    await sequelize.sync();
+                    return;
                     for (var i=0; i<models.length; i++){
                         var model = models[i];
+                        console.log(1, model.table);
                         await sequelize.getQueryInterface().createTable(model.table, model.module.attributes);
                     }
                 },
@@ -227,8 +230,8 @@ class Api {
             settings: settings
         };
 
-        await appster.settings.getMainBackendModule().then(async response => {
-            return response.getJavascript().then(async response => {
+        await appster.settings.getMainBackendModule().then(async _response => {
+            return _response.getJavascript().then(async response => {
                 await appster.proxyModule(response.code);
             })
         })

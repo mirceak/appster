@@ -6,26 +6,6 @@
       primaryKey: true,
       type: 'INTEGER'
     },
-    modelId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'models'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
-    guardId: {
-      type: 'INTEGER',
-      references: {
-        model: {
-          tableName: 'guards'
-        },
-        key: 'id'
-      },
-      allowNull: false
-    },
     createdAt: {
       allowNull: false,
       type: 'DATE'
