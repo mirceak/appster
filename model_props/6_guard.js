@@ -33,11 +33,13 @@
         // associations can be defined here
         models.Guard.belongsTo(models.Module, {
             constraints: false,
-            foreignKey: 'moduleId', as: 'Module'
+            foreignKey: 'moduleId',
+            as: 'Module'
         });
         models.Guard.belongsTo(models.Route, {
             constraints: false,
-            foreignKey: 'moduleId', as: 'Route'
+            foreignKey: 'moduleId',
+            as: 'Route'
         });
     }
 

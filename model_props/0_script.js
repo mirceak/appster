@@ -116,10 +116,10 @@
             (async ()=>{       
                 const secret = appster.passwordHash.generate(appster.crypto.randomBytes(256).toString() + new Date());     
                 var options = {
-                    host: 'localhost',
+                    host: 'database',
                     port: 3306,
                     user: 'root',
-                    password: '',
+                    password: 'appster',
                     database: 'appster',
                 };     
                 var sessionStore = new appster.MySQLStore(options);    
@@ -264,8 +264,8 @@
                                       routeId: sibling.dataValues.id 
                                   }
                               });
-                              frontEndRoute.Route = sibling;
-                              frontEndRoute.dataValues.Route = sibling;
+                              frontEndRoute.route = sibling;
+                              frontEndRoute.dataValues.route = sibling;
                               frontEndRoute.component = await frontEndRoute.getComponent();
                               frontEndRoute.dataValues.component = frontEndRoute.component;
                               frontEndRoute.component.siblings = await frontEndRoute.component.getSiblings(); 
@@ -278,29 +278,25 @@
                           return siblings;
                       };
                       var parseFrontEndRoutes = async (frontEndRoute)=> { 
-                                console.log(1);
-                          frontEndRoute.dataValues.siblings = await loadRouteSiblings(await frontEndRoute.getRoute());  
-                                console.log(2);                                                  
+                          frontEndRoute.route = await frontEndRoute.getRoute();
+                          frontEndRoute.dataValues.route = frontEndRoute.route;
+                          frontEndRoute.dataValues.siblings = await loadRouteSiblings(frontEndRoute.route);  
+                                                                     
                           for (var sibling of frontEndRoute.dataValues.siblings){
                               await parseFrontEndRoutes(sibling);
                           }
-                                console.log(3);
                           
-                          var component = await frontEndRoute.getComponent();  
-                          if (component.siblings){
-                              component.dataValues.html = await loadComponentHtml(component);
-                          }
-                            console.log(4);
-                          component.dataValues.mixins = await loadComponentMixins(component);
-                          
-                          console.log(5);
-                          var componentSiblings = await component.getSiblings();
-                          console.log(6);
-                          for (var sibling of componentSiblings){
-                          
+                          frontEndRoute.component = await frontEndRoute.getComponent();
+                          frontEndRoute.dataValues.component = frontEndRoute.component;
+                                                    
+                          frontEndRoute.component.siblings = await frontEndRoute.component.getSiblings();
+                          frontEndRoute.component.dataValues.siblings = frontEndRoute.component.siblings; 
+                          for (var sibling of frontEndRoute.component.siblings){                          
                               await loadComponentSibling(sibling);
                           }
-                          console.log(7);
+                          
+                          frontEndRoute.component.dataValues.html = await loadComponentHtml(frontEndRoute.component);
+                          frontEndRoute.component.dataValues.mixins = await loadComponentMixins(frontEndRoute.component);
                       }
                       
                       
@@ -338,16 +334,13 @@
               var parseFrontRoute = async (frontRoute)=> {
                   frontRoute.siblings = await frontRouteSiblings(frontRoute.Route);
                   
-                  var routeGuards = await frontRoute.Route.getGuards();
-                  for (var routeGuard of routeGuards){
-                      var guards = routeGuard.guards;                      
-                      for (var guard of guards){
-                          var guardModule = await guard.getModule();
-                          var guardModuleCode = (await guardModule.getJavascript()).code;
-                          guard.module = await (await appster.proxyModule(guardModuleCode))();
-                      }
+                  var guards = await frontRoute.Route.getGuards();
+                  for (var guard of guards){
+                      var guardModule = await guard.getModule();
+                      var guardModuleCode = (await guardModule.getJavascript()).code;
+                      guard.module = await (await appster.proxyModule(guardModuleCode))();
                   };
-                  frontRoute.guards = routeGuards;
+                  frontRoute.guards = guards;
                   ((frontRoute)=> {
                       appster.frontEndRouter.get(frontRoute.Route.dataValues.path, async function(req, res, next) {
                           return await appster.modules.routeModuleController(req, res, next, frontRoute);
@@ -377,11 +370,9 @@
           code: `
             (async (req, res, next, frontRoute)=>{      
               if (frontRoute){    
-                  for (var routeGuard of frontRoute.guards){
-                      for (var guard of routeGuard.guards){
-                          if (guard.module.condition && !guard.module.condition(req)){
-                              return res.redirect('/' + guard.module.redirectRoute);
-                          }
+                  for (var guard of frontRoute.guards){
+                      if (guard.module.condition && !guard.module.condition(req)){
+                          return res.redirect('/' + guard.module.redirectRoute);
                       }
                   };
                   var backendRoute = await sequelize.BackendRoute.findOne({

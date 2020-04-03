@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN npm install
+RUN npm update
 
 EXPOSE 80
 

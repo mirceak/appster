@@ -8,16 +8,16 @@
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "appster",
     "database": "appster",
-    "host": "127.0.0.1",
+    "host": "database",
     "dialect": "mariadb"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "appster",
     "database": "appster",
-    "host": "127.0.0.1",
+    "host": "database",
     "dialect": "mariadb"
   }
 }
