@@ -14,7 +14,7 @@
     console.log("APPSTER____________________________________________________________________________________________________EXECUTION STARTED. THANK YOU!");
 
     //make sure dependencies are loaded (I have made a selection of dependencies that do not require any other third party software installs. Running npm on this file will take care of absolutely everything you need)
-    await main.load_dependencies();
+    // await main.load_dependencies();
 
     //start services
     await main.start_server();
