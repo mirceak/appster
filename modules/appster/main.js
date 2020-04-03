@@ -14,7 +14,7 @@ class Main{
     }
 
     async load_dependencies(){
-        await dependencies.load();
+        // await dependencies.load();
     }
 
     async start_server(){

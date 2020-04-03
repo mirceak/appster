@@ -26,8 +26,24 @@
 
   var associate = function(models) {
     // associations can be defined here
-    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Parents', foreignKey: 'siblingId' });
-    models.Component.belongsToMany(models.Component, { through: 'ComponentChildren', as: 'Siblings', foreignKey: 'parentId' });
+    models.Component.belongsToMany(models.Component, {
+      through: {
+        model: 'ComponentChildren',
+        unique: false
+      },
+      as: 'Parents',
+      constraints: false,
+      foreignKey: 'siblingId'
+    });
+    models.Component.belongsToMany(models.Component, {
+      through: {
+        model: 'ComponentChildren',
+        unique: false
+      },
+      as: 'Siblings',
+      constraints: false,
+      foreignKey: 'parentId'
+    });
   }
 
   var seeder = {

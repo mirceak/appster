@@ -27,7 +27,7 @@ class Server{
     }
 
     async start(){
-        await build_frontend();
+        // await build_frontend();
         await listen_api();
     }
 }

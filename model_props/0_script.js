@@ -214,23 +214,7 @@
                       var routes = await sequelize.FrontendRoute.findAll({
                         where: {
                           type: 'root_page'
-                        },
-                        include:[
-                          {
-                            model: sequelize.Route,
-                            as: 'route',                            
-                          },                          
-                          {
-                            model: sequelize.Component,
-                            include:[                      
-                              {
-                                model: sequelize.Component,
-                                as: 'siblings',                            
-                              }
-                            ],
-                            as: 'component',                            
-                          }
-                        ]
+                        }
                       });
                       
                       var loadComponentSibling = async (component)=>{            
@@ -275,9 +259,13 @@
                           var siblings = await route.getSiblings(); 
                             
                           for (var sibling of siblings){      
-                              var frontEndRoute = await sibling.getFrontEndRoute();
-                              frontEndRoute.route = sibling;
-                              frontEndRoute.dataValues.route = sibling;
+                              var frontEndRoute = await sequelize.FrontendRoute.findOne({
+                                  where: {
+                                      routeId: sibling.dataValues.id 
+                                  }
+                              });
+                              frontEndRoute.Route = sibling;
+                              frontEndRoute.dataValues.Route = sibling;
                               frontEndRoute.component = await frontEndRoute.getComponent();
                               frontEndRoute.dataValues.component = frontEndRoute.component;
                               frontEndRoute.component.siblings = await frontEndRoute.component.getSiblings(); 
@@ -289,18 +277,30 @@
                           
                           return siblings;
                       };
-                      var parseFrontEndRoutes = async (frontEndRoute)=> {                          
-                          frontEndRoute.dataValues.siblings = await loadRouteSiblings(frontEndRoute.route);                                                    
+                      var parseFrontEndRoutes = async (frontEndRoute)=> { 
+                                console.log(1);
+                          frontEndRoute.dataValues.siblings = await loadRouteSiblings(await frontEndRoute.getRoute());  
+                                console.log(2);                                                  
                           for (var sibling of frontEndRoute.dataValues.siblings){
                               await parseFrontEndRoutes(sibling);
                           }
+                                console.log(3);
                           
-                          if (frontEndRoute.component.siblings)
-                          frontEndRoute.component.dataValues.html = await loadComponentHtml(frontEndRoute.component);   
-                          frontEndRoute.component.dataValues.mixins = await loadComponentMixins(frontEndRoute.component);
-                          for (var sibling of frontEndRoute.component.siblings){
+                          var component = await frontEndRoute.getComponent();  
+                          if (component.siblings){
+                              component.dataValues.html = await loadComponentHtml(component);
+                          }
+                            console.log(4);
+                          component.dataValues.mixins = await loadComponentMixins(component);
+                          
+                          console.log(5);
+                          var componentSiblings = await component.getSiblings();
+                          console.log(6);
+                          for (var sibling of componentSiblings){
+                          
                               await loadComponentSibling(sibling);
                           }
+                          console.log(7);
                       }
                       
                       
@@ -321,11 +321,14 @@
                   var siblings = await route.getSiblings();
                   
                   for (var sibling of siblings){
-                  console.log(1234231, sibling);
-                      var frontRoute = await sibling.getFrontEndRoute();
-                      frontRoute.route = sibling;
-                      frontRoute.dataValues.route = sibling;
-                      frontRoute.route.path = route.path + '/' + frontRoute.route.path; 
+                      var frontRoute = await sequelize.FrontendRoute.findOne({
+                          where: {
+                              routeId: sibling.dataValues.id 
+                          }
+                      });
+                      frontRoute.Route = sibling;
+                      frontRoute.dataValues.Route = sibling;
+                      frontRoute.Route.dataValues.path = route.path + '/' + frontRoute.Route.path; 
                       siblings[siblings.indexOf(sibling)] = await parseFrontRoute(frontRoute);
                   }
                   
@@ -335,16 +338,7 @@
               var parseFrontRoute = async (frontRoute)=> {
                   frontRoute.siblings = await frontRouteSiblings(frontRoute.Route);
                   
-                  var routeGuards = await sequelize.RouteGuard.findAll({
-                      where: {
-                          routeId: frontRoute.Route.dataValues.id
-                      },
-                      include: [
-                          [{
-                              model: sequelize.Guard
-                          }]
-                      ]
-                  });
+                  var routeGuards = await frontRoute.Route.getGuards();
                   for (var routeGuard of routeGuards){
                       var guards = routeGuard.guards;                      
                       for (var guard of guards){
@@ -355,7 +349,7 @@
                   };
                   frontRoute.guards = routeGuards;
                   ((frontRoute)=> {
-                      appster.frontEndRouter.get(frontRoute.route.path, async function(req, res, next) {
+                      appster.frontEndRouter.get(frontRoute.Route.dataValues.path, async function(req, res, next) {
                           return await appster.modules.routeModuleController(req, res, next, frontRoute);
                       });
                   })(frontRoute);
@@ -392,7 +386,7 @@
                   };
                   var backendRoute = await sequelize.BackendRoute.findOne({
                       where: {
-                          name: frontRoute.route.name
+                          name: frontRoute.Route.dataValues.name
                       },
                       include: [{
                           all: true
@@ -400,7 +394,7 @@
                   });
                       
                   if (backendRoute){
-                      var backendModule = await appster.proxyModule((await backendRoute.module.getJavascript()).code);
+                      var backendModule = await appster.proxyModule((await backendRoute.Module.getJavascript()).code);
                       
                       return backendModule(req, res, next);
                   };
@@ -539,9 +533,7 @@
                 var remoteModule = async (slug)=>{return await remoteModule(axios, baseUrl, 'module', slug)};    
                 var remoteComponent = async (slug)=>{return await remoteModule(axios, baseUrl, 'module', slug)};   
                 var remoteMixin = async (slug)=>{return await remoteModule(axios, baseUrl, 'module', slug)};    
-                
-                await Vue.component("VueAceEditor", VueAceEditor);
-                
+                                
                 Vue.use(Vuex);    
                 const remoteStore = await (async (remotes)=>{     
                     return {
@@ -634,6 +626,7 @@
                     return parsedRoute;
                 }
                 
+                console.log(routes);
                 for (var route of routes){
                     routes[routes.indexOf(route)] = await parseRoute(route);
                        

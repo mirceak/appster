@@ -23,13 +23,21 @@
     var associate = function (models) {
         // associations can be defined here
         models.Mixin.belongsToMany(models.Mixin, {
-            through: 'MixinChildren',
+            through: {
+                model: 'MixinChildren',
+                unique: false
+            },
             as: 'Parents',
+            constraints: false,
             foreignKey: 'siblingId'
         });
         models.Mixin.belongsToMany(models.Mixin, {
-            through: 'MixinChildren',
+            through: {
+                model: 'MixinChildren',
+                unique: false
+            },
             as: 'Siblings',
+            constraints: false,
             foreignKey: 'parentId'
         });
     }

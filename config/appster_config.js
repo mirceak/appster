@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 module.exports = {
-    apiIp: "localhost",
+    apiIp: "0.0.0.0",
     apiExt: '/appster/api/',
     apiPort: "80",
     frontEndIp: "localhost",
