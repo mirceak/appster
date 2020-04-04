@@ -18,7 +18,7 @@ services:
       - database
     environment:
       - WAIT_HOSTS=database:3306
-    command: bash -c "mkdir -p node_modules && cd app && mkdir -p node_modules && mkdir -p dist && cd ../ && /wait && node index"
+    command: bash -c "/wait && node index"
 
   database:
     image: mariadb:latest
