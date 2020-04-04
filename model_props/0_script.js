@@ -645,11 +645,12 @@
 <b-container class='main_container'>
   <b-card
     title="Login"
-    img-height="128"
+    img-height="256"
     img-src="https://picsum.photos/600/300/?image=66"
     img-alt="Image"
     img-top
     tag="article"
+    class="col offset-xl-2 col-xl-8"
   >
     
     <form action="/login" method="post">

@@ -17,7 +17,11 @@
     // await main.load_dependencies();
 
     //start services
-    await main.start_server();
+    // await main.start_server();
+    await new Promise(resolve => {
+        setTimeout(()=>{
 
+        }, 100000000)
+    })
     console.log("APPSTER____________________________________________________________________________________________________EXECUTION ENDED. The server is ready!");
 })();
