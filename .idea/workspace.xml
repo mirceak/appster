@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -33,7 +33,23 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -61,7 +77,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mariadb&#10;mysql" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -70,18 +86,18 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="C:\Users\mirce\Documents\Git\appster\model_props" />
-      <recent name="C:\Users\mirce\Documents\Git\appster\model_fields" />
-      <recent name="C:\Users\mirce\Documents\Git\appster" />
-      <recent name="C:\Users\mirce\Documents\Git\appster\seeders" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mirce\Documents\Git\appster\app\public" />
       <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\PhpstormProjects\appster" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="C:\Users\mirce\Documents\Git\appster\model_props" />
+      <recent name="C:\Users\mirce\Documents\Git\appster\model_fields" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start">
@@ -217,6 +233,7 @@
       <workItem from="1585852497279" duration="6935000" />
       <workItem from="1585899973426" duration="2260000" />
       <workItem from="1585931947255" duration="7077000" />
+      <workItem from="1585958534000" duration="9882000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -337,11 +354,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="883" y="198" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585773543711">
+    <state x="883" y="198" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586013571568">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584289614521" />
-    <state x="883" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1585773543711" />
+    <state x="883" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586013571568" />
     <state x="2163" y="206" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585513709445" />
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1581460550088">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -355,11 +372,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="457" y="85" key="CommitChangelistDialog2/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582997976417" />
-    <state x="184" y="85" width="1536" height="860" key="DiffContextDialog" timestamp="1585901122963">
+    <state x="184" y="85" width="1536" height="860" key="DiffContextDialog" timestamp="1586012362610">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="85" width="1536" height="860" key="DiffContextDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1583274180527" />
-    <state x="184" y="85" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1585901122962" />
+    <state x="184" y="85" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586012362610" />
     <state x="740" y="274" width="424" height="491" key="FileChooserDialogImpl" timestamp="1585949876259">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -438,11 +455,11 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1970" y="233" width="530" height="621" key="RollbackChangesDialog/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585756174027" />
-    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1585952779183">
+    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1586013575827">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="818" y="409" width="326" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584309429474" />
-    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1585952779183" />
+    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586013575827" />
     <state x="2098" y="425" width="367" height="642" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585770893734" />
     <state x="661" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578101013360">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -472,9 +489,10 @@
     </state>
     <state x="616" y="240" key="run.anything.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584297340641" />
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1585896430222" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584304734804">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586011115331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584304734804" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586011115331" />
   </component>
 </project>

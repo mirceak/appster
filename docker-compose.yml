@@ -8,6 +8,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/app/node_modules
+      - /usr/src/app/app/dist
     networks:
       - backend
     ports:
@@ -15,9 +16,12 @@ services:
       - "443:443"
     depends_on:
       - database
+    environment:
+      - WAIT_HOSTS=database:3306
 
   database:
     image: mariadb:latest
+    restart: always
     ports:
       - '3306:3306'
     volumes:
@@ -25,6 +29,8 @@ services:
     environment:
       - MYSQL_ROOT_USER=%
       - MYSQL_ROOT_PASSWORD=appster
+      - MYSQL_PASSWORD=appster
+      - MYSQL_USER=root
       - MYSQL_DATABASE=appster
     command: --character-set-server=utf8
     networks:
