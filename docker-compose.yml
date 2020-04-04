@@ -6,6 +6,9 @@ services:
     build: .
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/app/node_modules
+      - /usr/src/app/app/dist
     networks:
       - backend
     ports:
