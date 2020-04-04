@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dist/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/node_modules/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.gitkeep" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -33,23 +30,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -81,23 +62,24 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/dist" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\dist" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\node_modules" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\node_modules" />
       <recent name="C:\Users\mirce\Documents\Git\appster\app\public" />
       <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mirce\PhpstormProjects\appster" />
-      <recent name="C:\Users\mirce\PhpstormProjects\appster\app" />
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="C:\Users\mirce\Documents\Git\appster\model_props" />
-      <recent name="C:\Users\mirce\Documents\Git\appster\model_fields" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start">
