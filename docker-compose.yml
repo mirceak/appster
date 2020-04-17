@@ -6,9 +6,6 @@ services:
     build: .
     volumes:
       - ./:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/app/node_modules
-      - /usr/src/app/app/dist
     networks:
       - backend
     ports:
@@ -18,7 +15,8 @@ services:
       - database
     environment:
       - WAIT_HOSTS=database:3306
-    command: bash -c "/wait && node index"
+      - WAIT_HOSTS_TIMEOUT=60
+    command: ./start.sh
 
   database:
     image: mariadb:latest
