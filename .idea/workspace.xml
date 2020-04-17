@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e768d152-a923-468c-a296-04a4007ed775" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/dist/.dockervolume" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/node_modules/.dockervolume" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/.dockervolume" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/appster_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/appster_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/appster_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/appster_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/0_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/0_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_props/9_component.js" beforeDir="false" afterPath="$PROJECT_DIR$/model_props/9_component.js" afterDir="false" />
     </list>
     <list id="69e3909c-a36c-4d55-a335-87e3d5d3b4a2" name="Building first self editing component system." comment="Building first self editing component system." />
     <list id="39bb0659-7d35-41b5-832e-a92a91014b4f" name="Missing files." comment="" />
@@ -32,7 +34,23 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="appster@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="appster: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -60,29 +78,29 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
+    <property name="DatabaseDriversLRU" value="mariadb&#10;mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/dist" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\dist" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\node_modules" />
+      <recent name="C:\Users\mirce\PhpstormProjects\appster\app" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mirce\PhpstormProjects\appster\node_modules" />
       <recent name="C:\Users\mirce\Documents\Git\appster\app\public" />
       <recent name="C:\Users\mirce\Documents\Git\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\app\src" />
       <recent name="C:\Users\mirce\Documents\work\appster\3rdPartyFiles\appster_front\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mirce\PhpstormProjects\appster" />
-      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\node_modules" />
-      <recent name="C:\Users\mirce\PhpstormProjects\appster\app" />
-      <recent name="C:\Users\mirce\PhpstormProjects\appster\app\dist" />
-      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start">
@@ -221,6 +239,16 @@
       <workItem from="1585958534000" duration="9882000" />
       <workItem from="1586014437813" duration="4702000" />
       <workItem from="1586032900480" duration="75000" />
+      <workItem from="1586044337814" duration="2557000" />
+      <workItem from="1586188770610" duration="874000" />
+      <workItem from="1586377327047" duration="1111000" />
+      <workItem from="1586450375259" duration="2869000" />
+      <workItem from="1586608835609" duration="4265000" />
+      <workItem from="1586705975149" duration="1244000" />
+      <workItem from="1586811840973" duration="6857000" />
+      <workItem from="1586871960346" duration="4032000" />
+      <workItem from="1587054618696" duration="3164000" />
+      <workItem from="1587066891479" duration="3217000" />
     </task>
     <task id="LOCAL-00001" summary="Dependencies now loaded the classic way.">
       <created>1574884197563</created>
@@ -341,11 +369,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="Sync-up&#10;&#10;Added routers. Added body parser. Added passport login system (in progress). Added sessions. Added routes. Added vuex store. And others." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="883" y="198" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586014750059">
+    <state x="883" y="198" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586699999641">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584289614521" />
-    <state x="883" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586014750059" />
+    <state x="883" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586699999641" />
     <state x="2163" y="206" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585513709445" />
     <state x="708" y="323" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586043936325">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -450,16 +478,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586043574021" />
-    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1586013575827">
+    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1587069185017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="818" y="409" width="326" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584309429474" />
-    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1586013575827" />
+    <state x="818" y="0" width="326" height="1040" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1587069185017" />
     <state x="2098" y="425" width="367" height="642" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585770893734" />
-    <state x="661" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578101013360">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="661" y="345" key="com.intellij.ide.util.TipDialog/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1578101013360" />
     <state x="602" y="136" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1585897814611">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -473,11 +497,11 @@
       <screen x="-1280" y="0" width="1280" height="984" />
     </state>
     <state x="-1280" y="0" width="1296" height="722" maximized="true" key="dock-window-1/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1582928188118" />
-    <state x="646" y="245" width="1098" height="795" key="find.popup" timestamp="1585951603194">
+    <state x="646" y="245" width="1098" height="795" key="find.popup" timestamp="1587056488943">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="486" y="163" width="1098" height="794" key="find.popup/-1280.0.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1584225510999" />
-    <state x="646" y="245" width="1098" height="795" key="find.popup/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1585951603194" />
+    <state x="646" y="245" width="1098" height="795" key="find.popup/0.0.1920.1040/-1280.105.1280.984@0.0.1920.1040" timestamp="1587056488943" />
     <state x="1766" y="169" width="1098" height="825" key="find.popup/0.27.1280.931/1280.0.1920.1080@1280.0.1920.1080" timestamp="1585767790175" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1585896430222">
       <screen x="0" y="0" width="1920" height="1040" />

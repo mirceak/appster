@@ -1,8 +1,5 @@
 exports.default = {
-    apiIp: "localhost",
+    apiIp: "192.168.1.91",
     apiExt: '/appster/api/',
     apiPort: "80",
-    frontEndIp: "localhost",
-    frontEndExt: '/',
-    frontEndPort: "80",
 }

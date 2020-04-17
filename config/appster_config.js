@@ -4,7 +4,7 @@ module.exports = {
     apiIp: "0.0.0.0",
     apiExt: '/appster/api/',
     apiPort: "80",
-    frontEndIp: "localhost",
+    frontEndIp: "192.168.1.91",
     frontEndExt: '/',
     frontEndPort: "80",
 }

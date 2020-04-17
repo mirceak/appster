@@ -225,8 +225,10 @@
                               sibling.dataValues.html = await loadComponentHtml(sibling);    
                               sibling.dataValues.siblings = await loadComponentSiblings(sibling);    
                               sibling.dataValues.mixins = await loadComponentMixins(sibling);
-                              if (sibling.siblings){
-                                  await loadComponentSiblings(sibling);
+                              if (sibling.dataValues.siblings.length){
+                                  for (var sibling of sibling.dataValues.siblings){
+                                      await loadComponentSibling(sibling);                  
+                                  }
                               }
                           }
                       };
@@ -704,19 +706,30 @@
         {
           name: 'AdminPageComponent',
           code: `
-<b-container class='main_container'>
-    <b-row class="main_container_row">
-        <b-col cols="2" class="main_container_sidebar_col">
-            <AdminSidebarNav></AdminSidebarNav>         
-        </b-col>
-        <b-col cols="10" class="main_container_col">
-            <router-view class="main_container_router_view"></router-view>
-        </b-col>   
-<!--        <b-col cols="2" class="main_container_sidebar_col">-->
-<!--            <AdminSidebarTools></AdminSidebarTools>         -->
-<!--        </b-col>-->
-    </b-row>
-</b-container>
+<div>
+  <b-navbar :sticky="true" toggleable type="dark" variant="dark">
+      <b-navbar-brand><b-button v-b-toggle.sidebar-1 variant="light">Menu</b-button></b-navbar-brand>
+  
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <template v-slot:default="{ expanded }">
+          <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
+          <b-icon v-else icon="chevron-bar-down"></b-icon>
+        </template>
+      </b-navbar-toggle>
+  
+      <b-collapse id="navbar-toggle-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#" disabled>Upcoming menu items</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+        
+    <b-sidebar id="sidebar-1" title="Menu" bg-variant="light"shadow>
+      <AdminSidebarNav></AdminSidebarNav>
+    </b-sidebar>
+    
+    <router-view></router-view>
+</div>
           `,
           type: 'html',
           createdAt: new Date(),
@@ -726,89 +739,82 @@
           name: 'AdminComponentSidebarNav',
           code: `
 <div>
-    <div class="side_nav side_nav_left">
-        <div class="navbar navbar-dark bg-info navbar_side">
-            <b-navbar-brand><strong>Navigation</strong></b-navbar-brand>
-        </div>   
+    <AdminAccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'FrontEnd'" :accordionId="'FrontEnd'" :accordionGroupId="'LeftSideNav'">
+        <AdminAccordionSidebarButton :text="'Routes'" :accordionId="'Routes'" :accordionGroupId="'FrontEnd'">                
+            <b-card-body class="sidebar_accordion_card_body">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button class="sidebar_action_button" variant="warning" :href="'#'">List All</b-button>
+              </b-card-header>                  
+            </b-card-body>
+        </AdminAccordionSidebarButton>
+        <AdminAccordionSidebarButton :text="'Components'" :accordionId="'Components'" :accordionGroupId="'FrontEnd'">               
+            <b-card-body class="sidebar_accordion_card_body">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button class="sidebar_action_button" variant="warning" :href="'#'">List All</b-button>
+              </b-card-header>                  
+            </b-card-body>
+        </AdminAccordionSidebarButton>
+        <AdminAccordionSidebarButton :text="'Javascript'" :accordionId="'Javascript'" :accordionGroupId="'FrontEnd'">        
+            <b-card-body class="sidebar_accordion_card_body">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button class="sidebar_action_button" variant="warning" :href="'#'">List All</b-button>
+              </b-card-header>                  
+            </b-card-body>
+        </AdminAccordionSidebarButton>
         
-        <AdminAccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'FrontEnd'" :accordionId="'FrontEnd'" :accordionGroupId="'LeftSideNav'">    
-                    
-            <AdminAccordionSidebarButton :text="'Routes'" :accordionId="'Routes'" :accordionGroupId="'FrontEnd'">                
-                <b-card-body class="sidebar_accordion_card_body">
-                  <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
-                  </b-card-header>                  
-                </b-card-body>
-            </AdminAccordionSidebarButton>
-            <AdminAccordionSidebarButton :text="'Components'" :accordionId="'Components'" :accordionGroupId="'FrontEnd'">               
-                <b-card-body class="sidebar_accordion_card_body">
-                  <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
-                  </b-card-header>                  
-                </b-card-body>
-            </AdminAccordionSidebarButton>
-            <AdminAccordionSidebarButton :text="'Javascript'" :accordionId="'Javascript'" :accordionGroupId="'FrontEnd'">        
-                <b-card-body class="sidebar_accordion_card_body">
-                  <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
-                  </b-card-header>                  
-                </b-card-body>
-            </AdminAccordionSidebarButton>
-            
+    </AdminAccordionSidebarButton>
+    <AdminAccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'BackEnd'" :accordionId="'BackEnd'" :accordionGroupId="'LeftSideNav'">      
+              
+        <AdminAccordionSidebarButton :text="'API Endpoints'" :accordionId="'API'" :accordionGroupId="'BackEnd'">                
+            <b-card-body class="sidebar_accordion_card_body">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button class="sidebar_action_button" variant="warning" :href="'#'">List All</b-button>
+              </b-card-header>                  
+            </b-card-body>
         </AdminAccordionSidebarButton>
-        <AdminAccordionSidebarButton class="sidebar_accordion_button_body_top_level" :text="'BackEnd'" :accordionId="'BackEnd'" :accordionGroupId="'LeftSideNav'">      
-                  
-            <AdminAccordionSidebarButton :text="'API Endpoints'" :accordionId="'API'" :accordionGroupId="'BackEnd'">                
-                <b-card-body class="sidebar_accordion_card_body">
-                  <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
-                  </b-card-header>                  
-                </b-card-body>
-            </AdminAccordionSidebarButton>
-            <AdminAccordionSidebarButton :text="'Route Controllers'" :accordionId="'Route'" :accordionGroupId="'BackEnd'">                
-                <b-card-body class="sidebar_accordion_card_body">
-                  <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-button class="sidebar_action_button" variant="success" :href="'#'">List All</b-button>
-                  </b-card-header>                  
-                </b-card-body>
-            </AdminAccordionSidebarButton>
-            
+        <AdminAccordionSidebarButton :text="'Route Controllers'" :accordionId="'Route'" :accordionGroupId="'BackEnd'">                
+            <b-card-body class="sidebar_accordion_card_body">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button class="sidebar_action_button" variant="warning" :href="'#'">List All</b-button>
+              </b-card-header>                  
+            </b-card-body>
         </AdminAccordionSidebarButton>
+        
+    </AdminAccordionSidebarButton>
+    <AdminAccordionSidebarButton 
+        :collapsed="['view_all'].indexOf($route.name) != -1"
+        class="sidebar_accordion_button_body_top_level" 
+        :text="'Database'" 
+        :accordionId="'Database'" 
+        :accordionGroupId="'LeftSideNav'"
+    >                
         <AdminAccordionSidebarButton 
             :collapsed="['view_all'].indexOf($route.name) != -1"
-            class="sidebar_accordion_button_body_top_level" 
-            :text="'Database'" 
-            :accordionId="'Database'" 
-            :accordionGroupId="'LeftSideNav'"
-        >                
-            <AdminAccordionSidebarButton 
-                :collapsed="['view_all'].indexOf($route.name) != -1"
-                :text="'Tables'" 
-                :accordionId="'Tables'" 
-                :accordionGroupId="'Database'"
-            >
-            
-                <div v-for="model in store.state.admin.models">
-                    <AdminAccordionSidebarButton 
-                        :collapsed="['view_all'].indexOf($route.name) != -1 && [model.name].indexOf($route.params.model) != -1"
-                        :text="model.tableName" 
-                        :accordionId="model.name" 
-                        :accordionGroupId="'Tables'"
-                    >
-                        <b-card-body class="sidebar_accordion_button_body">
-                            <b-card no-body>
-                              <b-card-body class="sidebar_accordion_card_body">                
-                                <b-card-header header-tag="header" class="p-1" role="tab">
-                                  <b-button class="sidebar_action_button" variant="success" :to="{ name: 'view_all', params: {model: model.name} }">List All {{model.tableName}}</b-button>
-                                </b-card-header>                  
-                              </b-card-body>
-                            </b-card>
-                        </b-card-body>
-                    </AdminAccordionSidebarButton> 
-                </div>
-            </AdminAccordionSidebarButton>                   
-        </AdminAccordionSidebarButton>
-    </div>
+            :text="'Tables'" 
+            :accordionId="'Tables'" 
+            :accordionGroupId="'Database'"
+        >
+        
+            <div v-for="model in store.state.admin.models">
+                <AdminAccordionSidebarButton 
+                    :collapsed="['view_all'].indexOf($route.name) != -1 && [model.name].indexOf($route.params.model) != -1"
+                    :text="model.tableName" 
+                    :accordionId="model.name" 
+                    :accordionGroupId="'Tables'"
+                >
+                    <b-card-body class="sidebar_accordion_button_body">
+                        <b-card no-body>
+                          <b-card-body class="sidebar_accordion_card_body">                
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                              <b-button class="sidebar_action_button" variant="warning" :to="{ name: 'view_all', params: {model: model.name} }">List All {{model.tableName}}</b-button>
+                            </b-card-header>                  
+                          </b-card-body>
+                        </b-card>
+                    </b-card-body>
+                </AdminAccordionSidebarButton> 
+            </div>
+        </AdminAccordionSidebarButton>                   
+    </AdminAccordionSidebarButton>
 </div>
           `,
           type: 'html',
@@ -870,40 +876,32 @@
           name: 'AdminComponentDatabaseModels',
           code: `
 <b-container>
-    <b-card>
-        <b-row>
-            <b-col cols="6">
-                
-            </b-col>
-        </b-row>
-        <!-- Main table element -->
-        <b-table
-          show-empty
-          small
-          stacked="md"
-          :items="items"
-          :fields="fields"
-          :current-page="currentPage"
-          :per-page="perPage"
-          :filter="filter"
-          :filterIncludedFields="filterOn"
-          :sort-by.sync="sortBy"
-          :sort-desc.sync="sortDesc"
-          :sort-direction="sortDirection"
-        >
-          <template v-slot:cell(actions)="row">
-            <b-button size="sm" @click="row.toggleDetails">
-              {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-            </b-button>
-          </template>
-    
-          <template v-slot:row-details="row">
-    <!--            <DbItem :itemProps="{code: row.item.code, slug: row.item.slug}" />-->
-                    <h1>row</h1>
-          </template>
-        </b-table>
-    </b-card>
-    
+    <!-- Main table element -->
+    <b-table
+      show-empty
+      small
+      stacked="md"
+      :items="items"
+      :fields="fields"
+      :current-page="currentPage"
+      :per-page="perPage"
+      :filter="filter"
+      :filterIncludedFields="filterOn"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :sort-direction="sortDirection"
+    >
+      <template v-slot:cell(actions)="row">
+        <b-button size="sm" @click="row.toggleDetails">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+      </template>
+
+      <template v-slot:row-details="row">
+<!--            <DbItem :itemProps="{code: row.item.code, slug: row.item.slug}" />-->
+                <h1>row</h1>
+      </template>
+    </b-table>    
 </b-container>
           `,
           type: 'html',
@@ -916,7 +914,7 @@
 <b-card-body class="sidebar_accordion_button_body">
     <b-card no-body>
       <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button class="sidebar_accordion_button" block href="#" v-b-toggle="'accordion_' + accordionId" variant="info">{{text}}</b-button>
+        <b-button class="sidebar_accordion_button" block href="#" v-b-toggle="'accordion_' + accordionId" variant="dark">{{text}}</b-button>
       </b-card-header>
       <b-collapse v-bind="(collapsed ? {visible: true} : null)" :id="'accordion_' + accordionId" :accordion="'accordion_' + accordionGroupId" role="tabpanel">
         <slot></slot>

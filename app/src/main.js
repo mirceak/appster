@@ -1,4 +1,5 @@
 
+import {IconsPlugin} from 'bootstrap-vue';
 (async ()=>{
     let $ = (await import("jquery")).default;
     let config = ((await import('./appster_config.js')).default).default;
@@ -8,6 +9,7 @@
 
     let axios = (await import("axios")).default;
     let BootstrapVue = (await import('bootstrap-vue')).default;
+    Vue.use(IconsPlugin);
     await import('bootstrap/dist/css/bootstrap.css');
     await import('bootstrap-vue/dist/bootstrap-vue.css');
     let remoteModule = (await import ("./remoteModule")).default;

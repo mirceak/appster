@@ -100,19 +100,12 @@
 
             var component = await Sequelize.Component.findOne({where: {name: 'Admin'}});
             await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminSidebarNav'}})));
-            await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminSidebarTools'}})));
-            await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminContent'}})));
-            await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminDatabaseModels'}})));
 
             component = await Sequelize.Component.findOne({where: {name: 'AdminSidebarNav'}});
             await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminAccordionSidebarButton'}})));
 
             component = await Sequelize.Component.findOne({where: {name: 'AdminDatabaseModels'}});
             await component.addMixin((await Sequelize.Mixin.findOne({where: {name: 'AdminDatabaseModelsMixin'}})));
-
-            component = await Sequelize.Component.findOne({where: {name: 'AdminSidebarTools'}});
-            await component.addSibling((await Sequelize.Component.findOne({where: {name: 'AdminAccordionSidebarButton'}})));
-            await component.addMixin((await Sequelize.Mixin.findOne({where: {name: 'AdminSidebarToolsMixin'}})));
 
             component = await Sequelize.Component.findOne({where: {name: 'AdminAccordionSidebarButton'}});
             await component.addMixin((await Sequelize.Mixin.findOne({where: {name: 'AdminAccordionSidebarButtonMixin'}})));
