@@ -1,14 +1,15 @@
 #!/bin/bash
-/wait &&
-  if [ ! -d "./node_modules" ]; then
+/wait
+if [ ! -d "./node_modules" ]; then
+  npm install
+fi
+if [ ! -d "./app/node_modules" ]; then
+  cd ./app &&
     npm install
-  fi
-  if [ ! -d "./app/node_modules" ]; then
-    cd app &&
-      npm install
-  fi
-  if [ ! -d "./app/dist" ]; then
-    cd app &&
-      npm run buildP
-  fi
+fi
+if [ ! -d "./app/dist" ]; then
+  cd ./app &&
+    npm run buildP
+fi
+cd ./
 node index

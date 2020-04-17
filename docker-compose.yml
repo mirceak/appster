@@ -15,8 +15,6 @@ services:
       - database
     environment:
       - WAIT_HOSTS=database:3306
-      - WAIT_HOSTS_TIMEOUT=60
-    command: ./start.sh
 
   database:
     image: mariadb:latest
