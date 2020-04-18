@@ -1,19 +1,23 @@
 #!/bin/bash
 /wait
-if [ ! -d "/usr/src/app/node_modules" ]; then
-  cd /usr/src/app/ &&
+
+cd /usr/src/app/
+if [ ! -d "node_modules" ]; then
     npm install
 fi
 
-if [ ! -d "/usr/src/app/app/node_modules" ]; then
-  cd /usr/src/app/app &&
+cd /usr/src/app/app/
+if [ ! -d "node_modules" ]; then
     npm install
 fi
 
-if [ ! -d "/usr/src/app/app/dist" ]; then
-  cd /usr/src/app/app &&
+chmod 777 -R /usr/src/app/node_modules
+chmod 777 -R /usr/src/app/app/node_modules
+
+cd /usr/src/app/app/
+if [ ! -d "dist" ]; then
     npm run buildP
 fi
 
 cd /usr/src/app/ &&
-  npm start
+  node index
