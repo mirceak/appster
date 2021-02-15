@@ -52,7 +52,6 @@
           name: 'mainBackendModule',
           code: `
               (async ()=>{    
-                console.log(1);
                   appster = Object.assign({                                       
                       cors: await utils.require('cors'),
                       bodyParser: require("body-parser"),
