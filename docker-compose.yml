@@ -1,22 +1,15 @@
 version: '3'
 services:
   appster:
-<<<<<<< HEAD
-    image: appster
-    build: .
-=======
     container_name: appster
     image: appster
     build: .
     volumes:
       - ./:/usr/src/app
->>>>>>> origin/dev
     networks:
       - backend
     ports:
       - "80:80"
-<<<<<<< HEAD
-=======
       - "3000:3000"
       - "443:443"
     depends_on:
@@ -40,7 +33,6 @@ services:
       - MYSQL_DATABASE=appster
     networks:
       - backend
->>>>>>> origin/dev
 
 networks:
   backend:
