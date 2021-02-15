@@ -3,8 +3,8 @@
 module.exports = {
     apiIp: "0.0.0.0",
     apiExt: '/appster/api/',
-    apiPort: "80",
-    frontEndIp: "192.168.1.91",
+    apiPort: "3000",
+    frontEndIp: "localhost",
     frontEndExt: '/',
     frontEndPort: "80",
 }

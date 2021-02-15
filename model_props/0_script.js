@@ -12,7 +12,7 @@
     },
     code: {
       allowNull: false,
-      type: 'STRING(20000)'
+      type: 'TEXT'
     },
     type: {
       allowNull: false,
@@ -52,6 +52,7 @@
           name: 'mainBackendModule',
           code: `
               (async ()=>{    
+                console.log(1);
                   appster = Object.assign({                                       
                       cors: await utils.require('cors'),
                       bodyParser: require("body-parser"),
