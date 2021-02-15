@@ -13,20 +13,6 @@ class Shell{
         return this;
     }
 
-<<<<<<< HEAD
-    force_exit(process){
-        switch (process.platform)
-        {
-            case "win32":
-                child_process.exec('taskkill /pid ' + process.pid + ' /f /t')
-                console.log("APPSTER____________________________________________________________________________________________________Force Killed Shell with pid: "+process.pid)
-                break;
-
-        };
-    };
-
-=======
->>>>>>> origin/dev
     async run_command(command){
         return new Promise(resolve => {
             let process = spawn(command ,{stdio:[0,1,2]});
