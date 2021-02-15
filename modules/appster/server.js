@@ -12,7 +12,7 @@ let api;
 
 let build_frontend = async ()=>{
     return new Promise(async resolve => {
-        await shell.run_command("cd app \n npm run build \n exit \n");
+        await shell.run_command("cd app && npm run build");
         resolve();
     });
 }
@@ -27,8 +27,8 @@ class Server{
     }
 
     async start(){
+        // await build_frontend();
         await listen_api();
-        await build_frontend();
     }
 }
 

@@ -1,5 +1,3 @@
-/node_modules/
-/3rdPartyFiles/mariadb/data/
-/app/node_modules/
-/.idea
-/app/dist/
+/app/dist
+**/node_modules
+**/.idea

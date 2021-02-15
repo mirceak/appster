@@ -13,6 +13,7 @@ class Shell{
         return this;
     }
 
+<<<<<<< HEAD
     force_exit(process){
         switch (process.platform)
         {
@@ -24,6 +25,8 @@ class Shell{
         };
     };
 
+=======
+>>>>>>> origin/dev
     async run_command(command){
         return new Promise(resolve => {
             let process = spawn(command ,{stdio:[0,1,2]});
