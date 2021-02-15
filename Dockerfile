@@ -6,17 +6,9 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-<<<<<<< HEAD
-RUN npm install
-
-EXPOSE 80
-
-CMD ["node", "index"]
-=======
 EXPOSE 80
 
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
 RUN chmod +x /wait
 
 ENTRYPOINT ["/bin/bash", "-c", "/usr/src/app/start.sh"]
->>>>>>> origin/dev
